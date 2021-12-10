@@ -1,0 +1,22 @@
+{
+  "name": "fundoonotesapplication",
+  "version": "1.0.0",
+  "description": "fundooNotes App with ability to register, login, reset password",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "fundoonotes",
+    "Register",
+    "login",
+    "Reset-Password"
+  ],
+  "author": "Rohit Gupta",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.1.0"
+  }
+}
