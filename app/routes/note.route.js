@@ -1,7 +1,6 @@
-const notes = require('../controller/note.controller')
+const notes = require('../controller/note.controller.js')
 
 module.exports = (app) => {
-    app.post('/register',notes.register);
-
-    app.get('/register',notes.findAll);
+    // API for registration
+    app.post('/register', notes.register);
 }

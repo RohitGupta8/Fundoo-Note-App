@@ -1,47 +1,35 @@
-const Note = require('../model/note.model')
+const userService = require('../service/service.js')
 
-exports.register = (req, res) => {
-    // Validate request
-    if (!req.body.name) {
-        return res.status(400).send({
-            message: "Name can not be empty"
-        });
-    }
-   
-    // Validate request
-    if (!req.body.email) {
-        return res.status(400).send({
-            message: "Email can not be empty"
-        });
-    }
-    // Validate request
-    if (!req.body.password) {
-        return res.status(400).send({
-            message: "password can not be empty"
-        });
-    }
-    const note = new Note({
-        name: req.body.name,
-        phonenumber: req.body.phonenumber,
-        email: req.body.email,
-        password: req.body.password
-    });
+class Controller {
+    register = (req, res) => {
+        try {
+            const user = {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                password: req.body.password
+            };
 
-    note.save().then(data => res.send(data)).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while creating the Note."
-        });
-    });
-}
-
-// Retrieve and return all notes from the database.
-exports.findAll = (req, res) => {
-    Note.find()
-        .then(notes => {
-            res.send(notes);
-        }).catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while retrieving notes."
+            userService.registerUser(user, (error, data) => {
+                if (error) {
+                    return res.status(400).json({
+                        success: false,
+                        message: 'Try new..  User already registered....',
+                    });
+                } else {
+                    return res.status(200).json({
+                        success: true,
+                        message: "SuccessFully !!!  registered......",
+                        data: data,
+                    });
+                }
             });
-        });
-};
+        } catch (error) {
+            return res.status(500).json({
+                success: false, message: "Oops....Error While Registering",
+                data: null,
+            });
+        }
+    }
+}
+module.exports = new Controller();

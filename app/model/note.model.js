@@ -1,25 +1,47 @@
 const mongoose = require('mongoose');
 
-const UserDetail = mongoose.Schema({
-    name: {
+const userSchema = mongoose.Schema({
+    firstName: {
         type: String,
         required: true
     },
-    phonenumber: {
-        type: Number,
+    lastName: {
+        type: String,
         required: true
     },
     email: {
         type: String,
         required: true,
-        unique: [true,"This Email ID already present......."]       
+        unique: true,
     },
     password: {
         type: String,
-        required: true
+        required: true,
     }
-}, {
-    timestamps: true
-})
+},
+    {
+        timestamps: true
+    })
 
-module.exports = mongoose.model('UserInformation',UserDetail);
+const user = mongoose.model('UserInformation', userSchema);
+
+class userModel {
+
+    registerUser = (userDetails, callback) => {
+        const newUser = new user();
+        newUser.firstName = userDetails.firstName;
+        newUser.lastName = userDetails.lastName;
+        newUser.email = userDetails.email;
+        newUser.password = userDetails.password;
+
+        newUser.save()
+            .then(data => {
+                callback(null, data);
+            })
+            .catch(err => {
+                callback({ message: "Error while Storing User Details in DataBase" }, null);
+            })
+    };
+}
+
+module.exports = new userModel();

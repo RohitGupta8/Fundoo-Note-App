@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 
 // Listen a request
-app.listen(4000, () => console.log("Server is Listening Port 3000..... SuccessFully !!!"));
+app.listen(4000, () => console.log("Server is Listening Port: 4000..... SuccessFully !!!"));
 
 //Define a Simple Route
 app.get('/', (req, res) => {
