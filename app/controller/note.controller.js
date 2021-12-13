@@ -1,4 +1,5 @@
 const userService = require('../service/service.js')
+const validation = require('../utilities/validation')
 
 class Controller {
     register = (req, res) => {
@@ -9,6 +10,15 @@ class Controller {
                 email: req.body.email,
                 password: req.body.password
             };
+
+            const registerValidation = validation.authRegister.validate(user)
+            if (registerValidation.error) {
+                return res.status(400).send({
+                    success: false,
+                    message: 'Wrong Input Validations',
+                    data: registerValidation
+                });
+            }
 
             userService.registerUser(user, (error, data) => {
                 if (error) {
@@ -38,6 +48,15 @@ class Controller {
                 email: req.body.email,
                 password: req.body.password
             };
+
+            const loginValidation = validation.authLogin.validate(userLoginInfo);
+            if (loginValidation.error) {
+                res.status(400).send({
+                    success: false,
+                    message: loginValidation.error.message
+                });
+            }
+
             userService.userLogin(userLoginInfo, (error, data) => {
                 if (error) {
                     return res.status(400).json({
