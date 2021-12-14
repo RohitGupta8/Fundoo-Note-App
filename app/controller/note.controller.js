@@ -1,17 +1,19 @@
 const userService = require('../service/service.js')
 const validation = require('../utilities/validation')
+const encryption = require('../utilities/encryption')
 
 class Controller {
     register = (req, res) => {
         try {
+            let password = encryption.hashedPassword(req.body.password);
             const user = {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 email: req.body.email,
-                password: req.body.password
+                password: password
             };
 
-            const registerValidation = validation.authRegister.validate(user)
+            const registerValidation = validation.validDetails.validate(user)
             if (registerValidation.error) {
                 return res.status(400).send({
                     success: false,
@@ -49,7 +51,7 @@ class Controller {
                 password: req.body.password
             };
 
-            const loginValidation = validation.authLogin.validate(userLoginInfo);
+            const loginValidation = validation.validLogin.validate(userLoginInfo);
             if (loginValidation.error) {
                 res.status(400).send({
                     success: false,
@@ -64,12 +66,16 @@ class Controller {
                         message: 'Oops ...Wrong Information entered....',
                         error
                     });
-                }
-                return res.status(200).json({
-                    success: true,
-                    message: 'Successfully.....!!! user log in....',
-                    data: data
-                });
+                } else {
+                    console.log("data", data);
+                    let paswordResult = encryption.comparePassword(paswd, data.password);
+                    console.log("paswordResult", paswordResult);
+                    return res.status(200).json({
+                        success: true,
+                        message: 'User logged in successfully',
+                        data: data
+                    });
+                }                
             });
         }
         catch (error) {
