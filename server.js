@@ -1,34 +1,26 @@
 const express = require('express');
-const mongoose = require('mongoose');
-
-// Configuring the database
-const dbConfig = require('./config/database.config.js');
+require('dotenv').config();
 
 // create a app
 const app = express();
 
 app.use(express.json());
 
+app.use(express.urlencoded({ extended: true }))
+
 // Listen a request
-app.listen(4000, () => console.log("Server is Listening Port: 4000..... SuccessFully !!!"));
+app.listen(process.env.PORT, () => console.log("Server is Listening Port: 4000..... SuccessFully !!!"));
 
 //Define a Simple Route
-app.get('/', (req, res) => {
-    res.json({ "message": "Welcome to Fundoo Note Application" })
-})
+app.get('/', (req, res) => res.json({ "message": "Welcome to Fundoo Note Application" }))
 
 //Require Notes routes
 require('./app/routes/note.route.js')(app);
 
-mongoose.Promise = global.Promise;
+// Configuring the database
+const dbConfig = require('./config/database.config.js');
+dbConfig.connection();
 
-// Connecting to the database
-mongoose.connect(dbConfig.url, {
-    useNewUrlParser: true
-}).then(() => {
-    console.log("Connected to the database....Successfully !!!");
-}).catch(err => {
-    console.log('Could not connect to the database. Exiting now...', err);
-    process.exit();
-});
+module.exports = app;
+
 
