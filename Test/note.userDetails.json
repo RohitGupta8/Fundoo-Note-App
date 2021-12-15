@@ -1,0 +1,37 @@
+{
+    "userInformation":{
+        "fullInformation":{
+            "firstName": "Haily",
+            "lastName": "Trebilcock",
+            "email": "htlgcock0@xrea.com",
+            "password": "jL746wBA"
+        },
+        "withoutFirstName":{
+            
+            "lastName": "Eveque",
+            "email": "deveque4@canalblog.com",
+            "password": "X1w6i7S6qFXy"
+        },
+        "withoutLastName":{
+            "firstName": "Merwyn",
+            "email": "mashforth5@godaddy.com",
+            "password": "knXywM"
+        },
+        "withoutEmail":{
+            "firstName": "Sandie",
+            "lastName": "Ends",
+            "password": "bB1IJ8FMHNic"
+        },
+        "correctLogin":{
+            "email": "htlgcock0@xrea.com",
+            "password": "jL746wBA"
+        },
+        "wrongLogin":{
+            "email": "htlgcock0@xrea.com",
+            "password": "746wBA"
+        },
+        "isEmpty":{
+            
+        }
+    }
+}
