@@ -46,9 +46,10 @@ class Controller {
 
     login = (req, res) => {
         try {
+            let paswd = req.body.password;
             const userLoginInfo = {
                 email: req.body.email,
-                password: req.body.password
+                password: paswd
             };
 
             const loginValidation = validation.validLogin.validate(userLoginInfo);
