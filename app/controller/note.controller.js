@@ -1,92 +1,88 @@
-const userService = require('../service/service.js')
-const validation = require('../utilities/validation')
-const encryption = require('../utilities/encryption')
+const userService = require("../service/service.js");
+const validation = require("../utilities/validation");
+const encryption = require("../utilities/encryption");
 
 class Controller {
     register = (req, res) => {
-        try {
-            let password = encryption.hashedPassword(req.body.password);
-            const user = {
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                password: password
-            };
-
-            const registerValidation = validation.validDetails.validate(user)
-            if (registerValidation.error) {
-                return res.status(400).send({
-                    success: false,
-                    message: 'Wrong Input Validations',
-                    data: registerValidation
-                });
-            }
-
-            userService.registerUser(user, (error, data) => {
-                if (error) {
-                    return res.status(400).json({
-                        success: false,
-                        message: 'Try new..  User already registered....',
-                    });
-                } else {
-                    return res.status(200).json({
-                        success: true,
-                        message: "SuccessFully !!!  registered......",
-                        data: data,
-                    });
-                }
-            });
-        } catch (error) {
-            return res.status(500).json({
-                success: false, message: "Oops....Error While Registering",
-                data: null,
-            });
+      try {
+        const password = encryption.hashedPassword(req.body.password);
+        const user = {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          password: password
+        };
+        const registerValidation = validation.validDetails.validate(user);
+        if (registerValidation.error) {
+          return res.status(400).send({
+            success: false,
+            message: "Wrong Input Validations",
+            data: registerValidation
+          });
         }
+        userService.registerUser(user, (error, data) => {
+          if (error) {
+            return res.status(400).json({
+              success: false,
+              message: "Try new..  User already registered...."
+            });
+          } else {
+            return res.status(200).json({
+              success: true,
+              message: "SuccessFully !!!  registered......",
+              data: data
+            });
+          }
+        });
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          message: "Oops....Error While Registering",
+          data: null
+        });
+      }
     }
 
     login = (req, res) => {
-        try {
-            let paswd = req.body.password;
-            const userLoginInfo = {
-                email: req.body.email,
-                password: paswd
-            };
-
-            const loginValidation = validation.validLogin.validate(userLoginInfo);
-            if (loginValidation.error) {
-                res.status(400).send({
-                    success: false,
-                    message: loginValidation.error.message
-                });
-            }
-
-            userService.userLogin(userLoginInfo, (error, data) => {
-                if (error) {
-                    return res.status(400).json({
-                        success: false,
-                        message: 'Oops ...Wrong Information entered....',
-                        error
-                    });
-                } else {
-                    console.log("data", data);
-                    let paswordResult = encryption.comparePassword(paswd, data.password);
-                    console.log("paswordResult", paswordResult);
-                    return res.status(200).json({
-                        success: true,
-                        message: 'User logged in successfully',
-                        data: data
-                    });
-                }                
-            });
+      try {
+        const paswd = req.body.password;
+        const userLoginInfo = {
+          email: req.body.email,
+          password: paswd
+        };
+        const loginValidation = validation.validLogin.validate(userLoginInfo);
+        if (loginValidation.error) {
+          res.status(400).send({
+            success: false,
+            message: loginValidation.error.message
+          });
         }
-        catch (error) {
-            return res.status(500).json({
-                success: false,
-                message: 'Error while Login', error,
-                data: null
+        userService.userLogin(userLoginInfo, (error, data) => {
+          if (error) {
+            return res.status(400).json({
+              success: false,
+              message: "Oops ...Wrong Information entered....",
+              error
             });
-        }
+          } else {
+            console.log("data", data);
+            const paswordResult = encryption.comparePassword(paswd, data.password);
+            console.log("paswordResult", paswordResult);
+            return res.status(200).json({
+              success: true,
+              message: "User logged in successfully",
+              data: data
+            });
+          }
+        });
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          message: "Error while Login",
+          error,
+          data: null
+        });
+      }
     };
-
 }
 module.exports = new Controller();

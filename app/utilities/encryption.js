@@ -1,15 +1,14 @@
-const bcrypt = require('bcrypt');
-let saltRounds = 10;
-let salt = bcrypt.genSaltSync(saltRounds);
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const salt = bcrypt.genSaltSync(saltRounds);
 
-class helperClass {
+class HelperClass {
     hashedPassword = (password) => {
-        return bcrypt.hashSync(password, salt);
+      return bcrypt.hashSync(password, salt);
     }
+
     comparePassword = (password, result) => {
-        return bcrypt.compareSync(password, result);
+      return bcrypt.compareSync(password, result);
     }
 }
-
-// module.exports = { hashedPassword,comparePassword};
-module.exports = new helperClass();
+module.exports = new HelperClass();
