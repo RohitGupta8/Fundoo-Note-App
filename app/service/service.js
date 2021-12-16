@@ -13,10 +13,15 @@ class UserService {
 
   userLogin = (InfoLogin, callback) => {
     userModel.loginModel(InfoLogin, (error, data) => {
-      const passwordResult = utilities.comparePassword(InfoLogin.password, data.password);
-      console.log("paswordResult", passwordResult);
       if (data) {
-        return callback(null, data);
+        const passwordResult = utilities.comparePassword(InfoLogin.password, data.password);
+        if (!passwordResult) {
+          // eslint-disable-next-line node/no-callback-literal
+          return callback("Error occured......", null);
+        } else {
+          const token = utilities.token(data);
+          return callback(null, token);
+        }
       } else {
         return callback(error, null);
       }
