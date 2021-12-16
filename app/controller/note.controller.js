@@ -1,16 +1,14 @@
 const userService = require("../service/service.js");
 const validation = require("../utilities/validation");
-const encryption = require("../utilities/encryption");
 
 class Controller {
     register = (req, res) => {
       try {
-        const password = encryption.hashedPassword(req.body.password);
         const user = {
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           email: req.body.email,
-          password: password
+          password: req.body.password
         };
         const registerValidation = validation.validDetails.validate(user);
         if (registerValidation.error) {
@@ -66,8 +64,6 @@ class Controller {
             });
           } else {
             console.log("data", data);
-            const paswordResult = encryption.comparePassword(paswd, data.password);
-            console.log("paswordResult", paswordResult);
             return res.status(200).json({
               success: true,
               message: "User logged in successfully",

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const encryption = require("../utilities/encryption");
 
 const userSchema = mongoose.Schema({
   firstName: {
@@ -33,11 +34,15 @@ class UserModel {
       newUser.email = userDetails.email;
       newUser.password = userDetails.password;
 
-      newUser.save()
-        .then(data => {
+      const password = encryption.hashedPassword(userDetails.password);
+      newUser.password = password;
+      newUser.save((error, data) => {
+        if (error) {
+          callback(error, null);
+        } else {
           callback(null, data);
-        })
-        .catch(err => callback({ message: "Error while Storing User Details in DataBase" }, null));
+        }
+      });
     }
 
     loginModel = (loginData, callBack) => {
