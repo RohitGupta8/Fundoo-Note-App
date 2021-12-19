@@ -1,12 +1,14 @@
 const express = require("express");
 require("dotenv").config();
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocs = require("./swagger/swagger.json");
 
 // create a app
 const app = express();
 
 app.use(express.json());
 
-app.use(express.urlencoded({ extended: true }));
+app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Listen a request
 app.listen(process.env.PORT, () => console.log("Server is Listening Port: 4000..... SuccessFully !!!"));
