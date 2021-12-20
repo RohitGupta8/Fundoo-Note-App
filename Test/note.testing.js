@@ -8,7 +8,7 @@ const registrationData = require("./note.userDetails.json");
 
 // Test cases for Registration
 describe("registration", () => {
-  it("given registration details is empty then not save in DB", (done) => {
+  it("Should return status code - 500,When given registration details is empty.", (done) => {
     const userDetails = registrationData.userInformation.isEmpty;
 
     chai.request(server).post("/register").send(userDetails).end((err, res) => {
@@ -16,13 +16,12 @@ describe("registration", () => {
         console.log("Plz check again & enter with proper format");
         return done();
       }
-      res.should.have.status(500);
-      console.log("Success...!! Test Case Passes for empty details....");
+      res.should.have.status(400);
       done();
     });
   });
 
-  it("given registration details if proper then save in DB", (done) => {
+  it("Should return status code - 200,When given registration details is proper.", (done) => {
     const userDetails = registrationData.userInformation.fullInformation;
 
     chai.request(server).post("/register").send(userDetails).end((err, res) => {
@@ -31,12 +30,11 @@ describe("registration", () => {
         return done();
       }
       res.should.have.status(200);
-      console.log("Success...!! Test Case Passes for Proper details....");
       done();
     });
   });
 
-  it("given registration details without First Name then not save in DB", (done) => {
+  it("Should return status code - 400,When given registration details without First Name.", (done) => {
     const userDetails = registrationData.userInformation.withoutFirstName;
 
     chai.request(server).post("/register").send(userDetails).end((err, res) => {
@@ -45,12 +43,11 @@ describe("registration", () => {
         return done();
       }
       res.should.have.status(400);
-      console.log("Success...!! Test Case Passes for ImProper details....");
       done();
     });
   });
 
-  it("given registration details without Last Name then not save in DB", (done) => {
+  it("Should return status code - 400,When given registration details without Last Name.", (done) => {
     const userDetails = registrationData.userInformation.withoutLastName;
 
     chai.request(server).post("/register").send(userDetails).end((err, res) => {
@@ -59,12 +56,11 @@ describe("registration", () => {
         return done();
       }
       res.should.have.status(400);
-      console.log("Success...!! Test Case Passes for ImProper details....");
       done();
     });
   });
 
-  it("given registration details without email then not save in DB", (done) => {
+  it("Should return status code - 400,When given registration details without email.", (done) => {
     const userDetails = registrationData.userInformation.withoutEmail;
 
     chai.request(server).post("/register").send(userDetails).end((err, res) => {
@@ -73,7 +69,6 @@ describe("registration", () => {
         return done();
       }
       res.should.have.status(400);
-      console.log("Success...!! Test Case Passes for ImProper details....");
       done();
     });
   });
@@ -82,7 +77,7 @@ describe("registration", () => {
 // Test cases for login
 
 describe("Login", () => {
-  it("given Login details if true then sign in ", (done) => {
+  it("Should return status code - 200,When given Login details is true. ", (done) => {
     const userDetails = registrationData.userInformation.correctLogin;
 
     chai.request(server).post("/login").send(userDetails).end((err, res) => {
@@ -91,12 +86,11 @@ describe("Login", () => {
         return done();
       }
       res.should.have.status(200);
-      console.log("Success...!! Test Case Passes for Login details....");
       done();
     });
   });
 
-  it("given Login details if false then not sign in ", (done) => {
+  it("Should return status code - 400,When given Login details is false.", (done) => {
     const userDetails = registrationData.userInformation.wrongLogin;
 
     chai.request(server).post("/login").send(userDetails).end((err, res) => {
@@ -105,7 +99,6 @@ describe("Login", () => {
         return done();
       }
       res.should.have.status(400);
-      console.log("Success...!! Test Case Passes for false Login details....");
       done();
     });
   });
