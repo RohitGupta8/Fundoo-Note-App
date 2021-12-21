@@ -23,9 +23,9 @@ exports.sendEmail = (mailMessage) => {
     from: process.env.EMAIL,
     to: mailMessage.email,
     subject: `${otpcode} is your Account recovery code.`,
-    html: `<div style="text-align: center;"><h3>We received a request to reset your Fundoo Note App password.<br>Enter the following one time password:</h3>
+    html: `<span style="text-align: center;"><h1>Hi , ${mailMessage.email}</h1></span><div style="text-align: center;"><h3>We received a request to reset your Fundoo Note App password.<br>Enter the following one time password:</h3>
     <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${otpcode}
-  </h2></div><br><br><h5>(NOTE:- If you don’t use this otp within 3 hours, it will expire.)</h5><br><h5>Thanks,</h5><h4>Team FundooNote</h4><br>`
+  </h2></div><br><br><h5>(NOTE:- If you don’t use this otp within 3 hours, it will expire.)</h5><br><h5>Thanks,</h5><br><h4><span>Regards,<br>Team FundooNote</span></h4><br>`
   };
 
   transporter.sendMail(message, (err, info) => {

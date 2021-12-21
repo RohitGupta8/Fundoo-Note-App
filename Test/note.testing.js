@@ -116,4 +116,15 @@ describe("reset password", () => {
       return done();
     });
   });
+
+  it.only("should return input", (done) => {
+    chai.request(server).patch("/resetPassword").send({}).end((err, res) => {
+      if (err) {
+        console.log("plz check your credential");
+        return done();
+      }
+      res.should.have.status(200);
+      return done();
+    });
+  });
 });
