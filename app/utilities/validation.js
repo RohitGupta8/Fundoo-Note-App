@@ -25,7 +25,7 @@ class Validation {
 
   validForgotPasswordLogin =
     Joi.object({
-      email: Joi.string().required().pattern(new RegExp("^^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")),
+      email: Joi.string().required().pattern(new RegExp("^^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"))
 
     });
 }
