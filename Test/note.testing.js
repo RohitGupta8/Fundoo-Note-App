@@ -111,8 +111,7 @@ describe("reset password", () => {
       if (err) {
         console.log("plz check your credential");
         return done();
-      }
-      res.should.have.status(200);
+      }res.should.have.status(200);
       return done();
     });
   });
@@ -122,8 +121,7 @@ describe("reset password", () => {
       if (err) {
         console.log("plz check your credential");
         return done();
-      }
-      res.should.have.status(200);
+      }res.should.have.status(200);
       return done();
     });
   });
