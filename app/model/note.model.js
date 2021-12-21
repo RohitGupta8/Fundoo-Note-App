@@ -51,11 +51,22 @@ class UserModel {
         if (error) {
           return callBack(error, null);
         } else if (!data) {
+          console.log(data);
           return callBack("Invalid Credential", null);
         } else {
           return callBack(null, data);
         }
       });
     }
+
+  forgotPassword = (data, callback) => {
+    User.findOne({ email: data.email }, (err, data) => {
+      if (data) {
+        return callback(null, data);
+      } else {
+        return callback(err, null);
+      }
+    });
+  };
 }
 module.exports = new UserModel();

@@ -80,5 +80,41 @@ class Controller {
         });
       }
     };
+
+  forgotPassword = (req, res) => {
+    try {
+      const userCredential = {
+        email: req.body.email
+      };
+
+      userService.forgotPassword(userCredential, (error, result) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: "failed to send email"
+          });
+        } else {
+          return res.status(200).send({
+            success: true,
+            message: "Email sent successfully"
+          });
+        }
+      });
+    } catch (error) {
+      console.log("Error", error);
+      return res.status(500).send({
+        success: false,
+        message: "Internal server error",
+        result: null
+      });
+    }
+  };
+
+  resetPassword = (req, res) => {
+    return res.status(200).send({
+      success: true,
+      message: "Email sent successfully"
+    });
+  }
 }
 module.exports = new Controller();

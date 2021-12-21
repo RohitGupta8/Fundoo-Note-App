@@ -6,4 +6,9 @@ module.exports = (app) => {
 
   // api for login
   app.post("/login", notes.login);
+
+  // api for forgot password
+  app.post("/forgot", notes.forgotPassword);
+
+  app.patch("/resetPassword", notes.resetPassword);
 };

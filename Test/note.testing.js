@@ -1,3 +1,4 @@
+/* eslint-disable no-trailing-spaces */
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const server = require("../server.js");
@@ -49,7 +50,7 @@ describe("registration", () => {
 
   it("Should return status code - 400,When given registration details without Last Name.", (done) => {
     const userDetails = registrationData.userInformation.withoutLastName;
-
+  
     chai.request(server).post("/register").send(userDetails).end((err, res) => {
       if (err) {
         console.log("Plz check again & enter with proper format");
@@ -100,6 +101,19 @@ describe("Login", () => {
       }
       res.should.have.status(400);
       done();
+    });
+  });
+});
+
+describe("reset password", () => {
+  it.only("should return response status success when called reset password api", (done) => {
+    chai.request(server).patch("/resetPassword").send({}).end((err, res) => {
+      if (err) {
+        console.log("plz check your credential");
+        return done();
+      }
+      res.should.have.status(200);
+      return done();
     });
   });
 });
