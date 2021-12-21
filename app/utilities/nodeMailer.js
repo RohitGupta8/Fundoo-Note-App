@@ -3,7 +3,7 @@ require("dotenv").config();
 const otp = require("../model/oneTimePassword");
 
 exports.sendEmail = (mailMessage) => {
-  const otpcode = Math.floor(100000 + Math.random() * 900000);
+  const otpcode = Math.random().toString(36).substring(2, 12);
   // eslint-disable-next-line new-cap
   const optData = new otp({
     email: mailMessage.email,
