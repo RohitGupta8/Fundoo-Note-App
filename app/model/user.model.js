@@ -71,5 +71,9 @@ class UserModel {
       }
     });
   };
+
+  resetPassword = (data, callback) => {
+    callback(null, data);
+  };
 }
 module.exports = new UserModel();

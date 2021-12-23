@@ -1,3 +1,4 @@
+/* eslint-disable node/no-callback-literal */
 const userModel = require("../model/user.model.js");
 const utilities = require("../utilities/encryption");
 const nodemailer = require("../utilities/nodeMailer");
@@ -41,7 +42,15 @@ class UserService {
   };
 
   resetPassword = (resetInfo, callback) => {
-    callback(null, resetInfo);
+    userModel.resetPassword(resetInfo, (err, data) => {
+      if (err) {
+        callback(err, null);
+      } else if (!data) {
+        callback("Code not found", null);
+      } else {
+        callback(null, data);
+      }
+    });
   };
 }
 module.exports = new UserService();
