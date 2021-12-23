@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 /* eslint-disable quote-props */
 /* eslint-disable node/handle-callback-err */
 /* eslint-disable node/no-callback-literal */
@@ -60,7 +61,17 @@ class UserModel {
   }
 
   forgotPassword = (data, callback) => {
-    callback(null, data);
+    User.findOne({ email: data.email }, (err, data) => {
+      if (err) {
+        return callback(err, null);
+      } else {
+        if (!data) {
+
+        } else {
+          return callback(null, data);
+        }
+      }
+    });
   };
 }
 module.exports = new UserModel();

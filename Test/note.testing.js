@@ -111,7 +111,7 @@ describe("Login", () => {
 // Test Cases for Forgot Password API
 
 describe("Forgot Password API", () => {
-  it.only(" when call Forgot password api,should return response status success", (done) => {
+  it(" when call Forgot password api,should return response status success", (done) => {
     chai
       .request(server)
       .post("/forgotPassword")
@@ -126,7 +126,7 @@ describe("Forgot Password API", () => {
       });
   });
 
-  it.only(" should validate the input , return appropriate response", (done) => {
+  it(" should validate the input , return appropriate response", (done) => {
     chai
       .request(server)
       .post("/forgotPassword")
@@ -141,7 +141,7 @@ describe("Forgot Password API", () => {
       });
   });
 
-  it.only(" Should return true from ForgotPassword service, return appropriate response", (done) => {
+  it(" Should return true from ForgotPassword service, return appropriate response", (done) => {
     chai
       .request(server)
       .post("/forgotPassword")
@@ -156,7 +156,7 @@ describe("Forgot Password API", () => {
       });
   });
 
-  it.only(" Should return true from ForgotPassword model, return appropriate response", (done) => {
+  it(" Should return true from ForgotPassword model, return appropriate response", (done) => {
     chai
       .request(server)
       .post("/forgotPassword")
@@ -169,5 +169,5 @@ describe("Forgot Password API", () => {
         res.should.have.status(200);
         return done();
       });
-  });
+  });  
 });
