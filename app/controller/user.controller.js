@@ -133,12 +133,21 @@ class Controller {
           success: false,
           message: resetValidation.error.message
         });
-      } else {
-        return res.status(200).send({
-          success: true,
-          message: "Email sent successfully"
-        });
       }
+
+      userService.resetPassword(userResetPasswordInfo, (err, data) => {
+        if (err) {
+          return res.status(500).send({
+            success: false,
+            message: "Something went wrong"
+          });
+        } else {
+          return res.status(200).send({
+            success: true,
+            message: "Email sent successfully"
+          });
+        }
+      });
     } catch (error) {
       console.log("Error", error);
       return res.status(500).send({

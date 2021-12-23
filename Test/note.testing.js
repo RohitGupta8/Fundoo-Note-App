@@ -250,7 +250,7 @@ describe("Reset Password API", () => {
       });
   });
 
-  it.only("should validate the wrong input of email, return appropriate response", (done) => {
+  it("should validate the wrong input of email, return appropriate response", (done) => {
     chai
       .request(server)
       .patch("/resetPassword")
@@ -261,6 +261,21 @@ describe("Reset Password API", () => {
           return done();
         }
         res.should.have.status(400);
+        return done();
+      });
+  });
+
+  it.only("when call reset password api, should return appropriate response from reset service", (done) => {
+    chai
+      .request(server)
+      .patch("/resetPassword")
+      .send({ email: "rohitg213@gmail.com", password: "Jhingalala@3456", code: "jhjdhsjdhs" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(200);
         return done();
       });
   });

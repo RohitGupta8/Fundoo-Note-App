@@ -39,5 +39,9 @@ class UserService {
       }
     });
   };
+
+  resetPassword = (resetInfo, callback) => {
+    callback(null, resetInfo);
+  };
 }
 module.exports = new UserService();
