@@ -86,19 +86,21 @@ class Controller {
       const userForgotPasswordInfo = {
         email: req.body.email
       };
+
       const forgotValidation = validation.validForgotPassword.validate(userForgotPasswordInfo);
-      console.log(forgotValidation.error);
+
       if (forgotValidation.error) {
         res.status(400).send({
           success: false,
-          message: forgotValidation.error.message
+          message: "Email is not valid..."
         });
       }
+
       userService.forgotPassword(userForgotPasswordInfo, (error, result) => {
         if (error) {
           return res.status(400).send({
             success: false,
-            message: "failed to send email"
+            message: "Failed to send email. Email not exist...."
           });
         } else {
           return res.status(200).send({

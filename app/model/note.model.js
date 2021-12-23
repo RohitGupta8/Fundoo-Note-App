@@ -64,12 +64,10 @@ class UserModel {
     User.findOne({ email: data.email }, (err, data) => {
       if (err) {
         return callback(err, null);
+      } else if (!data) {
+        return callback("Invalid Credential", null);
       } else {
-        if (!data) {
-
-        } else {
-          return callback(null, data);
-        }
+        return callback(null, data);
       }
     });
   };
