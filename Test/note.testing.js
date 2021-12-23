@@ -6,7 +6,7 @@ const server = require("../server.js");
 chai.use(chaiHttp);
 chai.should();
 
-const registrationData = require("./note.userDetails.json");
+const registrationData = require("./user.Details.json");
 
 // Test cases for Registration
 // eslint-disable-next-line no-undef
@@ -197,6 +197,25 @@ describe("Forgot Password API", () => {
           return done();
         }
         res.should.have.status(400);
+        return done();
+      });
+  });
+});
+
+// Test cases for RESET Password API
+
+describe("Reset Password API", () => {
+  it.only("when call reset password api, should return appropriate response", (done) => {
+    chai
+      .request(server)
+      .patch("/resetPassword")
+      .send({})
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(200);
         return done();
       });
   });

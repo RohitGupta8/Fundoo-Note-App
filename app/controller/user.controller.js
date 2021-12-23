@@ -1,4 +1,4 @@
-const userService = require("../service/service.js");
+const userService = require("../service/user.service.js");
 const validation = require("../utilities/validation");
 
 class Controller {
@@ -108,6 +108,22 @@ class Controller {
             message: "Email sent successfully"
           });
         }
+      });
+    } catch (error) {
+      console.log("Error", error);
+      return res.status(500).send({
+        success: false,
+        message: "Internal server error",
+        result: null
+      });
+    };
+  }
+
+  resetPassword = (req, res) => {
+    try {
+      return res.status(200).send({
+        success: true,
+        message: "Email sent successfully"
       });
     } catch (error) {
       console.log("Error", error);

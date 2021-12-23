@@ -17,7 +17,7 @@ app.listen(process.env.PORT, () => console.log("Server is Listening Port: 4000..
 app.get("/", (req, res) => res.json({ message: "Welcome to Fundoo Note Application" }));
 
 // Require Notes routes
-require("./app/routes/note.route.js")(app);
+require("./app/routes/user.route.js")(app);
 
 // Configuring the database
 const dbConfig = require("./config/database.config.js");

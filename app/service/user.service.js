@@ -1,4 +1,4 @@
-const userModel = require("../model/note.model.js");
+const userModel = require("../model/user.model.js");
 const utilities = require("../utilities/encryption");
 const nodemailer = require("../utilities/nodeMailer");
 
