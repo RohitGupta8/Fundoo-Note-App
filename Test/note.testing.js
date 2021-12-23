@@ -204,8 +204,8 @@ describe("Forgot Password API", () => {
 
 // Test cases for RESET Password API
 
-describe("Reset Password API", () => {
-  it.only("when call reset password api, should return appropriate response", (done) => {
+describe("Reset Password API", () => {  
+  it("when call reset password api, should return appropriate response", (done) => {
     chai
       .request(server)
       .patch("/resetPassword")
@@ -218,5 +218,5 @@ describe("Reset Password API", () => {
         res.should.have.status(200);
         return done();
       });
-  });
+  });  
 });

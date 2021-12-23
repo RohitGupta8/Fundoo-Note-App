@@ -121,10 +121,24 @@ class Controller {
 
   resetPassword = (req, res) => {
     try {
-      return res.status(200).send({
-        success: true,
-        message: "Email sent successfully"
-      });
+      const userResetPasswordInfo = {
+        email: req.body.email,
+        password: req.body.password,
+        code: req.body.code
+      };
+      const resetValidation = validation.validResetPassword.validate(userResetPasswordInfo);
+      console.log(resetValidation.error);
+      if (resetValidation.error) {
+        res.status(400).send({
+          success: false,
+          message: resetValidation.error.message
+        });
+      } else {
+        return res.status(200).send({
+          success: true,
+          message: "Email sent successfully"
+        });
+      }
     } catch (error) {
       console.log("Error", error);
       return res.status(500).send({
