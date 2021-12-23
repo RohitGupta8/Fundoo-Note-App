@@ -82,24 +82,39 @@ class Controller {
   };
 
   forgotPassword = (req, res) => {
-    const userForgotPasswordInfo = {
-      email: req.body.email
-    };
-    const forgotValidation = validation.validForgotPassword.validate(
-      userForgotPasswordInfo
-    );
-    console.log(forgotValidation.error);
-    if (forgotValidation.error) {
-      res.status(400).send({
+    try {
+      const userForgotPasswordInfo = {
+        email: req.body.email
+      };
+      const forgotValidation = validation.validForgotPassword.validate(userForgotPasswordInfo);
+      console.log(forgotValidation.error);
+      if (forgotValidation.error) {
+        res.status(400).send({
+          success: false,
+          message: forgotValidation.error.message
+        });
+      }
+      userService.forgotPassword(userForgotPasswordInfo, (error, result) => {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: "failed to send email",
+          });
+        } else {
+          return res.status(200).send({
+            success: true,
+            message: "Email sent successfully",
+          });
+        }
+      });
+    } catch (error) {
+      console.log("Error", error);
+      return res.status(500).send({
         success: false,
-        message: forgotValidation.error.message
+        message: "Internal server error",
+        result: null
       });
-    } else {
-      return res.status(200).send({
-        success: true,
-        message: "Email sent successfully"
-      });
-    }
+    };
   }
 }
 module.exports = new Controller();

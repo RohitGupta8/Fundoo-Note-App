@@ -2,7 +2,6 @@
 /* eslint-disable no-trailing-spaces */
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-const { getMaxListeners } = require("../server.js");
 const server = require("../server.js");
 chai.use(chaiHttp);
 chai.should();
@@ -128,6 +127,21 @@ describe("Forgot Password API", () => {
   });
 
   it.only(" should validate the input , return appropriate response", (done) => {
+    chai
+      .request(server)
+      .post("/forgotPassword")
+      .send({ email: "rohitg213@gmail.com" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(200);
+        return done();
+      });
+  });
+
+  it.only(" Should return true from ForgotPassword service, return appropriate response", (done) => {
     chai
       .request(server)
       .post("/forgotPassword")
