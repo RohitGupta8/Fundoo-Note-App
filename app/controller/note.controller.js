@@ -98,12 +98,12 @@ class Controller {
         if (error) {
           return res.status(400).send({
             success: false,
-            message: "failed to send email",
+            message: "failed to send email"
           });
         } else {
           return res.status(200).send({
             success: true,
-            message: "Email sent successfully",
+            message: "Email sent successfully"
           });
         }
       });

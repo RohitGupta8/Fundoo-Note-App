@@ -29,7 +29,13 @@ class UserService {
   }
 
   forgotPassword = (email, callback) => {
-    callback(null, email);
+    userModel.forgotPassword(email, (error, data) => {
+      if (error) {
+        return callback(error, null);
+      } else {
+        return callback(null, data);
+      }
+    });
   };
 }
 module.exports = new UserService();

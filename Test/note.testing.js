@@ -155,4 +155,19 @@ describe("Forgot Password API", () => {
         return done();
       });
   });
+
+  it.only(" Should return true from ForgotPassword model, return appropriate response", (done) => {
+    chai
+      .request(server)
+      .post("/forgotPassword")
+      .send({ email: "rohitg213@gmail.com" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(200);
+        return done();
+      });
+  });
 });

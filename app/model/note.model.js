@@ -58,5 +58,9 @@ class UserModel {
       }
     });
   }
+
+  forgotPassword = (data, callback) => {
+    callback(null, data);
+  };
 }
 module.exports = new UserModel();
