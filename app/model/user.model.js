@@ -3,6 +3,8 @@
 /* eslint-disable node/handle-callback-err */
 /* eslint-disable node/no-callback-literal */
 const mongoose = require("mongoose");
+const encryption = require("../utilities/encryption");
+const Otp = require("./oneTimePassword");
 
 const userSchema = mongoose.Schema({
   firstName: {
@@ -72,8 +74,34 @@ class UserModel {
     });
   };
 
-  resetPassword = (data, callback) => {
-    callback(null, data);
-  };
+  resetPassword = (userData, callback) => {
+    console.log("i am model");
+    Otp.findOne({ code: userData.code }, (error, data) => {
+      if (data) {
+        // eslint-disable-next-line eqeqeq
+        if (userData.code == data.code) {
+          encryption.hashing(userData.password, (err, hash) => {
+            if (hash) {
+              userData.password = hash;
+              User.updateOne({ email: userData.email }, { $set: { password: userData.password } }, (error, data) => {
+                if (data) {
+                  console.log("updated message : ", data);
+                  return callback(null, "SuccessFully Updated...... ");
+                } else {
+                  return callback("Error in updating", null);
+                }
+              });
+            } else {
+              return callback("Error in hash on password", null);
+            }
+          });
+        } else {
+          return callback("User not found", null);
+        }
+      } else {
+        return callback("Otp doesnt match", null);
+      }
+    });
+  }
 }
 module.exports = new UserModel();

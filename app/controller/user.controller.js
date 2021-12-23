@@ -144,7 +144,7 @@ class Controller {
         } else {
           return res.status(200).send({
             success: true,
-            message: "Email sent successfully"
+            message: "Successfully updated......"
           });
         }
       });
