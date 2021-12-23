@@ -2,15 +2,15 @@ const userModel = require("../model/note.model.js");
 const utilities = require("../utilities/encryption");
 const nodemailer = require("../utilities/nodeMailer");
 class UserService {
-    registerUser = (user, callback) => {
-      userModel.registerUser(user, (err, data) => {
-        if (err) {
-          callback(err, null);
-        } else {
-          callback(null, data);
-        }
-      });
-    }
+  registerUser = (user, callback) => {
+    userModel.registerUser(user, (err, data) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, data);
+      }
+    });
+  }
 
   userLogin = (InfoLogin, callback) => {
     userModel.loginModel(InfoLogin, (error, data) => {
@@ -36,6 +36,15 @@ class UserService {
       } else {
         return callback(null, nodemailer.sendEmail(data));
       }
+    });
+  };
+
+  resetPassword = (userData, callback) => {
+    console.log("i am service");
+    userModel.resetPassword(userData).then((data) => {
+      return callback(null, data);
+    }).catch((error) => {
+      return callback(error, null);
     });
   };
 }

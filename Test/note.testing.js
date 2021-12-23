@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-trailing-spaces */
 const chai = require("chai");
 const chaiHttp = require("chai-http");
@@ -8,7 +9,9 @@ chai.should();
 const registrationData = require("./note.userDetails.json");
 
 // Test cases for Registration
+// eslint-disable-next-line no-undef
 describe("registration", () => {
+  // eslint-disable-next-line no-undef
   it("Should return status code - 500,When given registration details is empty.", (done) => {
     const userDetails = registrationData.userInformation.isEmpty;
 
@@ -50,7 +53,7 @@ describe("registration", () => {
 
   it("Should return status code - 400,When given registration details without Last Name.", (done) => {
     const userDetails = registrationData.userInformation.withoutLastName;
-  
+
     chai.request(server).post("/register").send(userDetails).end((err, res) => {
       if (err) {
         console.log("Plz check again & enter with proper format");
@@ -107,22 +110,73 @@ describe("Login", () => {
 
 describe("reset password", () => {
   it.only("should return response status success when called reset password api", (done) => {
-    chai.request(server).patch("/resetPassword").send({}).end((err, res) => {
-      if (err) {
-        console.log("plz check your credential");
+    chai
+      .request(server)
+      .patch("/resetPassword")
+      .send({ code: "jhjdhsjdhs", newPassword: "Jhingalala@3456" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(200);
         return done();
-      }res.should.have.status(200);
-      return done();
-    });
+      });
   });
-
-  it.only("should return input", (done) => {
-    chai.request(server).patch("/resetPassword").send({}).end((err, res) => {
-      if (err) {
-        console.log("plz check your credential");
+  it.only("should validate the input , return appropriate response", (done) => {
+    chai
+      .request(server)
+      .patch("/resetPassword")
+      .send({ code: "jhjdhsjdhs", newPassword: "jhingalala" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
         return done();
-      }res.should.have.status(200);
-      return done();
-    });
+      });
+  });
+  it.only("should validate the input , return appropriate response", (done) => {
+    chai
+      .request(server)
+      .patch("/resetPassword")
+      .send({ code: "dgsazgjjgf", newPassword: "clickN70" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
+        return done();
+      });
+  });
+  it.only("Should return true from resetPassword service  , return appropriate response", (done) => {
+    chai
+      .request(server)
+      .patch("/resetPassword")
+      .send({ code: "rttdgfjvjvhs", newPassword: "clickN70@" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
+        return done();
+      });
+  });
+  it.only("Should return true from resetPassword model  , return appropriate response", (done) => {
+    chai
+      .request(server)
+      .patch("/resetPassword")
+      .send({ code: "jhjdhdghxjdhs", newPassword: "clickN70@" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(200);
+        return done();
+      });
   });
 });
