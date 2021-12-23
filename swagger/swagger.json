@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "version": "1.0",
-        "title": "Fundoo Notes App",
+        "title": "Fundoo Note Application",
         "description": "Fundoo Notes Application",
         "license": {
             "name": "MIT",
@@ -27,14 +27,14 @@
                 "tags": [
                     "Register"
                 ],
-                "description": "Register new user",
+                "description": "Registration of new user",
                 "parameters": [
                     {
                         "name": "Register",
                         "in": "body",
-                        "description": "User that we want to register",
+                        "description": "Sign Up..",
                         "schema": {
-                            "$ref": "#/definitions/registerUser"
+                            "$ref": "#/definitions/register"
                         }
                     }
                 ],
@@ -43,7 +43,7 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "New user is Registered"
+                        "description": "Successfully  Registered......"
                     },
                     "409": {
                         "description": "User already exist"
@@ -64,9 +64,9 @@
                     {
                         "name": "Login",
                         "in": "body",
-                        "description": "User that we want to login",
+                        "description": "Sign in",
                         "schema": {
-                            "$ref": "#/definitions/loginUser"
+                            "$ref": "#/definitions/login"
                         }
                     }
                 ],
@@ -88,12 +88,12 @@
                 "tags": [
                     "forgotPassword"
                 ],
-                "description": "Send OTP for reset password",
+                "description": "Send OTP for Password Reset to email",
                 "parameters": [
                     {
-                        "name": "forgotPassword",
+                        "name": "forgotpassword",
                         "in": "body",
-                        "description": "Send OTP for Reset Password",
+                        "description": "Send OTP to Email for reset Password",
                         "schema": {
                             "$ref": "#/definitions/forgotPassword"
                         }
@@ -112,33 +112,87 @@
                 }
             }
         },
-        "definitions": {
-            "registerUser": {
-                "type": "object",
-                "properties": {
-                    "firstName": {
-                        "type": "string"
+        "/resetPassword": {
+            "patch": {
+                "tags": [
+                    "reset password"
+                ],
+                "description": "Already registered ? Then reset password successfully !!",
+                "parameters": [
+                    {
+                        "name": "Reset Password",
+                        "in": "body",
+                        "description": "Reset Password by OTP code",
+                        "schema": {
+                            "$ref": "#/definitions/resetPassword"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "reset password succesfully !!"
                     },
-                    "lastName": {
-                        "type": "string"
+                    "400": {
+                        "description": "wrong otp entered / otp expired...."
                     },
-                    "email": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "type": "string"
+                    "500": {
+                        "description": "Internal server error"
                     }
                 }
-            },
-            "loginUser": {
-                "type": "object",
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "type": "string"
-                    }
+            }
+        }
+    },
+    "definitions": {
+        "register": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "login": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "forgotPassword": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "resetPassword": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
                 }
             }
         }
