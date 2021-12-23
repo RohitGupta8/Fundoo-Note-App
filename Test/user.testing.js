@@ -295,7 +295,7 @@ describe("Reset Password API", () => {
       });
   });
 
-  it.only("when call reset password api then update with new password, should return appropriate response", (done) => {
+  it("when call reset password api then update with new password, should return appropriate response", (done) => {
     chai
       .request(server)
       .patch("/resetPassword")
@@ -306,6 +306,21 @@ describe("Reset Password API", () => {
           return done();
         }
         res.should.have.status(200);
+        return done();
+      });
+  });
+
+  it.only("when update with new password from wrong OTP, should return appropriate response", (done) => {
+    chai
+      .request(server)
+      .patch("/resetPassword")
+      .send({ email: "rohitg213@gmail.com", password: "Jhingalala@3456", code: "b2oo5rddrvhy" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
         return done();
       });
   });

@@ -137,7 +137,7 @@ class Controller {
 
       userService.resetPassword(userResetPasswordInfo, (err, data) => {
         if (err) {
-          return res.status(500).send({
+          return res.status(400).send({
             success: false,
             message: "Something went wrong"
           });
