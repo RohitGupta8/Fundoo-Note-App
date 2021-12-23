@@ -126,7 +126,7 @@ describe("Forgot Password API", () => {
       });
   });
 
-  it(" should validate the input , return appropriate response", (done) => {
+  it(" when call Forgot password api, should validate the input & return appropriate response", (done) => {
     chai
       .request(server)
       .post("/forgotPassword")
@@ -141,7 +141,7 @@ describe("Forgot Password API", () => {
       });
   });
 
-  it(" Should return true from ForgotPassword service, return appropriate response", (done) => {
+  it(" when call Forgot password api, Should return appropriate response from ForgotPassword service", (done) => {
     chai
       .request(server)
       .post("/forgotPassword")
@@ -156,7 +156,7 @@ describe("Forgot Password API", () => {
       });
   });
 
-  it(" Should return true from ForgotPassword model, return appropriate response", (done) => {
+  it("when call Forgot password api, Should return appropriate response from ForgotPassword model", (done) => {
     chai
       .request(server)
       .post("/forgotPassword")
