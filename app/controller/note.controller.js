@@ -82,10 +82,24 @@ class Controller {
   };
 
   forgotPassword = (req, res) => {
-    return res.status(200).send({
-      success: true,
-      message: "Email sent successfully"
-    });
+    const userForgotPasswordInfo = {
+      email: req.body.email
+    };
+    const forgotValidation = validation.validForgotPassword.validate(
+      userForgotPasswordInfo
+    );
+    console.log(forgotValidation.error);
+    if (forgotValidation.error) {
+      res.status(400).send({
+        success: false,
+        message: forgotValidation.error.message
+      });
+    } else {
+      return res.status(200).send({
+        success: true,
+        message: "Email sent successfully"
+      });
+    }
   }
 }
 module.exports = new Controller();
