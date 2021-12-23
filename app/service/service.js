@@ -40,12 +40,13 @@ class UserService {
   };
 
   resetPassword = (userData, callback) => {
-    console.log("i am service");
-    userModel.resetPassword(userData).then((data) => {
-      return callback(null, data);
-    }).catch((error) => {
-      return callback(error, null);
+    userModel.resetPassword(userData, (error, data) => {
+      if (error) {
+        return callback(error, null);
+      } else {
+        return callback(null, data);
+      }
     });
-  };
+  }
 }
 module.exports = new UserService();

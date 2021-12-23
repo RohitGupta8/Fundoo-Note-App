@@ -24,9 +24,9 @@ const userSchema = mongoose.Schema({
     required: true
   }
 },
-  {
-    timestamps: true
-  });
+{
+  timestamps: true
+});
 
 const User = mongoose.model("UserInformation", userSchema);
 
@@ -72,7 +72,6 @@ class UserModel {
   };
 
   resetPassword = (userData, callback) => {
-    console.log("i am model");
     Otp.findOne({ code: userData.code }, (error, data) => {
       if (data) {
         // eslint-disable-next-line eqeqeq
@@ -82,7 +81,6 @@ class UserModel {
               userData.password = hash;
               User.updateOne({ email: userData.email }, { $set: { password: userData.password } }, (error, data) => {
                 if (data) {
-                  console.log("updated message : ", data);
                   return callback(null, "SuccessFully Updated...... ");
                 } else {
                   return callback("Error in updating", null);

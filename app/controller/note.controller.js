@@ -112,7 +112,6 @@ class Controller {
 
   resetPassword = (req, res) => {
     try {
-      console.log("i am controler");
       const userData = {
         email: req.body.email,
         password: req.body.password,
