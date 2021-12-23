@@ -1,6 +1,5 @@
 const userModel = require("../model/note.model.js");
 const utilities = require("../utilities/encryption");
-const nodemailer = require("../utilities/nodeMailer");
 class UserService {
   registerUser = (user, callback) => {
     userModel.registerUser(user, (err, data) => {
@@ -25,26 +24,6 @@ class UserService {
         }
       } else {
         return callback(error, null);
-      }
-    });
-  }
-
-  forgotPassword = (email, callback) => {
-    userModel.forgotPassword(email, (error, data) => {
-      if (error) {
-        return callback(error, null);
-      } else {
-        return callback(null, nodemailer.sendEmail(data));
-      }
-    });
-  };
-
-  resetPassword = (userData, callback) => {
-    userModel.resetPassword(userData, (error, data) => {
-      if (error) {
-        return callback(error, null);
-      } else {
-        return callback(null, data);
       }
     });
   }

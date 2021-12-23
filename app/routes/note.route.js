@@ -6,10 +6,4 @@ module.exports = (app) => {
 
   // api for login
   app.post("/login", notes.login);
-
-  // api for forgot password
-  app.post("/forgot", notes.forgotPassword);
-
-  //  api for Reset Password
-  app.post("/resetPassword", notes.resetPassword);
 };
