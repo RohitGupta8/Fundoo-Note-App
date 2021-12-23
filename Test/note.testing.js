@@ -218,5 +218,20 @@ describe("Reset Password API", () => {
         res.should.have.status(200);
         return done();
       });
-  });  
+  });
+
+  it.only("should validate the input , return appropriate response", (done) => {
+    chai
+      .request(server)
+      .patch("/resetPassword")
+      .send({ email: "rohitg213@gmail.com", password: "Jhingalala@3456", code: "jhjdhsjdhs" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(200);
+        return done();
+      });
+  });
 });
