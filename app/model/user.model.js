@@ -39,6 +39,9 @@ class UserModel {
     newUser.email = userDetails.email;
     newUser.password = userDetails.password;
 
+    const password = encryption.hashedPassword(userDetails.password);
+    newUser.password = password;
+
     newUser.save((error, data) => {
       if (error) {
         callback(error, null);
