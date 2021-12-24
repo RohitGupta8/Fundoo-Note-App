@@ -34,7 +34,8 @@
     "prompt": "^1.2.0",
     "save": "^2.4.0",
     "swagger-jsdoc": "^6.1.0",
-    "swagger-ui-express": "^4.3.0"
+    "swagger-ui-express": "^4.3.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
