@@ -5,6 +5,7 @@
 const mongoose = require("mongoose");
 const encryption = require("../utilities/encryption");
 const Otp = require("./oneTimePassword");
+const { logger } = require("../../logger/logger");
 
 const userSchema = mongoose.Schema({
   firstName: {
@@ -44,8 +45,10 @@ class UserModel {
 
     newUser.save((error, data) => {
       if (error) {
+        logger.error(error);
         callback(error, null);
       } else {
+        logger.info("success fully registered");
         callback(null, data);
       }
     });
@@ -55,11 +58,14 @@ class UserModel {
     // To find a user email in the database
     User.findOne({ email: loginData.email }, (error, data) => {
       if (error) {
+        logger.error("Find error while loggin user");
         return callBack(error, null);
       } else if (!data) {
+        logger.error("Invalid User");
         console.log(data);
         return callBack("Invalid Credential", null);
       } else {
+        logger.info("Email id found");
         return callBack(null, data);
       }
     });
@@ -68,17 +74,19 @@ class UserModel {
   forgotPassword = (data, callback) => {
     User.findOne({ email: data.email }, (err, data) => {
       if (err) {
+        logger.error(err);
         return callback(err, null);
       } else if (!data) {
+        logger.error("Invalid Credential");
         return callback("Invalid Credential", null);
       } else {
+        logger.info(data);
         return callback(null, data);
       }
     });
   };
 
   resetPassword = (userData, callback) => {
-    console.log("i am model");
     Otp.findOne({ code: userData.code }, (error, data) => {
       if (data) {
         // eslint-disable-next-line eqeqeq
@@ -88,20 +96,24 @@ class UserModel {
               userData.password = hash;
               User.updateOne({ email: userData.email }, { $set: { password: userData.password } }, (error, data) => {
                 if (data) {
-                  console.log("updated message : ", data);
+                  logger.info("SuccessFully Updated...... ", data);
                   return callback(null, "SuccessFully Updated...... ");
                 } else {
+                  logger.error("Error in updating");
                   return callback("Error in updating", null);
                 }
               });
             } else {
+              logger.error("Error in hash on password");
               return callback("Error in hash on password", null);
             }
           });
         } else {
+          logger.error("User not found");
           return callback("User not found", null);
         }
       } else {
+        logger.error("Otp doesnt match");
         return callback("Otp doesnt match", null);
       }
     });
