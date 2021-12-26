@@ -56,9 +56,19 @@ class NoteController {
           data: getNoteValidation
         });
       }
-      return res.status(201).json({
-        message: "Successfully Notes retrieve.....",
-        success: true
+      noteService.getNote(id, (error, data) => {
+        if (error) {
+          return res.status(400).json({
+            message: "failed to get all notes",
+            success: false
+          });
+        } else {
+          return res.status(201).json({
+            message: "Get All Notes successfully",
+            success: true,
+            data: data
+          });
+        }
       });
     } catch (error) {
       console.log(error);
