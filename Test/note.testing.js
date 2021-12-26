@@ -6,7 +6,7 @@ chai.should();
 const noteData = require("./note.Token.json");
 
 describe("Create Note", () => {
-  it.only("when call create note api, should return appropriate response from controller", (done) => {
+  it("when call create note api, should return appropriate response from controller", (done) => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
@@ -23,7 +23,7 @@ describe("Create Note", () => {
       });
   });
 
-  it.only("when call create note api, should return appropriate response from controller with invalid token", (done) => {
+  it("when call create note api, should return appropriate response from controller with invalid token", (done) => {
     const token = noteData.notes.inValidToken;
     chai
       .request(server)
@@ -36,6 +36,23 @@ describe("Create Note", () => {
           return done();
         }
         res.should.have.status(400);
+        return done();
+      });
+  });
+
+  it.only("give valid input, should return appropriate response from controller", (done) => {
+    const token = noteData.notes.validToken;
+    chai
+      .request(server)
+      .post("/createNote")
+      .set({ authorization: token })
+      .send({ title: "google", description: "google is good search engine" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
         return done();
       });
   });

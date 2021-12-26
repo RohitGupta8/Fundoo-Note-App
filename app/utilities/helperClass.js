@@ -25,7 +25,7 @@ class HelperClass {
       password: data.password,
       email: data.email
     };
-    return jwt.sign({ dataForToken }, process.env.JWT_SECRET, { expiresIn: "1H" });
+    return jwt.sign({ dataForToken }, process.env.JWT_SECRET, { expiresIn: "10H" });
   }
 
   comparePassword = (password, result) => {
@@ -42,6 +42,7 @@ class HelperClass {
           if (error) {
             return res.status(400).send({ success: false, message: "Invalid Token" });
           } else {
+            console.log("token ", decoded);
             req.user = decoded;
             next();
           }
