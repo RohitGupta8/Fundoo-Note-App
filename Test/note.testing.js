@@ -163,7 +163,7 @@ describe("Create Note", () => {
 // api for get all notes
 
 describe("Get all Notes", () => {
-  it.only("when call getNote api without token, should return appropriate response from controller", (done) => {
+  it("when call getNote api without token, should return appropriate response from controller", (done) => {
     chai
       .request(server)
       .get("/getNote")
@@ -177,7 +177,7 @@ describe("Get all Notes", () => {
       });
   });
 
-  it.only("when call getNote api with token, should return appropriate response from controller", (done) => {
+  it("when call getNote api with token, should return appropriate response from controller", (done) => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
@@ -193,7 +193,7 @@ describe("Get all Notes", () => {
       });
   });
 
-  it.only("when call getNote api with token, should return appropriate response from controller", (done) => {
+  it("when call getNote api with token, should return appropriate response from controller", (done) => {
     const token = noteData.notes.inValidToken;
     chai
       .request(server)
@@ -205,6 +205,22 @@ describe("Get all Notes", () => {
           return done();
         }
         res.should.have.status(400);
+        return done();
+      });
+  });
+
+  it.only("when call getNote api with token is Authentic Request, should return appropriate response from controller", (done) => {
+    const token = noteData.notes.validToken;
+    chai
+      .request(server)
+      .get("/getNote")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
         return done();
       });
   });

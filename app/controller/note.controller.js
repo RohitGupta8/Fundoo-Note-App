@@ -47,7 +47,7 @@ class NoteController {
   getNote = (req, res) => {
     try {
       const id = { id: req.user.dataForToken.id };
-      const getNoteValidation = validation.noteValidation.validate(id);
+      const getNoteValidation = validation.noteIDValidation.validate(id);
       if (getNoteValidation.error) {
         console.log(getNoteValidation.error);
         return res.status(400).send({
@@ -61,6 +61,7 @@ class NoteController {
         success: true
       });
     } catch (error) {
+      console.log(error);
       return res.status(500).json({
         message: "Internal Server Error",
         success: false
