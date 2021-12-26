@@ -310,7 +310,7 @@ describe("Reset Password API", () => {
       });
   });
 
-  it.only("when update with new password from wrong OTP, should return appropriate response", (done) => {
+  it("when update with new password from wrong OTP, should return appropriate response", (done) => {
     chai
       .request(server)
       .patch("/resetPassword")

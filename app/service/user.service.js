@@ -1,6 +1,6 @@
 /* eslint-disable node/no-callback-literal */
 const userModel = require("../model/user.model.js");
-const utilities = require("../utilities/encryption");
+const utilities = require("../utilities/helperClass");
 const nodemailer = require("../utilities/nodeMailer");
 const { logger } = require("../../logger/logger");
 

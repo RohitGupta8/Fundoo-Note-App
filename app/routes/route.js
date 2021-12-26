@@ -1,4 +1,6 @@
 const userController = require("../controller/user.controller.js");
+const helperClass = require("../utilities/helperClass.js");
+const noteController = require("../controller/note.controller");
 
 module.exports = (app) => {
   // API for registration
@@ -12,4 +14,7 @@ module.exports = (app) => {
 
   // api for Reset Password
   app.patch("/resetPassword", userController.resetPassword);
+
+  // api for createNote
+  app.post("/createNote", helperClass.validateToken, noteController.createNote);
 };

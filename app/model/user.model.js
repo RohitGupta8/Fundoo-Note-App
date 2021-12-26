@@ -3,7 +3,7 @@
 /* eslint-disable node/handle-callback-err */
 /* eslint-disable node/no-callback-literal */
 const mongoose = require("mongoose");
-const encryption = require("../utilities/encryption");
+const encryption = require("../utilities/helperClass");
 const Otp = require("./oneTimePassword");
 const { logger } = require("../../logger/logger");
 
