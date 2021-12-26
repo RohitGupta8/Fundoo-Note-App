@@ -25,7 +25,7 @@
         "/register": {
             "post": {
                 "tags": [
-                    "Register"
+                    "Sign up"
                 ],
                 "description": "Registration of new user",
                 "parameters": [
@@ -57,7 +57,7 @@
         "/login": {
             "post": {
                 "tags": [
-                    "Login"
+                    "Sign in"
                 ],
                 "description": "Login user",
                 "parameters": [
@@ -86,7 +86,7 @@
         "/forgotPassword": {
             "post": {
                 "tags": [
-                    "forgotPassword"
+                    "Forgot-Password"
                 ],
                 "description": "Send OTP for Password Reset to email",
                 "parameters": [
@@ -115,7 +115,7 @@
         "/resetPassword": {
             "patch": {
                 "tags": [
-                    "reset password"
+                    "Reset-Password"
                 ],
                 "description": "Already registered ? Then reset password successfully !!",
                 "parameters": [
@@ -137,6 +137,50 @@
                     },
                     "400": {
                         "description": "wrong otp entered / otp expired...."
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/createNote": {
+            "post": {
+                "tags": [
+                    "Create Notes"
+                ],
+                "description": "Create a  note !!",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Token for validation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    },
+                    {
+                        "name": "create note",
+                        "in": "body",
+                        "description": "Note's body",
+                        "schema": {
+                            "$ref": "#/definitions/createNote"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "schema": {
+                    "$ref": "#/definitions/createNote"
+                },
+                "responses": {
+                    "201": {
+                        "description": "Create note succesfully !!"
+                    },
+                    "400": {
+                        "description": "Please enter Valid Token"
                     },
                     "500": {
                         "description": "Internal server error"
@@ -192,6 +236,17 @@
                     "type": "string"
                 },
                 "code": {
+                    "type": "string"
+                }
+            }
+        },
+        "createNote": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
                     "type": "string"
                 }
             }
