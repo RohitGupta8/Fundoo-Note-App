@@ -74,7 +74,7 @@ describe("Create Note", () => {
       });
   });
 
-  it.only("give invalid description, should return appropriate response from controller", (done) => {
+  it("give invalid description, should return appropriate response from controller", (done) => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
@@ -87,6 +87,23 @@ describe("Create Note", () => {
           return done();
         }
         res.should.have.status(400);
+        return done();
+      });
+  });
+
+  it.only("when call createNoteAPI, should return appropriate response from service", (done) => {
+    const token = noteData.notes.validToken;
+    chai
+      .request(server)
+      .post("/createNote")
+      .set({ authorization: token })
+      .send({ title: "google", description: "google is good search engine" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
         return done();
       });
   });

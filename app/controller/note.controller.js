@@ -1,4 +1,5 @@
 const validation = require("../utilities/validation");
+const noteService = require("../service/note.service");
 class NoteController {
   createNote = (req, res) => {
     try {
@@ -16,9 +17,19 @@ class NoteController {
           data: createNoteValidation
         });
       }
-      return res.status(201).send({
-        message: "Found Token",
-        success: true
+      noteService.createNote(note, (error, data) => {
+        if (error) {
+          return res.status(400).json({
+            message: "failed to post note",
+            success: false
+          });
+        } else {
+          return res.status(201).send({
+            message: "Successfully inserted note",
+            success: true,
+            data: data
+          });
+        }
       });
     } catch (error) {
       return res.status(500).send({
