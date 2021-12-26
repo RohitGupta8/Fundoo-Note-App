@@ -46,8 +46,18 @@ class NoteController {
 
   getNote = (req, res) => {
     try {
-      return res.status(201).send({
-        message: "Note inserted Successfully",
+      const id = { id: req.user.dataForToken.id };
+      const getNoteValidation = validation.noteValidation.validate(id);
+      if (getNoteValidation.error) {
+        console.log(getNoteValidation.error);
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: getNoteValidation
+        });
+      }
+      return res.status(201).json({
+        message: "Successfully Notes retrieve.....",
         success: true
       });
     } catch (error) {
