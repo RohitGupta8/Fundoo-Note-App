@@ -142,7 +142,7 @@ describe("Create Note", () => {
       });
   });
 
-  it.only("when call createNoteAPI with inValid token, should return appropriate response from model", (done) => {
+  it("when call createNoteAPI with inValid token, should return appropriate response from model", (done) => {
     const token = noteData.notes.inValidToken;
     chai
       .request(server)
@@ -155,6 +155,40 @@ describe("Create Note", () => {
           return done();
         }
         res.should.have.status(400);
+        return done();
+      });
+  });
+});
+
+// api for get all notes
+
+describe("Get all Notes", () => {
+  it.only("when call getNote api without token, should return appropriate response from controller", (done) => {
+    chai
+      .request(server)
+      .get("/getNote")
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(500);
+        return done();
+      });
+  });
+
+  it.only("when call getNote api with token, should return appropriate response from controller", (done) => {
+    const token = noteData.notes.validToken;
+    chai
+      .request(server)
+      .get("/getNote")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
         return done();
       });
   });
