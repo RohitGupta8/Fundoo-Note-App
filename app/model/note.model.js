@@ -36,9 +36,14 @@ class NoteModel {
     }
 
   getNote = (id, callback) => {
-    if (id) {
-      callback(null, id.data);
-    }
-  };
+    NoteRegister.find({ userId: id.id }, (error, data) => {
+      if (data) {
+        console.log(data);
+        callback(null, data);
+      } else {
+        callback(error, null);
+      }
+    });
+  }
 }
 module.exports = new NoteModel();
