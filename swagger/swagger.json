@@ -268,57 +268,96 @@
                 }
             }
         },
-
-"/updateNote/{id}": {
-    "put": {
-        "tags": [
-            "Update Notes By Id"
-        ],
-        "description": "Update a Specific note id !!",
-        "parameters": [
-            {
-                "in": "header",
-                "name": "Authorization",
-                "description": "Token for validation",
-                "schema": {
-                    "type": "string",
-                    "required": true
-                }
-            },
-            {
-                "in": "path",
-                "name": "id",
-                "description": "Id of note you want to update",
-                "schema": {
-                    "type": "string"
-                }
-            },
-            {
-                "in": "body",
-                "name": "note",
-                "description": "Note body",
-                "schema": {
-                    "$ref": "#/definitions/updatenotes"
+        "/updateNote/{id}": {
+            "put": {
+                "tags": [
+                    "Update Notes By Id"
+                ],
+                "description": "Update a Specific note id !!",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Token for validation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id of note you want to update",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "note",
+                        "description": "Note body",
+                        "schema": {
+                            "$ref": "#/definitions/updatenotes"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "update note succesfully !!"
+                    },
+                    "401": {
+                        "description": "Please enter Valid Token"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
                 }
             }
-        ],
-        "produces": [
-            "application/json"
-        ],
-        "responses": {
-            "201": {
-                "description": "update note succesfully !!"
-            },
-            "401": {
-                "description": "Please enter Valid Token"
-            },
-            "500": {
-                "description": "Internal server error"
+        },
+        "/deleteNote/{id}": {
+            "delete": {
+                "tags": [
+                    "Delete Notes By Id"
+                ],
+                "description": "Delete a note by ID ",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Token for vaidation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id of note you want to Delete",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Delete note succesfully !!"
+                    },
+                    "401": {
+                        "description": "Please enter Valid Token"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
             }
         }
-    }
-}
-
     },
     "definitions": {
         "register": {
