@@ -77,8 +77,10 @@ class NoteModel {
   deleteNoteById = (id, callback) => {
     NoteRegister.findOneAndDelete({ $and: [{ _id: id.noteId }, { userId: id.userId }] }, (error, data) => {
       if (data) {
+        logger.info(data);
         return callback(null, data);
       }
+      logger.error(error);
       return callback(error, null);
     });
   }

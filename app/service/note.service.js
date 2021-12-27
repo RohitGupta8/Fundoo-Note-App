@@ -52,8 +52,10 @@ class NoteService {
   deleteNoteById = (id, callback) => {
     noteModel.deleteNoteById(id, (error, data) => {
       if (error) {
+        logger.error(error);
         return callback(error, null);
       }
+      logger.info("deleted...");
       return callback(null, data);
     });
   };
