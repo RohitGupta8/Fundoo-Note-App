@@ -371,7 +371,23 @@ describe("GetNoteById", () => {
       });
   });
 
-  it.only("when call getNoteById with validToken , should return appropriate response from model", (done) => {
+  it("when call getNoteById with validToken , should return appropriate response from model", (done) => {
+    const token = noteData.notes.validToken;
+    chai
+      .request(server)
+      .get("/getNote/61c8407f4e180a62acac73b3")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
+        return done();
+      });
+  });
+
+  it.only("when call getNoteById with validToken using find method , should return appropriate response from model", (done) => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
