@@ -23,4 +23,7 @@ module.exports = (app) => {
 
   // api for getNoteById
   app.get("/getNote/:id", helperClass.validateToken, noteController.getNoteById);
+
+  // api for updateNoteById
+  app.put("/updateNote/:id", helperClass.validateToken, noteController.updateNoteById);
 };

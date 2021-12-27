@@ -387,11 +387,31 @@ describe("GetNoteById", () => {
       });
   });
 
-  it.only("when call getNoteById with validToken using find method , should return appropriate response from model", (done) => {
+  it("when call getNoteById with validToken using find method , should return appropriate response from model", (done) => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
       .get("/getNote/61c8407f4e180a62acac73b3")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
+        return done();
+      });
+  });
+});
+
+// api for update note by id
+
+describe("Update Note By Id", () => {
+  it.only("when call updateNoteById with validToken , should return appropriate response from controller", (done) => {
+    const token = noteData.notes.validToken;
+    chai
+      .request(server)
+      .put("/updateNote/:id")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
