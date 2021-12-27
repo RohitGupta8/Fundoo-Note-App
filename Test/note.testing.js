@@ -306,4 +306,20 @@ describe("GetNoteById", () => {
         return done();
       });
   });
+
+  it.only("when call getNoteById with validToken , should return appropriate response", (done) => {
+    const token = noteData.notes.validToken;
+    chai
+      .request(server)
+      .get("/getNote/:id")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
+        return done();
+      });
+  });
 });
