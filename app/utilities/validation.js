@@ -61,7 +61,7 @@ class Validation {
 
   validateDeleteNote = Joi.object({
     id: Joi.string(),
-    noteId: Joi.string(),
+    noteId: Joi.string().required().min(20),
     userId: Joi.string()
   });
 }
