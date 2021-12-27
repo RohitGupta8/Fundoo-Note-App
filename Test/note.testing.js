@@ -323,7 +323,7 @@ describe("GetNoteById", () => {
       });
   });
 
-  it.only("given token is verified then given id should be validated", (done) => {
+  it("given token is verified then given id should be validated", (done) => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
@@ -339,7 +339,7 @@ describe("GetNoteById", () => {
       });
   });
 
-  it.only("given token is not verified then given id should not be validated", (done) => {
+  it("given token is not verified then given id should not be validated", (done) => {
     const token = noteData.notes.inValidToken;
     chai
       .request(server)
@@ -351,6 +351,22 @@ describe("GetNoteById", () => {
           return done();
         }
         res.should.have.status(400);
+        return done();
+      });
+  });
+
+  it.only("when call getNoteById with validToken , should return appropriate response from service", (done) => {
+    const token = noteData.notes.validToken;
+    chai
+      .request(server)
+      .get("/getNote/61c8407f4e180a62acac73b3")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
         return done();
       });
   });
