@@ -28,8 +28,10 @@ class NoteService {
   getNoteById = (id, callback) => {
     noteModel.getNoteById(id, (err, data) => {
       if (data) {
+        logger.info(data);
         return callback(null, data);
       } else {
+        logger.error(err);
         return callback(err, null);
       }
     });

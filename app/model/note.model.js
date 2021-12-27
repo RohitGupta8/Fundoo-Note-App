@@ -51,8 +51,11 @@ class NoteModel {
   getNoteById = (id, callback) => {
     NoteRegister.find({ userId: id.UserId, _id: id.noteId }, (error, data) => {
       if (data) {
+        console.log(data);
+        logger.info(data);
         callback(null, data);
       } else {
+        logger.error(error);
         callback(error, null);
       }
     });

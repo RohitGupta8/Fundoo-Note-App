@@ -89,6 +89,7 @@ class NoteController {
       const getNoteValidation = validation.getNoteByIDValidation.validate(id);
       if (getNoteValidation.error) {
         console.log(getNoteValidation.error);
+        logger.error(getNoteValidation.error);
         return res.status(400).send({
           success: false,
           message: "Wrong Input Validations",
@@ -97,11 +98,13 @@ class NoteController {
       }
       noteService.getNoteById(id, (error, data) => {
         if (error) {
+          logger.error(error);
           return res.status(400).json({
             message: "failed to get given notes",
             success: false
           });
         } else {
+          logger.info(data);
           return res.status(201).json({
             message: " Successfully !! retreive given note",
             success: true,
@@ -110,6 +113,7 @@ class NoteController {
         }
       });
     } catch (error) {
+      logger.error(error);
       return res.status(500).json({
         message: "Internal server error",
         success: false
