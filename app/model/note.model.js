@@ -61,8 +61,14 @@ class NoteModel {
     });
   }
 
-  updateNoteById = (id, callback) => {
-    return callback(null, id);
+  updateNoteById = (updatedNote, callback) => {
+    NoteRegister.findByIdAndUpdate(updatedNote.id, { title: updatedNote.title, description: updatedNote.description }, { new: true }, (err, data) => {
+      if (err) {
+        return callback(err, null);
+      } else {
+        return callback(null, data);
+      }
+    });
   }
 }
 module.exports = new NoteModel();
