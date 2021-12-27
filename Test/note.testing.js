@@ -407,7 +407,7 @@ describe("GetNoteById", () => {
 // api for update note by id
 
 describe("Update Note By Id", () => {
-  it.only("when call updateNoteById with validToken , should return appropriate response from controller", (done) => {
+  it("when call updateNoteById with validToken , should return appropriate response from controller", (done) => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
@@ -419,6 +419,22 @@ describe("Update Note By Id", () => {
           return done();
         }
         res.should.have.status(201);
+        return done();
+      });
+  });
+
+  it("when call updateNoteById with inValidToken , should return appropriate response from controller", (done) => {
+    const token = noteData.notes.inValidToken;
+    chai
+      .request(server)
+      .put("/updateNote/:id")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
         return done();
       });
   });

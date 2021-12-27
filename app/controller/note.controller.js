@@ -123,8 +123,22 @@ class NoteController {
 
   updateNoteById = (req, res) => {
     try {
+      const updateNote = {
+        id: req.params.id,
+        userId: req.user.dataForToken.id,
+        title: req.body.title,
+        description: req.body.description
+      };
+      const updateNoteValidation = validation.noteUpdateValidation.validate(updateNote);
+      if (updateNoteValidation.error) {
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: updateNoteValidation
+        });
+      }
       return res.status(201).json({
-        message: "successfully note updated......",
+        message: "Getting Appropriate response from token",
         success: true
       });
     } catch (error) {
