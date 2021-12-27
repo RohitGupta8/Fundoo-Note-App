@@ -674,7 +674,7 @@ describe("DeleteNoteById", () => {
       });
   });
 
-  it.only("given id present in DB then delete, should return proper response from model", (done) => {
+  it("given id present in DB then delete, should return proper response from model", (done) => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
@@ -686,6 +686,22 @@ describe("DeleteNoteById", () => {
           return done();
         }
         res.should.have.status(201);
+        return done();
+      });
+  });
+
+  it.only("given id not present in DB, should return proper response from model", (done) => {
+    const token = noteData.notes.validToken;
+    chai
+      .request(server)
+      .delete("/deleteNote/61c8913bdcf696ac219c")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
         return done();
       });
   });
