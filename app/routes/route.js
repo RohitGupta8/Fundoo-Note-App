@@ -22,5 +22,5 @@ module.exports = (app) => {
   app.get("/getNote", helperClass.validateToken, noteController.getNote);
 
   // api for getNoteById
-  app.get("/getNote/:id", helperClass.validateToken, noteController.getNote);
+  app.get("/getNote/:id", helperClass.validateToken, noteController.getNoteById);
 };

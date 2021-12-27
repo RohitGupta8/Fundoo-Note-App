@@ -95,7 +95,7 @@ class NoteController {
           data: getNoteValidation
         });
       }
-      noteService.getNote(id, (error, data) => {
+      noteService.getNoteById(id, (error, data) => {
         if (error) {
           return res.status(400).json({
             message: "failed to get given notes",

@@ -18,22 +18,22 @@ const noteSchema = mongoose.Schema({
 const NoteRegister = mongoose.model("NoteBook", noteSchema);
 
 class NoteModel {
-    createNote = (note, callback) => {
-      const notes = new NoteRegister({
-        userId: note.userId,
-        title: note.title,
-        description: note.description
-      });
-      notes.save((error, data) => {
-        if (error) {
-          logger.error(error);
-          return callback(error, null);
-        } else {
-          logger.info(data);
-          return callback(null, data);
-        }
-      });
-    }
+  createNote = (note, callback) => {
+    const notes = new NoteRegister({
+      userId: note.userId,
+      title: note.title,
+      description: note.description
+    });
+    notes.save((error, data) => {
+      if (error) {
+        logger.error(error);
+        return callback(error, null);
+      } else {
+        logger.info(data);
+        return callback(null, data);
+      }
+    });
+  }
 
   getNote = (id, callback) => {
     NoteRegister.find({ userId: id.id }, (error, data) => {
@@ -49,7 +49,7 @@ class NoteModel {
   }
 
   getNoteById = (id, callback) => {
-    NoteRegister.find({ userId: id.UserId }, (error, data) => {
+    NoteRegister.find({ userId: id.UserId, _id: id.noteId }, (error, data) => {
       if (data) {
         callback(null, data);
       } else {
