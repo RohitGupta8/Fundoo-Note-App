@@ -95,7 +95,7 @@ class NoteController {
           data: getNoteValidation
         });
       }
-      return res.status(200).send({
+      return res.status(201).send({
         success: true,
         message: "Retrieve Note Successfully"
       });
