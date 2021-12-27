@@ -165,8 +165,18 @@ class NoteController {
 
   deleteNoteById = (req, res) => {
     try {
+      const id = { userId: req.user.dataForToken.id, noteId: req.params.id };
+      const deleteNoteValidation = validation.validateDeleteNote.validate(id);
+      if (deleteNoteValidation.error) {
+        console.log(deleteNoteValidation.error);
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: deleteNoteValidation
+        });
+      }
       return res.status(201).send({
-        message: "Successfully id is found",
+        message: " successfully deleted note",
         success: true
       });
     } catch {
