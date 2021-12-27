@@ -641,4 +641,20 @@ describe("DeleteNoteById", () => {
         return done();
       });
   });
+
+  it.only("when call DeleteNote api, should return proper response from service", (done) => {
+    const token = noteData.notes.validToken;
+    chai
+      .request(server)
+      .delete("/deleteNote/61c8913bdcf696ac219ce3ea")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
+        return done();
+      });
+  });
 });
