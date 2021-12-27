@@ -50,7 +50,12 @@ class NoteService {
   };
 
   deleteNoteById = (id, callback) => {
-    return callback(null, id);
+    noteModel.deleteNoteById(id, (error, data) => {
+      if (error) {
+        return callback(error, null);
+      }
+      return callback(null, data);
+    });
   };
 }
 module.exports = new NoteService();
