@@ -188,43 +188,86 @@
                 }
             }
         },
-"/getNote": {
-    "get": {
-        "tags": [
-            "Get All Notes"
-        ],
-        "description": "Get all note !!",
-        "parameters": [
-            {
-                "in": "header",
-                "name": "Authorization",
-                "description": "Token for validation",
+        "/getNote": {
+            "get": {
+                "tags": [
+                    "Get All Notes"
+                ],
+                "description": "Get all note !!",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Token for validation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "schema": {
-                    "type": "string",
-                    "required": true
+                    "$ref": "#/definitions/getNote"
+                },
+                "responses": {
+                    "201": {
+                        "description": "Succesfully !! retrieve all notes."
+                    },
+                    "401": {
+                        "description": "Please enter Valid Token/ or add bearer before token..."
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
                 }
             }
-        ],
-        "produces": [
-            "application/json"
-        ],
-        "schema": {
-            "$ref": "#/definitions/getNote"
         },
-        "responses": {
-            "201": {
-                "description": "Succesfully !! retrieve all notes."
-            },
-            "401": {
-                "description": "Please enter Valid Token/ or add bearer before token..."
-            },
-            "500": {
-                "description": "Internal server error"
+        "/getNote/{id}": {
+            "get": {
+                "tags": [
+                    "Get Notes By Id"
+                ],
+                "description": "Get a note by ID for specific person id",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Token for validation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    },
+                    {
+                        "name": "Note_id",
+                        "in": "path",
+                        "description": "Note id for retrieve note",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "schema": {
+                    "$ref": "#/definitions/getNoteById"
+                },
+                "responses": {
+                    "201": {
+                        "description": "get note succesfully !!"
+                    },
+                    "400": {
+                        "description": "Please enter Valid Token"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
             }
         }
-    }
-}
-
     },
     "definitions": {
         "register": {
@@ -302,7 +345,21 @@
                 "title": "Write a title here.....",
                 "description": "Write a description here....."
             }
+        },
+        "getNoteById": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "title": "Write a title here.....",
+                "description": "Write a description here....."
+            }
         }
-    
     }
 }
