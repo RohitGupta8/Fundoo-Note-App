@@ -137,9 +137,19 @@ class NoteController {
           data: updateNoteValidation
         });
       }
-      return res.status(201).json({
-        message: "Getting Appropriate response from token",
-        success: true
+      noteService.updateNoteById(updateNote, (error, data) => {
+        if (error) {
+          return res.status(400).json({
+            message: "Failed to update note",
+            success: false
+          });
+        } else {
+          return res.status(201).send({
+            message: "Successfully updated....",
+            success: true,
+            data: data
+          });
+        }
       });
     } catch (error) {
       return res.status(500).json({

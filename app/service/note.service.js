@@ -36,5 +36,9 @@ class NoteService {
       }
     });
   };
+
+  updateNoteById = (id, callback) => {
+    return callback(null, id);
+  }
 }
 module.exports = new NoteService();
