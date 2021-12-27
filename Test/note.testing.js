@@ -557,7 +557,7 @@ describe("Update Note By Id", () => {
       });
   });
 
-  it.only("given id is not matched then don't update, should return proper response", (done) => {
+  it("given id is not matched then don't update, should return proper response", (done) => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
@@ -570,6 +570,26 @@ describe("Update Note By Id", () => {
           return done();
         }
         res.should.have.status(400);
+        return done();
+      });
+  });
+});
+
+// api of Delete Note by Id
+
+describe("DeleteNoteById", () => {
+  it.only("when call DeleteNote Api with valid token, should return proper response from controller", (done) => {
+    const token = noteData.notes.validToken;
+    chai
+      .request(server)
+      .delete("/deleteNote/:id")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
         return done();
       });
   });
