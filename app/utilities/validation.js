@@ -46,5 +46,10 @@ class Validation {
   noteIDValidation = Joi.object({
     id: Joi.string()
   });
+
+  getNoteByIDValidation = Joi.object({
+    userId: Joi.string().required(),
+    noteId: Joi.string().required()
+  });
 }
 module.exports = new Validation();
