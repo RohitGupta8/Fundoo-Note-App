@@ -610,7 +610,7 @@ describe("DeleteNoteById", () => {
       });
   });
 
-  it.only("when it is validate with the given id, should return proper response from controller", (done) => {
+  it("when it is validate with the given id, should return proper response from controller", (done) => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
@@ -622,6 +622,22 @@ describe("DeleteNoteById", () => {
           return done();
         }
         res.should.have.status(201);
+        return done();
+      });
+  });
+
+  it("when it is validate with the given false id, should return proper response from controller", (done) => {
+    const token = noteData.notes.validToken;
+    chai
+      .request(server)
+      .delete("/deleteNote/61c8913bdcf696aca")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
         return done();
       });
   });
