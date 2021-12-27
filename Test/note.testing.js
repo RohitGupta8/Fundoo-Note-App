@@ -578,7 +578,7 @@ describe("Update Note By Id", () => {
 // api of Delete Note by Id
 
 describe("DeleteNoteById", () => {
-  it.only("when call DeleteNote Api with valid token, should return proper response from controller", (done) => {
+  it("when call DeleteNote Api with valid token, should return proper response from controller", (done) => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
@@ -590,6 +590,22 @@ describe("DeleteNoteById", () => {
           return done();
         }
         res.should.have.status(201);
+        return done();
+      });
+  });
+
+  it.only("when call DeleteNote Api with inValid token, should return proper response from controller", (done) => {
+    const token = noteData.notes.inValidToken;
+    chai
+      .request(server)
+      .delete("/deleteNote/:id")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
         return done();
       });
   });
