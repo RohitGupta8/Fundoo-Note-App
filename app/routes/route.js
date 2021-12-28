@@ -1,6 +1,7 @@
 const userController = require("../controller/user.controller.js");
 const helperClass = require("../utilities/helperClass.js");
 const noteController = require("../controller/note.controller");
+const labelController = require("../controller/label.controller");
 
 module.exports = (app) => {
   // API for registration
@@ -29,4 +30,7 @@ module.exports = (app) => {
 
   // api for DeleteNoteById
   app.delete("/deleteNote/:id", helperClass.validateToken, noteController.deleteNoteById);
+
+  // api for AddLabel
+  app.post("/addLabel", helperClass.validateToken, labelController.addLabel);
 };

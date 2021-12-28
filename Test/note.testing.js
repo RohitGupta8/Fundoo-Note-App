@@ -690,7 +690,7 @@ describe("DeleteNoteById", () => {
       });
   });
 
-  it.only("given id not present in DB, should return proper response from model", (done) => {
+  it("given id not present in DB, should return proper response from model", (done) => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
