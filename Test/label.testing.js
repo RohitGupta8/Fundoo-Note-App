@@ -73,4 +73,21 @@ describe("Add Label", () => {
         return done();
       });
   });
+
+  it("when call AddLabel api with false label, should return appropriate response from controller", (done) => {
+    const token = labelData.notes.validToken;
+    chai
+      .request(server)
+      .post("/addLabel/61ca792c3e0c670ef5737934")
+      .set({ authorization: token })
+      .send({ labelName: "fake" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
+        return done();
+      });
+  });
 });
