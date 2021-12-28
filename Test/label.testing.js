@@ -91,7 +91,24 @@ describe("Add Label", () => {
       });
   });
 
-  it.only("when call AddLabel api, should return appropriate response from Service", (done) => {
+  it("when call AddLabel api, should return appropriate response from Service", (done) => {
+    const token = labelData.notes.validToken;
+    chai
+      .request(server)
+      .post("/addLabel/61ca792c3e0c670ef5737934")
+      .set({ authorization: token })
+      .send({ labelName: "fakeName" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
+        return done();
+      });
+  });
+
+  it.only("when call AddLabel api, should return appropriate response from Model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
