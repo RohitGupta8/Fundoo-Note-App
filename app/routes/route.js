@@ -32,5 +32,5 @@ module.exports = (app) => {
   app.delete("/deleteNote/:id", helperClass.validateToken, noteController.deleteNoteById);
 
   // api for AddLabel
-  app.post("/addLabel", helperClass.validateToken, labelController.addLabel);
+  app.post("/addLabel/:id", helperClass.validateToken, labelController.addLabel);
 };
