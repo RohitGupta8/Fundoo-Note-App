@@ -1,4 +1,6 @@
+/* eslint-disable node/no-callback-literal */
 const mongoose = require("mongoose");
+const UserModel = require("../model/user.model").UserDB;
 const { logger } = require("../../logger/logger");
 const noteSchema = mongoose.Schema({
   userId: [{ type: mongoose.Schema.Types.ObjectId, ref: "UserInformation" }],
@@ -19,18 +21,28 @@ const NoteRegister = mongoose.model("NoteBook", noteSchema);
 
 class NoteModel {
   createNote = (note, callback) => {
-    const notes = new NoteRegister({
-      userId: note.userId,
-      title: note.title,
-      description: note.description
-    });
-    notes.save((error, data) => {
+    UserModel.findById({ _id: note.userId }, (error, data) => {
       if (error) {
-        logger.error(error);
+        console.log("1", error);
         return callback(error, null);
+      } else if (!data) {
+        console.log("2", error);
+        return callback("Id not found", null);
       } else {
-        logger.info(data);
-        return callback(null, data);
+        const notes = new NoteRegister({
+          userId: note.userId,
+          title: note.title,
+          description: note.description
+        });
+        return notes.save((error, data) => {
+          if (error) {
+            logger.error(error);
+            return callback(error, null);
+          } else {
+            logger.info(data);
+            return callback(null, data);
+          }
+        });
       }
     });
   }
