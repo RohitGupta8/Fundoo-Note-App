@@ -1,4 +1,4 @@
-const noteModel = require("../model/note.model");
+const noteModel = require("../model/note.model").UserModel;
 const { logger } = require("../../logger/logger");
 class NoteService {
     createNote = (note, callback) => {

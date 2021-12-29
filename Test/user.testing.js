@@ -5,14 +5,14 @@ const chaiHttp = require("chai-http");
 const server = require("../server.js");
 chai.use(chaiHttp);
 chai.should();
-
+const faker = require("faker");
 const registrationData = require("./user.Details.json");
 
 // Test cases for Registration
 // eslint-disable-next-line no-undef
 describe("registration", () => {
   // eslint-disable-next-line no-undef
-  it("Should return status code - 500,When given registration details is empty.", (done) => {
+  it("Should return status code - 400,When given registration details is empty.", (done) => {
     const userDetails = registrationData.userInformation.isEmpty;
 
     chai.request(server).post("/register").send(userDetails).end((err, res) => {
@@ -26,9 +26,13 @@ describe("registration", () => {
   });
 
   it("Should return status code - 200,When given registration details is proper.", (done) => {
-    const userDetails = registrationData.userInformation.fullInformation;
-
-    chai.request(server).post("/register").send(userDetails).end((err, res) => {
+    const registerfaker = {
+      firstName: faker.name.findName(),
+      lastName: faker.name.lastName(),
+      email: faker.internet.email(),
+      password: faker.internet.password()
+    };
+    chai.request(server).post("/register").send(registerfaker).end((err, res) => {
       if (err) {
         console.log("Plz check again & enter with proper format");
         return done();

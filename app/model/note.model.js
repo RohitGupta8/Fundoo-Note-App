@@ -85,4 +85,7 @@ class NoteModel {
     });
   }
 }
-module.exports = new NoteModel();
+module.exports = {
+  UserModel: new NoteModel(),
+  User: NoteRegister
+};

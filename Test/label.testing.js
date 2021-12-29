@@ -10,9 +10,9 @@ describe("Add Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel")
+      .post("/addLabel/61ca792c3e0c670ef5737934")
       .set({ authorization: token })
-      .send({})
+      .send({ labelName: "fakeName" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -35,7 +35,7 @@ describe("Add Label", () => {
           console.log("plz check your credential");
           return done();
         }
-        res.should.have.status(400);
+        res.should.have.status(404);
         return done();
       });
   });
@@ -108,7 +108,7 @@ describe("Add Label", () => {
       });
   });
 
-  it.only("when call AddLabel api, should return appropriate response from Model", (done) => {
+  it("when call AddLabel api, should return appropriate response from Model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)

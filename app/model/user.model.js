@@ -119,4 +119,4 @@ class UserModel {
     });
   }
 }
-module.exports = new UserModel();
+module.exports = { UserModel: new UserModel(), UserDB: User };

@@ -25,7 +25,7 @@ class HelperClass {
       password: data.password,
       email: data.email
     };
-    return jwt.sign({ dataForToken }, process.env.JWT_SECRET, { expiresIn: "20H" });
+    return jwt.sign({ dataForToken }, process.env.JWT_SECRET, { expiresIn: "20000H" });
   }
 
   comparePassword = (password, result) => {
