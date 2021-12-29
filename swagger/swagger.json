@@ -357,6 +357,56 @@
                     }
                 }
             }
+        },
+        "/addLabel/{id}": {
+            "post": {
+                "tags": [
+                    "Add label by NoteID"
+                ],
+                "description": "Add Label",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token for validation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Note id",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "addlabel",
+                        "description": "Label to be updated",
+                        "schema": {
+                            "$ref": "#/definitions/addlabel"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "label added"
+                    },
+                    "500": {
+                        "description": "Failed to add label"
+                    },
+                    "400": {
+                        "description": "Invalid Token"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -465,6 +515,15 @@
                 "title": "Write a title here.....",
                 "description": "Write a description here....."
             }
+        },
+        "addlabel": {
+            "type": "object",
+            "properties": {
+                "labelName": {
+                    "type": "string"
+                }
+            }
         }
     }
+    
 }
