@@ -1,5 +1,9 @@
+/* eslint-disable node/no-callback-literal */
+/* eslint-disable semi */
+/* eslint-disable node/handle-callback-err */
 const mongoose = require("mongoose");
 const noteModel = require("../model/note.model").User;
+const UserModel = require("../model/user.model").UserDB;
 const labelSchema = mongoose.Schema({
   userId: [{ type: mongoose.Schema.Types.ObjectId, ref: "UserInformation" }],
 
@@ -17,19 +21,23 @@ const labelSchema = mongoose.Schema({
 const LabelRegister = mongoose.model("LabelBook", labelSchema);
 
 class LabelModel {
-  addlabelById = (labelData, callback) => {
-    noteModel.find({ _id: labelData._id }, (data, error) => {
-      if (data) {
+  addlabelById = (labelID, callback) => {
+    UserModel.findById({ _id: labelID.userId }, (error, data) => {
+      if (error) {
         return callback(error, null);
+      } else if (!data) {
+        return callback("user id not found", null)
       } else {
-        LabelRegister.findOne({ labelName: labelData.labelName, noteId: labelData.noteId }, { new: true }, (data, error) => {
-          if (data) {
+        noteModel.findById({ _id: labelID.noteId }, (error, data) => {
+          if (error) {
             return callback(error, null);
+          } else if (!data) {
+            return callback("note id note found", null);
           } else {
             const labels = new LabelRegister({
-              noteId: labelData.noteId,
-              userId: labelData.userId,
-              labelName: labelData.labelName
+              userId: labelID.userId,
+              noteId: labelID.noteId,
+              labelName: labelID.labelName
             });
             return labels.save((error, data) => {
               if (error) {
@@ -39,7 +47,7 @@ class LabelModel {
               }
             });
           }
-        });
+        })
       }
     });
   }

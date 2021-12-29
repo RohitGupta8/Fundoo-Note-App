@@ -10,9 +10,9 @@ describe("Add Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61ca792c3e0c670ef5737934")
+      .post("/addLabel/61cc4dffb33009b46075b861")
       .set({ authorization: token })
-      .send({ labelName: "fakeName" })
+      .send({ labelName: "fakeNamefff" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -27,7 +27,7 @@ describe("Add Label", () => {
     const token = labelData.notes.inValidToken;
     chai
       .request(server)
-      .post("/addLabel")
+      .post("/addLabel/61cc4dffb33009b46075b861")
       .set({ authorization: token })
       .send({})
       .end((err, res) => {
@@ -44,9 +44,9 @@ describe("Add Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61ca792c3e0c670ef5737934")
+      .post("/addLabel/61cc4dffb33009b46075b861")
       .set({ authorization: token })
-      .send({ labelName: "fakeName" })
+      .send({ labelName: "fakeNamgge" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -63,7 +63,7 @@ describe("Add Label", () => {
       .request(server)
       .post("/addLabel/61ca792c3e0c670ef4")
       .set({ authorization: token })
-      .send({ labelName: "fakeName" })
+      .send({ labelName: "fakfeName" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -78,7 +78,7 @@ describe("Add Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61ca792c3e0c670ef5737934")
+      .post("/addLabel/61cc4dffb33009b46075b861")
       .set({ authorization: token })
       .send({ labelName: "fake" })
       .end((err, res) => {
@@ -95,9 +95,9 @@ describe("Add Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61ca792c3e0c670ef5737934")
+      .post("/addLabel/61cc4dffb33009b46075b861")
       .set({ authorization: token })
-      .send({ labelName: "fakeName" })
+      .send({ labelName: "fakkkeName" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -112,9 +112,26 @@ describe("Add Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61ca792c3e0c670ef5737934")
+      .post("/addLabel/61cc4dffb33009b46075b861")
       .set({ authorization: token })
-      .send({ labelName: "fakeName" })
+      .send({ labelName: "fakeNammme" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
+        return done();
+      });
+  });
+
+  it.only("when note id present then add to DB, should return appropriate response from Model", (done) => {
+    const token = labelData.notes.validToken;
+    chai
+      .request(server)
+      .post("/addLabel/61cc4dffb33009b46075b861")
+      .set({ authorization: token })
+      .send({ labelName: "fakeNallme" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
