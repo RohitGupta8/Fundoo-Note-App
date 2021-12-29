@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { logger } = require("../../logger/logger");
 const noteSchema = mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  userId: [{ type: mongoose.Schema.Types.ObjectId, ref: "UserInformation" }],
   title: {
     type: String,
     required: true,

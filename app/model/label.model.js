@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const noteModel = require("../model/note.model").User;
 const labelSchema = mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  userId: [{ type: mongoose.Schema.Types.ObjectId, ref: "UserInformation" }],
 
-  noteId: [{ type: mongoose.Schema.Types.ObjectId, ref: "NoteRegister" }],
+  noteId: [{ type: mongoose.Schema.Types.ObjectId, ref: "NoteBook" }],
 
   labelName: {
     type: String,
@@ -18,7 +18,7 @@ const LabelRegister = mongoose.model("LabelBook", labelSchema);
 
 class LabelModel {
   addlabelById = (labelData, callback) => {
-    noteModel.find({ userId: labelData.userId, _id: labelData.noteId }, { new: true }, (data, error) => {
+    noteModel.find({ _id: labelData._id }, (data, error) => {
       if (data) {
         return callback(error, null);
       } else {

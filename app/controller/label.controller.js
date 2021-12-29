@@ -5,7 +5,7 @@ class AddLabelController {
       try {
         const label = {
           labelName: req.body.labelName,
-          userId: req.user.dataForToken.id,
+          userId: req.user.tokenData.id,
           noteId: req.params.id
         };
         const labelValidation = validation.validateLabel.validate(label);

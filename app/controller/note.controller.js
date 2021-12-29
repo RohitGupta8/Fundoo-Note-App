@@ -5,7 +5,7 @@ class NoteController {
   createNote = (req, res) => {
     try {
       const note = {
-        userId: req.user.dataForToken.id,
+        userId: req.user.tokenData.id,
         title: req.body.title,
         description: req.body.description
       };
@@ -46,7 +46,7 @@ class NoteController {
 
   getNote = (req, res) => {
     try {
-      const id = { id: req.user.dataForToken.id };
+      const id = { id: req.user.tokenData.id };
       const getNoteValidation = validation.noteIDValidation.validate(id);
       if (getNoteValidation.error) {
         console.log(getNoteValidation.error);
@@ -85,7 +85,7 @@ class NoteController {
 
   getNoteById = (req, res) => {
     try {
-      const id = { userId: req.user.dataForToken.id, noteId: req.params.id };
+      const id = { userId: req.user.tokenData.id, noteId: req.params.id };
       const getNoteValidation = validation.getNoteByIDValidation.validate(id);
       if (getNoteValidation.error) {
         console.log(getNoteValidation.error);
@@ -125,7 +125,7 @@ class NoteController {
     try {
       const updateNote = {
         id: req.params.id,
-        userId: req.user.dataForToken.id,
+        userId: req.user.tokenData.id,
         title: req.body.title,
         description: req.body.description
       };
@@ -165,7 +165,7 @@ class NoteController {
 
   deleteNoteById = (req, res) => {
     try {
-      const id = { userId: req.user.dataForToken.id, noteId: req.params.id };
+      const id = { userId: req.user.tokenData.id, noteId: req.params.id };
       const deleteNoteValidation = validation.validateDeleteNote.validate(id);
       if (deleteNoteValidation.error) {
         logger.error(deleteNoteValidation.error);
