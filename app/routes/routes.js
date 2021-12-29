@@ -33,4 +33,7 @@ module.exports = (app) => {
 
   // api for AddLabel
   app.post("/addLabel/:id", helperClass.validateToken, labelController.addLabel);
+
+  // api for getLabel
+  app.get("/getLabel", helperClass.validateToken, labelController.getLabel);
 };
