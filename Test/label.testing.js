@@ -35,7 +35,7 @@ describe("Add Label", () => {
           console.log("plz check your credential");
           return done();
         }
-        res.should.have.status(404);
+        res.should.have.status(400);
         return done();
       });
   });
@@ -125,7 +125,7 @@ describe("Add Label", () => {
       });
   });
 
-  it.only("when note id present then add to DB, should return appropriate response from Model", (done) => {
+  it("when note id present then add to DB, should return appropriate response from Model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -138,6 +138,23 @@ describe("Add Label", () => {
           return done();
         }
         res.should.have.status(201);
+        return done();
+      });
+  });
+
+  it("when note id absent then status code 400, should return appropriate response from Model", (done) => {
+    const token = labelData.notes.validToken;
+    chai
+      .request(server)
+      .post("/addLabel/62cc4dffb33009b46075b861")
+      .set({ authorization: token })
+      .send({ labelName: "fakeNallme" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
         return done();
       });
   });
