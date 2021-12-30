@@ -46,7 +46,7 @@ class AddLabelController {
 
   getLabel = (req, res) => {
     try {
-      const id = { id: req.user.dataForToken.id };
+      const id = { id: req.user.tokenData.id };
       const getLabelValidation = validation.getLabelValidation.validate(id);
       if (getLabelValidation.error) {
         console.log(getLabelValidation.error);
@@ -55,7 +55,10 @@ class AddLabelController {
           message: "Wrong Input Validations",
           data: getLabelValidation
         });
-      }
+      } return res.status(201).json({
+        message: "Successfully labels retrieve.....",
+        success: true
+      });
     } catch (error) {
       return res.status(500).json({
         message: "Internal Server Error",

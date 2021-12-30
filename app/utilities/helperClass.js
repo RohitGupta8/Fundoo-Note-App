@@ -34,22 +34,21 @@ class HelperClass {
   }
 
   validateToken = (req, res, next) => {
-    const header = req.headers.authorization;
-    const myArr = header.split(" ");
-    const token = myArr[1];
+    const tokenHeader = req.headers.authorization;
+    const tokenArray = tokenHeader.split(" ");
+    const tokenInfo = tokenArray[1];
     try {
-      if (token) {
-        jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
+      if (tokenInfo) {
+        jwt.verify(tokenInfo, process.env.JWT_SECRET, (error, decoded) => {
           if (error) {
-            return res.status(400).send({ success: false, message: "Invalid Token" });
+            return res.status(400).send({ success: false, message: "Oops.....Invalid Token" });
           } else {
-            console.log("token ", decoded);
             req.user = decoded;
             next();
           }
         });
       } else {
-        return res.status(401).send({ success: false, message: "Authorisation failed! Invalid user" });
+        return res.status(401).send({ success: false, message: "Oops....Authorisation failed! Invalid user" });
       }
     } catch (error) {
       return res.status(500).send({ success: false, message: "Something went wrong!" });

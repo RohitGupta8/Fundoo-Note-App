@@ -72,7 +72,7 @@ class Validation {
   });
 
   getLabelValidation = Joi.object({
-    id: Joi.string()
+    id: Joi.string().required()
   });
 }
 module.exports = new Validation();
