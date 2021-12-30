@@ -81,9 +81,9 @@ class Validation {
   });
 
   labelUpdateValidation = Joi.object({
-    id: Joi.string().required().min(20),
+    id: Joi.string(),
     userId: Joi.string(),
-    labelName: Joi.string().min(3).required()
+    labelName: Joi.string().min(3)
   });
 }
 module.exports = new Validation();

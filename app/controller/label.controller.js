@@ -123,15 +123,16 @@ class AddLabelController {
     try {
       const updateLabel = {
         id: req.params.id,
-        userId: req.user.dataForToken.id,
-        labelName: req.body.title
+        userId: req.user.tokenData.id,
+        labelName: req.body.labelName
       };
-      const updateNoteValidation = validation.labelUpdateValidation.validate(updateLabel);
-      if (updateNoteValidation.error) {
+      const updateLabelValidation = validation.labelUpdateValidation.validate(updateLabel);
+      if (updateLabelValidation.error) {
+        console.log(updateLabelValidation.error);
         return res.status(400).send({
           success: false,
           message: "Wrong Input Validations",
-          data: updateNoteValidation
+          data: updateLabelValidation
         });
       }
       return res.status(201).json({
