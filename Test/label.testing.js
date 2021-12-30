@@ -441,4 +441,20 @@ describe("Update Label", () => {
         return done();
       });
   });
+
+  it.only("when call update label api, should return appropriate response from controller", (done) => {
+    const token = labelData.notes.inValidToken;
+    chai
+      .request(server)
+      .patch("/updateLabel/:id")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
+        return done();
+      });
+  });
 });
