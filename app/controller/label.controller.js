@@ -128,16 +128,25 @@ class AddLabelController {
       };
       const updateLabelValidation = validation.labelUpdateValidation.validate(updateLabel);
       if (updateLabelValidation.error) {
-        console.log(updateLabelValidation.error);
         return res.status(400).send({
           success: false,
           message: "Wrong Input Validations",
           data: updateLabelValidation
         });
       }
-      return res.status(201).json({
-        message: "Getting Appropriate response from token",
-        success: true
+      labelService.updateLabelById(updateLabel, (error, data) => {
+        if (error) {
+          return res.status(400).json({
+            message: "Failed to update note",
+            success: false
+          });
+        } else {
+          return res.status(201).send({
+            message: "Successfully updated....",
+            success: true,
+            data: data
+          });
+        }
       });
     } catch (error) {
       return res.status(500).json({
