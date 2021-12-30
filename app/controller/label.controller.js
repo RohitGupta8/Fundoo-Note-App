@@ -159,6 +159,20 @@ class AddLabelController {
       });
     }
   }
+
+  deleteLabelById = (req, res) => {
+    try {
+      return res.status(201).send({
+        message: "Successfully id is found",
+        success: true
+      });
+    } catch {
+      return res.status(500).json({
+        message: "Internal server error",
+        success: false
+      });
+    }
+  }
 }
 
 module.exports = new AddLabelController();

@@ -42,4 +42,7 @@ module.exports = (app) => {
 
   // api for updateLabelById
   app.put("/updateLabel/:id", helperClass.validateToken, labelController.updateLabelById);
+
+  // api for deleteLabelById
+  app.delete("/deleteLabel/:id", helperClass.validateToken, labelController.deleteLabelById);
 };
