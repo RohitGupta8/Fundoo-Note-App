@@ -75,7 +75,6 @@ class LabelModel {
   getLabelById = (id, callback) => {
     LabelRegister.find({ userId: id.userId, _id: id.id }, (error, data) => {
       if (data) {
-        console.log(data);
         callback(null, data);
       } else {
         callback(error, null);

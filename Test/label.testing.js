@@ -294,7 +294,7 @@ describe("GetLabel", () => {
 // api for getLabel by Id
 
 describe("Get Label By ID", () => {
-  it.only("when call getLabelById with valid token , should return appropriate response from controller", (done) => {
+  it("when call getLabelById with valid token , should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -310,7 +310,7 @@ describe("Get Label By ID", () => {
       });
   });
 
-  it.only("when call getLabelById with invalid token , should return appropriate response from controller", (done) => {
+  it("when call getLabelById with invalid token , should return appropriate response from controller", (done) => {
     const token = labelData.notes.inValidToken;
     chai
       .request(server)
@@ -326,7 +326,7 @@ describe("Get Label By ID", () => {
       });
   });
 
-  it.only("check validation of true params , should return appropriate response from controller", (done) => {
+  it("check validation of true params , should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -342,7 +342,7 @@ describe("Get Label By ID", () => {
       });
   });
 
-  it.only("check validation of false params , should return appropriate response from controller", (done) => {
+  it("check validation of false params , should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -358,7 +358,7 @@ describe("Get Label By ID", () => {
       });
   });
 
-  it.only("when call getLabelById with valid token , should return appropriate response from service", (done) => {
+  it("when call getLabelById with valid token , should return appropriate response from service", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -374,7 +374,7 @@ describe("Get Label By ID", () => {
       });
   });
 
-  it.only("when call getLabelById with valid token , should return appropriate response from model", (done) => {
+  it("when call getLabelById with valid token , should return appropriate response from model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -390,7 +390,7 @@ describe("Get Label By ID", () => {
       });
   });
 
-  it.only("check with valid params , should return appropriate response from model", (done) => {
+  it("check with valid params , should return appropriate response from model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -402,6 +402,22 @@ describe("Get Label By ID", () => {
           return done();
         }
         res.should.have.status(201);
+        return done();
+      });
+  });
+
+  it("check with false params , should return appropriate response from model", (done) => {
+    const token = labelData.notes.validToken;
+    chai
+      .request(server)
+      .get("/getLabel/61cc4ae7c22dd21239e23cdf0")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
         return done();
       });
   });
