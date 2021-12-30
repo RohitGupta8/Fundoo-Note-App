@@ -48,5 +48,9 @@ class LabelService {
     }
     );
   }
+
+  deleteLabelById = (id, callback) => {
+    return callback(null, id);
+  };
 }
 module.exports = new LabelService();

@@ -172,9 +172,18 @@ class AddLabelController {
           data: deleteLabelValidation
         });
       }
-      return res.status(201).send({
-        message: " successfully deleted label..",
-        success: true
+      labelService.deleteLabelById(id, (error, data) => {
+        if (error) {
+          return res.status(400).json({
+            message: "Note not found",
+            success: false
+          });
+        }
+        return res.status(201).send({
+          message: "Successfully Deleted Label..",
+          success: true,
+          data: data
+        });
       });
     } catch {
       return res.status(500).json({
