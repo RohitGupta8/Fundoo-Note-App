@@ -81,7 +81,7 @@ class Validation {
   });
 
   labelUpdateValidation = Joi.object({
-    id: Joi.string(),
+    id: Joi.string().min(20),
     userId: Joi.string(),
     labelName: Joi.string().min(3)
   });
