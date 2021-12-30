@@ -84,8 +84,18 @@ class AddLabelController {
 
   getLabelById = (req, res) => {
     try {
-      return res.status(201).send({
-        message: "Note inserted Successfully",
+      const id = { id: req.user.tokenData.id, labelId: req.params.id };
+      const getLabelValidation = validation.getLabelByIdValidation.validate(id);
+      if (getLabelValidation.error) {
+        console.log(getLabelValidation.error);
+        return res.status(400).send({
+          success: false,
+          message: "Wrong Input Validations",
+          data: getLabelValidation
+        });
+      }
+      return res.status(201).json({
+        message: "Successfully label retrieve.....",
         success: true
       });
     } catch (error) {
