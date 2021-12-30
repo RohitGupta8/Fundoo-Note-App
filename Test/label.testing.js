@@ -583,11 +583,11 @@ describe("Update Label", () => {
 // api for deleteLabel
 
 describe("Delete Label", () => {
-  it.only("when call delete label api, should return appropriate response from controller", (done) => {
+  it("when call delete label api, should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .delete("/deleteLabel/61cc4aec224dd21239e23cdf0")
+      .delete("/deleteLabel/61cc504673bf80c104067db6")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -599,7 +599,7 @@ describe("Delete Label", () => {
       });
   });
 
-  it.only("when call delete label api with false token, should return appropriate response from controller", (done) => {
+  it("when call delete label api with false token, should return appropriate response from controller", (done) => {
     const token = labelData.notes.inValidToken;
     chai
       .request(server)
@@ -615,11 +615,11 @@ describe("Delete Label", () => {
       });
   });
 
-  it.only("check validation with true params, should return appropriate response from controller", (done) => {
+  it("check validation with true params, should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .delete("/deleteLabel/61cc4aec224dd21239e23cdf0")
+      .delete("/deleteLabel/61cc504673bf80c104067db2")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -631,7 +631,7 @@ describe("Delete Label", () => {
       });
   });
 
-  it.only("check validation with false params, should return appropriate response from controller", (done) => {
+  it("check validation with false params, should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -647,11 +647,11 @@ describe("Delete Label", () => {
       });
   });
 
-  it.only("when call delete label api, should return appropriate response from service", (done) => {
+  it("when call delete label api, should return appropriate response from service", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .delete("/deleteLabel/61cc4aec224dd21239e23cdf0")
+      .delete("/deleteLabel/61cc504673bf80c104067dae")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -663,11 +663,11 @@ describe("Delete Label", () => {
       });
   });
 
-  it.only("when call delete label api, should return appropriate response from model", (done) => {
+  it("when call delete label api, should return appropriate response from model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .delete("/deleteLabel/61cc4aec224dd21239e23cdf0")
+      .delete("/deleteLabel/61cc504673bf80c104067daa")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -679,11 +679,11 @@ describe("Delete Label", () => {
       });
   });
 
-  it.only("check with true id, should return appropriate response from model", (done) => {
+  it("check with true id, should return appropriate response from model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .delete("/deleteLabel/61cc4eec4d47d03e9aba0882")
+      .delete("/deleteLabel/61cc4fd07cdcfbcbdc48890a")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -691,6 +691,22 @@ describe("Delete Label", () => {
           return done();
         }
         res.should.have.status(201);
+        return done();
+      });
+  });
+
+  it("check with false id, should return appropriate response from model", (done) => {
+    const token = labelData.notes.validToken;
+    chai
+      .request(server)
+      .delete("/deleteLabel/61cc4eec4d403e9aba0882")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
         return done();
       });
   });
