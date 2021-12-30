@@ -36,8 +36,16 @@ class LabelService {
     });
   };
 
-  updateLabelById = (id, callback) => {
-    return callback(null, id);
+  updateLabelById = (updateNote, callback) => {
+    labelModel.updateLabelById(updateNote, (error, data) => {
+      if (error) {
+        logger.error(error);
+        return callback(error, null);
+      } else {
+        return callback(null, data);
+      }
+    }
+    );
   }
 }
 module.exports = new LabelService();
