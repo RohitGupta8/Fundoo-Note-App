@@ -76,8 +76,8 @@ class Validation {
   });
 
   getLabelByIdValidation = Joi.object({
-    id: Joi.string().required(),
-    labelId: Joi.string().required().min(20)
+    userId: Joi.string().required(),
+    id: Joi.string().required().min(20)
   });
 }
 module.exports = new Validation();
