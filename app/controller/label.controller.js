@@ -87,6 +87,7 @@ class AddLabelController {
       const id = { userId: req.user.tokenData.id, id: req.params.id };
       const getLabelValidation = validation.getLabelByIdValidation.validate(id);
       if (getLabelValidation.error) {
+        logger.error(getLabelValidation.error);
         return res.status(400).send({
           success: false,
           message: "Wrong Input Validations",
@@ -95,11 +96,13 @@ class AddLabelController {
       }
       labelService.getLabelById(id, (error, data) => {
         if (error) {
+          logger.error(error);
           return res.status(400).json({
             message: "Oops....failed to get a notes",
             success: false
           });
         } else {
+          logger.info("success get label");
           return res.status(201).json({
             message: "Hurray....!!!.Get  label successfully.....",
             success: true,
@@ -108,6 +111,7 @@ class AddLabelController {
         }
       });
     } catch (error) {
+      logger.error(error);
       return res.status(500).json({
         message: "Internal Server Error",
         success: false
