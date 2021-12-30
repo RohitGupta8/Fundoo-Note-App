@@ -164,7 +164,7 @@ describe("Add Label", () => {
 // api for getLabel
 
 describe("GetLabel", () => {
-  it.only("when call getLabel with inValid token , should return appropriate response from controller", (done) => {
+  it("when call getLabel with inValid token , should return appropriate response from controller", (done) => {
     const token = labelData.notes.inValidToken;
     chai
       .request(server)
@@ -180,7 +180,7 @@ describe("GetLabel", () => {
       });
   });
 
-  it.only("when call getLabel with valid token , should return appropriate response from controller", (done) => {
+  it("when call getLabel with valid token , should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -196,7 +196,7 @@ describe("GetLabel", () => {
       });
   });
 
-  it.only("check validation , should return appropriate response from controller", (done) => {
+  it("check validation , should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -212,7 +212,7 @@ describe("GetLabel", () => {
       });
   });
 
-  it.only("when call getLabel with valid token , should return appropriate response from service", (done) => {
+  it("when call getLabel with valid token , should return appropriate response from service", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -228,7 +228,7 @@ describe("GetLabel", () => {
       });
   });
 
-  it.only("when call getLabel with valid token , should return appropriate response from model", (done) => {
+  it("when call getLabel with valid token , should return appropriate response from model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -244,7 +244,7 @@ describe("GetLabel", () => {
       });
   });
 
-  it.only("check with valid token , should return appropriate response from model", (done) => {
+  it("check with valid token , should return appropriate response from model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -260,7 +260,7 @@ describe("GetLabel", () => {
       });
   });
 
-  it.only("check with invalid token , should return appropriate response from model", (done) => {
+  it("check with invalid token , should return appropriate response from model", (done) => {
     const token = labelData.notes.inValidToken;
     chai
       .request(server)
@@ -272,6 +272,20 @@ describe("GetLabel", () => {
           return done();
         }
         res.should.have.status(400);
+        return done();
+      });
+  });
+
+  it("check without token , should return appropriate response from model", (done) => {
+    chai
+      .request(server)
+      .get("/getLabel")
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(500);
         return done();
       });
   });
