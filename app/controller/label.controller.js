@@ -93,9 +93,19 @@ class AddLabelController {
           data: getLabelValidation
         });
       }
-      return res.status(201).json({
-        message: "Successfully label retrieve.....",
-        success: true
+      labelService.getLabelById(id, (error, data) => {
+        if (error) {
+          return res.status(400).json({
+            message: "Oops....failed to get a notes",
+            success: false
+          });
+        } else {
+          return res.status(201).json({
+            message: "Hurray....!!!.Get  label successfully.....",
+            success: true,
+            data: data
+          });
+        }
       });
     } catch (error) {
       return res.status(500).json({
