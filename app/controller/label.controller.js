@@ -165,7 +165,7 @@ class AddLabelController {
       const id = { userId: req.user.tokenData.id, id: req.params.id };
       const deleteLabelValidation = validation.validateDeleteLabel.validate(id);
       if (deleteLabelValidation.error) {
-        console.log(deleteLabelValidation.error);
+        logger.error(deleteLabelValidation.error);
         return res.status(400).send({
           success: false,
           message: "Wrong Input Validations",
@@ -174,11 +174,13 @@ class AddLabelController {
       }
       labelService.deleteLabelById(id, (error, data) => {
         if (error) {
+          logger.error(error);
           return res.status(400).json({
             message: "Note not found",
             success: false
           });
         }
+        logger.info("success deleted label");
         return res.status(201).send({
           message: "Successfully Deleted Label..",
           success: true,
@@ -186,6 +188,7 @@ class AddLabelController {
         });
       });
     } catch {
+      logger.error("internal server error");
       return res.status(500).json({
         message: "Internal server error",
         success: false
