@@ -699,7 +699,7 @@ describe("Delete Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .delete("/deleteLabel/61cc4eec4d403e9aba0882")
+      .delete("/deleteLabel/61cc4eec4ld403e9aba0882")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
