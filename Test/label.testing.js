@@ -493,4 +493,21 @@ describe("Update Label", () => {
         return done();
       });
   });
+
+  it.only("check validation with false labelName, should return appropriate response from controller", (done) => {
+    const token = labelData.notes.validToken;
+    chai
+      .request(server)
+      .put("/updateLabel/61cc239e23cdf0")
+      .set({ authorization: token })
+      .send({ labelName: "Ro" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
+        return done();
+      });
+  });
 });
