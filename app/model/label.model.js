@@ -63,8 +63,10 @@ class LabelModel {
   getLabel = (labelID, callback) => {
     LabelRegister.find({ userId: labelID.id }, (error, data) => {
       if (data) {
+        logger.info(data);
         callback(null, data);
       } else {
+        logger.error(error);
         callback(error, null);
       }
     })

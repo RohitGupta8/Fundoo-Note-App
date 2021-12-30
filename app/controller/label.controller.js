@@ -49,6 +49,7 @@ class AddLabelController {
       const id = { id: req.user.tokenData.id };
       const getLabelValidation = validation.getLabelValidation.validate(id);
       if (getLabelValidation.error) {
+        logger.error(getLabelValidation.error);
         console.log(getLabelValidation.error);
         return res.status(400).send({
           success: false,
@@ -58,11 +59,13 @@ class AddLabelController {
       }
       labelService.getLabel(id, (error, data) => {
         if (error) {
+          logger.error(error);
           return res.status(400).json({
             message: "failed to get all notes",
             success: false
           });
         } else {
+          logger.info("get all labels");
           return res.status(201).json({
             message: "Get All label successfully",
             success: true,
@@ -71,6 +74,7 @@ class AddLabelController {
         }
       });
     } catch (error) {
+      logger.error("internal server error");
       return res.status(500).json({
         message: "Internal Server Error",
         success: false

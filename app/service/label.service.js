@@ -15,8 +15,10 @@ class LabelService {
   getLabel = (id, callback) => {
     labelModel.getLabel(id, (error, data) => {
       if (data) {
+        logger.info(data);
         callback(null, data);
       } else {
+        logger.error(error);
         callback(error, null);
       }
     });
