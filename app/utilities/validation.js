@@ -85,5 +85,10 @@ class Validation {
     userId: Joi.string(),
     labelName: Joi.string().min(3)
   });
+
+  validateDeleteLabel = Joi.object({
+    id: Joi.string().min(20).required(),
+    userId: Joi.string()
+  });
 }
 module.exports = new Validation();
