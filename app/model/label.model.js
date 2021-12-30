@@ -97,7 +97,12 @@ class LabelModel {
   }
 
   deleteLabelById = (id, callback) => {
-    return callback(null, id);
+    LabelRegister.findOneAndDelete({ $and: [{ _id: id.id }, { userId: id.userId }] }, (error, data) => {
+      if (data) {
+        return callback(null, data);
+      }
+      return callback(error, null);
+    });
   };
 }
 module.exports = new LabelModel();

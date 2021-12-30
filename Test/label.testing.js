@@ -678,4 +678,20 @@ describe("Delete Label", () => {
         return done();
       });
   });
+
+  it.only("check with true id, should return appropriate response from model", (done) => {
+    const token = labelData.notes.validToken;
+    chai
+      .request(server)
+      .delete("/deleteLabel/61cc4eec4d47d03e9aba0882")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
+        return done();
+      });
+  });
 });
