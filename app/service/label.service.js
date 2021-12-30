@@ -42,6 +42,7 @@ class LabelService {
         logger.error(error);
         return callback(error, null);
       } else {
+        logger.info(data);
         return callback(null, data);
       }
     }

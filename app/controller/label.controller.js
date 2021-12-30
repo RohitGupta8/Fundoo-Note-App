@@ -128,6 +128,7 @@ class AddLabelController {
       };
       const updateLabelValidation = validation.labelUpdateValidation.validate(updateLabel);
       if (updateLabelValidation.error) {
+        logger.error(updateLabelValidation.error);
         return res.status(400).send({
           success: false,
           message: "Wrong Input Validations",
@@ -136,11 +137,13 @@ class AddLabelController {
       }
       labelService.updateLabelById(updateLabel, (error, data) => {
         if (error) {
+          logger.error(error);
           return res.status(400).json({
             message: "Failed to update note",
             success: false
           });
         } else {
+          logger.info("successfully updated...");
           return res.status(201).send({
             message: "Successfully updated....",
             success: true,
@@ -149,6 +152,7 @@ class AddLabelController {
         }
       });
     } catch (error) {
+      logger.error(error);
       return res.status(500).json({
         message: "Internal server error",
         success: false
