@@ -436,7 +436,50 @@
                     }
                 }
             }
+        },
+        "/getLabel/{id}": {
+            "get": {
+                "tags": [
+                    "Get Label By Id"
+                ],
+                "description": "Gets Label By Id",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token for validation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Label id",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "label Found"
+                    },
+                    "500": {
+                        "description": "label not Found"
+                    },
+                    "400": {
+                        "description": "Invalid Token"
+                    }
+                }
+            }
         }
+        
     },
     "definitions": {
         "register": {
