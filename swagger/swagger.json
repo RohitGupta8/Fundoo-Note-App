@@ -361,7 +361,7 @@
         "/addLabel/{id}": {
             "post": {
                 "tags": [
-                    "Add label by NoteID"
+                    "Add Label by NoteID"
                 ],
                 "description": "Add Label",
                 "parameters": [
@@ -404,6 +404,35 @@
                     },
                     "400": {
                         "description": "Invalid Token"
+                    }
+                }
+            }
+        },"/getLabel": {
+            "get": {
+                "tags": [
+                    "Get All Labels"
+                ],
+                "description": "Gets All Labels",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token for validation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "labels retrieved"
+                    },
+                    "500": {
+                        "description": "Couldnt retrieve labels"
                     }
                 }
             }
