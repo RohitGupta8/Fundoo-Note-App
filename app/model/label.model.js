@@ -60,10 +60,14 @@ class LabelModel {
     });
   }
 
-  getLabel = (id, callback) => {
-    if (id) {
-      callback(null, id.data);
-    }
+  getLabel = (labelID, callback) => {
+    LabelRegister.find({ userId: labelID.id }, (error, data) => {
+      if (data) {
+        callback(null, data);
+      } else {
+        callback(error, null);
+      }
+    })
   };
 }
 module.exports = new LabelModel();
