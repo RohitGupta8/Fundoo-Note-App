@@ -87,7 +87,6 @@ class AddLabelController {
       const id = { id: req.user.tokenData.id, labelId: req.params.id };
       const getLabelValidation = validation.getLabelByIdValidation.validate(id);
       if (getLabelValidation.error) {
-        console.log(getLabelValidation.error);
         return res.status(400).send({
           success: false,
           message: "Wrong Input Validations",
