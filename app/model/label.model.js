@@ -95,5 +95,9 @@ class LabelModel {
       }
     });
   }
+
+  deleteLabelById = (id, callback) => {
+    return callback(null, id);
+  };
 }
 module.exports = new LabelModel();
