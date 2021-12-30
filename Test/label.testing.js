@@ -426,7 +426,7 @@ describe("Get Label By ID", () => {
 // api for updateLabelById
 
 describe("Update Label", () => {
-  it.only("when call update label api, should return appropriate response from controller", (done) => {
+  it("when call update label api, should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -443,7 +443,7 @@ describe("Update Label", () => {
       });
   });
 
-  it.only("when call update label api, should return appropriate response from controller", (done) => {
+  it("when call update label api, should return appropriate response from controller", (done) => {
     const token = labelData.notes.inValidToken;
     chai
       .request(server)
@@ -460,7 +460,7 @@ describe("Update Label", () => {
       });
   });
 
-  it.only("check validation with true input, should return appropriate response from controller", (done) => {
+  it("check validation with true input, should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -477,7 +477,7 @@ describe("Update Label", () => {
       });
   });
 
-  it.only("check validation with false labelName, should return appropriate response from controller", (done) => {
+  it("check validation with false labelName, should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -494,7 +494,7 @@ describe("Update Label", () => {
       });
   });
 
-  it.only("check validation with false params, should return appropriate response from controller", (done) => {
+  it("check validation with false params, should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -511,7 +511,7 @@ describe("Update Label", () => {
       });
   });
 
-  it.only("when call updateLabel api, should return appropriate response from service", (done) => {
+  it("when call updateLabel api, should return appropriate response from service", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -528,7 +528,7 @@ describe("Update Label", () => {
       });
   });
 
-  it.only("when call updateLabel api, should return appropriate response from model", (done) => {
+  it("when call updateLabel api, should return appropriate response from model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -545,7 +545,7 @@ describe("Update Label", () => {
       });
   });
 
-  it.only("check updation with true id, should return appropriate response from model", (done) => {
+  it("check updation with true id, should return appropriate response from model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
@@ -558,6 +558,23 @@ describe("Update Label", () => {
           return done();
         }
         res.should.have.status(201);
+        return done();
+      });
+  });
+
+  it("check updation with false id, should return appropriate response from model", (done) => {
+    const token = labelData.notes.validToken;
+    chai
+      .request(server)
+      .put("/updateLabel/61cc4aec224dd21239e23cdf0")
+      .set({ authorization: token })
+      .send({ labelName: "RohitGupta" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
         return done();
       });
   });
