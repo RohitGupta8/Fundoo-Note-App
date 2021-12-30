@@ -11,5 +11,11 @@ class LabelService {
         return callback(null, data);
       });
     };
+
+  getLabel = (id, callback) => {
+    if (id) {
+      callback(null, id.data);
+    }
+  };
 }
 module.exports = new LabelService();

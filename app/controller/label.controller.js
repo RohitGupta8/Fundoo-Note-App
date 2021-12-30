@@ -55,9 +55,20 @@ class AddLabelController {
           message: "Wrong Input Validations",
           data: getLabelValidation
         });
-      } return res.status(201).json({
-        message: "Successfully labels retrieve.....",
-        success: true
+      }
+      labelService.getLabel(id, (error, data) => {
+        if (error) {
+          return res.status(400).json({
+            message: "failed to get all notes",
+            success: false
+          });
+        } else {
+          return res.status(201).json({
+            message: "Get All label successfully",
+            success: true,
+            data: data
+          });
+        }
       });
     } catch (error) {
       return res.status(500).json({
