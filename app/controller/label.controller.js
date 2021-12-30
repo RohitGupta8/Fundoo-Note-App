@@ -118,6 +118,20 @@ class AddLabelController {
       });
     }
   }
+
+  updateLabelById = (req, res) => {
+    try {
+      return res.status(201).json({
+        message: "successfully note updated......",
+        success: true
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: "Internal server error",
+        success: false
+      });
+    }
+  }
 }
 
 module.exports = new AddLabelController();

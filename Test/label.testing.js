@@ -422,3 +422,23 @@ describe("Get Label By ID", () => {
       });
   });
 });
+
+// api for updateLabelById
+
+describe("Update Label", () => {
+  it.only("when call update label api, should return appropriate response from controller", (done) => {
+    const token = labelData.notes.validToken;
+    chai
+      .request(server)
+      .patch("/updateLabel/:id")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
+        return done();
+      });
+  });
+});
