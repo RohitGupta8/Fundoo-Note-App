@@ -34,7 +34,7 @@
                         "in": "body",
                         "description": "Sign Up..",
                         "schema": {
-                            "$ref": "#/definitions/register"
+                            "$ref": "#/definitions/Register"
                         }
                     }
                 ],
@@ -66,7 +66,7 @@
                         "in": "body",
                         "description": "Sign in",
                         "schema": {
-                            "$ref": "#/definitions/login"
+                            "$ref": "#/definitions/Login"
                         }
                     }
                 ],
@@ -95,7 +95,7 @@
                         "in": "body",
                         "description": "Send OTP to Email for reset Password",
                         "schema": {
-                            "$ref": "#/definitions/forgotPassword"
+                            "$ref": "#/definitions/ForgotPassword"
                         }
                     }
                 ],
@@ -124,7 +124,7 @@
                         "in": "body",
                         "description": "Reset Password by OTP code",
                         "schema": {
-                            "$ref": "#/definitions/resetPassword"
+                            "$ref": "#/definitions/ResetPassword"
                         }
                     }
                 ],
@@ -165,7 +165,7 @@
                         "in": "body",
                         "description": "Note's body",
                         "schema": {
-                            "$ref": "#/definitions/createNote"
+                            "$ref": "#/definitions/CreateNote"
                         }
                     }
                 ],
@@ -173,7 +173,7 @@
                     "application/json"
                 ],
                 "schema": {
-                    "$ref": "#/definitions/createNote"
+                    "$ref": "#/definitions/CreateNote"
                 },
                 "responses": {
                     "201": {
@@ -209,7 +209,7 @@
                     "application/json"
                 ],
                 "schema": {
-                    "$ref": "#/definitions/getNote"
+                    "$ref": "#/definitions/GetNote"
                 },
                 "responses": {
                     "201": {
@@ -253,7 +253,7 @@
                     "application/json"
                 ],
                 "schema": {
-                    "$ref": "#/definitions/getNoteById"
+                    "$ref": "#/definitions/GetNoteById"
                 },
                 "responses": {
                     "201": {
@@ -297,7 +297,7 @@
                         "name": "note",
                         "description": "Note body",
                         "schema": {
-                            "$ref": "#/definitions/updatenotes"
+                            "$ref": "#/definitions/UpdateNotes"
                         }
                     }
                 ],
@@ -388,7 +388,7 @@
                         "name": "addlabel",
                         "description": "Label to be updated",
                         "schema": {
-                            "$ref": "#/definitions/addlabel"
+                            "$ref": "#/definitions/AddLabel"
                         }
                     }
                 ],
@@ -478,11 +478,61 @@
                     }
                 }
             }
+        },
+        "/updateLabel/{id}": {
+            "put": {
+                "tags": [
+                    "Update Label"
+                ],
+                "description": "Updates Label",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token for validation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Label id",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "label",
+                        "description": "Label to be updated",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateLabel"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "label updated"
+                    },
+                    "500": {
+                        "description": "Failed to update label"
+                    },
+                    "400": {
+                        "description": "Invalid Token"
+                    }
+                }
+            }
         }
         
     },
     "definitions": {
-        "register": {
+        "Register": {
             "type": "object",
             "properties": {
                 "firstName": {
@@ -499,7 +549,7 @@
                 }
             }
         },
-        "login": {
+        "Login": {
             "type": "object",
             "properties": {
                 "email": {
@@ -510,7 +560,7 @@
                 }
             }
         },
-        "forgotPassword": {
+        "ForgotPassword": {
             "type": "object",
             "properties": {
                 "email": {
@@ -518,7 +568,7 @@
                 }
             }
         },
-        "resetPassword": {
+        "ResetPassword": {
             "type": "object",
             "properties": {
                 "email": {
@@ -532,7 +582,7 @@
                 }
             }
         },
-        "createNote": {
+        "CreateNote": {
             "type": "object",
             "properties": {
                 "title": {
@@ -543,22 +593,7 @@
                 }
             }
         },
-        "getNote": {
-            "type": "object",
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                }
-            },
-            "example": {
-                "title": "Write a title here.....",
-                "description": "Write a description here....."
-            }
-        },
-        "getNoteById": {
+        "GetNote": {
             "type": "object",
             "properties": {
                 "title": {
@@ -573,7 +608,7 @@
                 "description": "Write a description here....."
             }
         },
-        "updatenotes": {
+        "GetNoteById": {
             "type": "object",
             "properties": {
                 "title": {
@@ -588,7 +623,29 @@
                 "description": "Write a description here....."
             }
         },
-        "addlabel": {
+        "UpdateNotes": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "title": "Write a title here.....",
+                "description": "Write a description here....."
+            }
+        },
+        "AddLabel": {
+            "type": "object",
+            "properties": {
+                "labelName": {
+                    "type": "string"
+                }
+            }
+        },"UpdateLabel": {
             "type": "object",
             "properties": {
                 "labelName": {
