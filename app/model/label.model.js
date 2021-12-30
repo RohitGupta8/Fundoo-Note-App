@@ -85,7 +85,13 @@ class LabelModel {
   };
 
   updateLabelById = (id, callback) => {
-    return callback(null, id);
+    LabelRegister.findByIdAndUpdate(id.id, { labelName: id.labelName }, { new: true }, (err, data) => {
+      if (err) {
+        return callback(err, null);
+      } else {
+        return callback(null, data);
+      }
+    });
   }
 }
 module.exports = new LabelModel();

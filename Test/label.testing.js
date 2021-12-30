@@ -466,7 +466,7 @@ describe("Update Label", () => {
       .request(server)
       .put("/updateLabel/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
-      .send({ labelName: "Rohit" })
+      .send({ labelName: "Rohit rupali" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -494,13 +494,13 @@ describe("Update Label", () => {
       });
   });
 
-  it.only("check validation with false labelName, should return appropriate response from controller", (done) => {
+  it.only("check validation with false params, should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
       .put("/updateLabel/61cc239e23cdf0")
       .set({ authorization: token })
-      .send({ labelName: "Ro" })
+      .send({ labelName: "Rohithdffd" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -517,7 +517,7 @@ describe("Update Label", () => {
       .request(server)
       .put("/updateLabel/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
-      .send({ labelName: "RohitGupta" })
+      .send({ labelName: "RohitGujpta" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -529,6 +529,23 @@ describe("Update Label", () => {
   });
 
   it.only("when call updateLabel api, should return appropriate response from model", (done) => {
+    const token = labelData.notes.validToken;
+    chai
+      .request(server)
+      .put("/updateLabel/61cc4aec22dd21239e23cdf0")
+      .set({ authorization: token })
+      .send({ labelName: "RohitGuphhta" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
+        return done();
+      });
+  });
+
+  it.only("check updation with true id, should return appropriate response from model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
