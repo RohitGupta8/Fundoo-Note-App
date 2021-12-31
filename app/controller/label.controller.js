@@ -24,7 +24,7 @@ class AddLabelController {
         if (error) {
           logger.error(error);
           return res.status(400).json({
-            message: "Note Id Not found / invalid note id..",
+            message: "Oops ...label already exist...plz try with new name..",
             success: false
           });
         } else {
