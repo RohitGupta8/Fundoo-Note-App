@@ -1,6 +1,7 @@
 const validation = require("../utilities/validation");
 const noteService = require("../service/note.service");
 const { logger } = require("../../logger/logger");
+
 class NoteController {
   createNote = async (req, res) => {
     try {
@@ -172,21 +173,22 @@ class NoteController {
           data: deleteNoteValidation
         });
       }
-      noteService.deleteNoteById(id, (error, data) => {
-        if (error) {
-          logger.error(error);
-          return res.status(400).json({
-            message: "Note not found",
-            success: false
-          });
-        }
-        logger.info("successfully deleted..");
+      noteService.deleteNoteById(id, resolve, reject);
+      function resolve (data) {
+        logger.info("Delete Note successfully");
         return res.status(201).send({
-          message: "Successfully Deleted note",
+          message: "Delete note successfully",
           success: true,
           data: data
         });
-      });
+      }
+      function reject () {
+        logger.error("Failed to delete note");
+        return res.status(400).json({
+          message: "failed to delete note",
+          success: false
+        });
+      }
     } catch (error) {
       logger.error(error);
       return res.status(500).json({
