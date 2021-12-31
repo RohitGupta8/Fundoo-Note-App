@@ -7,19 +7,15 @@ class NoteService {
       if (!success) {
         return false;
       }
-      return true;
+      return success;
     }
 
-  getNote = (id, callback) => {
-    noteModel.getNote(id, (error, data) => {
-      if (data) {
-        logger.info(data);
-        callback(null, data);
-      } else {
-        logger.error(error);
-        callback(error, null);
-      }
-    });
+  getNote = async (id) => {
+    const get = await noteModel.getNote(id);
+    if (!get) {
+      return false;
+    }
+    return get;
   };
 
   getNoteById = (id, callback) => {

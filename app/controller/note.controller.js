@@ -28,7 +28,8 @@ class NoteController {
       } else {
         return res.status(201).send({
           success: true,
-          message: "Successfully....  creating note"
+          message: "Successfully....  creating note",
+          data: notes
         });
       }
     } catch (error) {
@@ -40,7 +41,7 @@ class NoteController {
     }
   }
 
-  getNote = (req, res) => {
+  getNote = async (req, res) => {
     try {
       const id = { id: req.user.tokenData.id };
       const getNoteValidation = validation.noteIDValidation.validate(id);
@@ -53,22 +54,21 @@ class NoteController {
           data: getNoteValidation
         });
       }
-      noteService.getNote(id, (error, data) => {
-        if (error) {
-          logger.error(error);
-          return res.status(400).json({
-            message: "failed to get all notes",
-            success: false
-          });
-        } else {
-          logger.info("Get All Notes successfully");
-          return res.status(201).json({
-            message: " Successfully !!! retrieve all notes.....",
-            success: true,
-            data: data
-          });
-        }
-      });
+      const serviceNotes = await noteService.getNote(id);
+      if (!serviceNotes) {
+        logger.error("error in getting all notes");
+        return res.status(400).send({
+          success: false,
+          message: "error in getting all notes"
+        });
+      } else {
+        logger.info("successfully getting all notes");
+        return res.status(201).send({
+          success: true,
+          message: "Successfully....  getting all notes",
+          data: serviceNotes
+        });
+      }
     } catch (error) {
       console.log(error);
       logger.error(error);

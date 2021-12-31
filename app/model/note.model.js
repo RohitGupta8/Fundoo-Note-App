@@ -29,20 +29,15 @@ class NoteModel {
     if (!success) {
       return false;
     }
-    return true;
+    return success;
   }
 
-  getNote = (id, callback) => {
-    NoteRegister.find({ userId: id.id }, (error, data) => {
-      if (data) {
-        logger.info("Successfully retrieve all notes.");
-        console.log(data);
-        callback(null, data);
-      } else {
-        logger.error(error);
-        callback(error, null);
-      }
-    });
+  getNote = async (id) => {
+    const getAll = await NoteRegister.find({ userId: id.id });
+    if (!getAll) {
+      return false;
+    }
+    return getAll;
   }
 
   getNoteById = (id, callback) => {
