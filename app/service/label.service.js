@@ -49,15 +49,8 @@ class LabelService {
     );
   }
 
-  deleteLabelById = (id, callback) => {
-    labelModel.deleteLabelById(id, (error, data) => {
-      if (error) {
-        logger.error(error);
-        return callback(error, null);
-      }
-      logger.info("success label deleted");
-      return callback(null, data);
-    });
+  deleteLabelById = (id, resolve, reject) => {
+    labelModel.deleteLabelById(id).then((data) => resolve(data)).catch((err) => reject(err));
   };
 }
 module.exports = new LabelService();

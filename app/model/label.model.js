@@ -96,15 +96,10 @@ class LabelModel {
     });
   }
 
-  deleteLabelById = (id, callback) => {
-    LabelRegister.findOneAndDelete({ $and: [{ _id: id.id }, { userId: id.userId }] }, (error, data) => {
-      if (data) {
-        logger.info(data)
-        return callback(null, data);
-      }
-      logger.error(error)
-      return callback(error, null);
-    });
-  };
+  deleteLabelById = (id) => {
+    return new Promise((resolve, reject) => {
+      LabelRegister.findOneAndDelete({ $and: [{ _id: id.id }, { userId: id.userId }] }).then(data => resolve(data)).catch((err) => reject(err));
+    })
+  }
 }
 module.exports = new LabelModel();

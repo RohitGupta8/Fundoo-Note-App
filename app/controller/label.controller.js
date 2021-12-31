@@ -1,6 +1,7 @@
 const validation = require("../utilities/validation");
 const labelService = require("../service/label.service");
 const { logger } = require("../../logger/logger");
+
 class AddLabelController {
   addLabel = (req, res) => {
     try {
@@ -172,21 +173,22 @@ class AddLabelController {
           data: deleteLabelValidation
         });
       }
-      labelService.deleteLabelById(id, (error, data) => {
-        if (error) {
-          logger.error(error);
-          return res.status(400).json({
-            message: "Note not found",
-            success: false
-          });
-        }
-        logger.info("success deleted label");
+      labelService.deleteLabelById(id, resolve, reject);
+      function resolve (data) {
+        logger.info("Delete Label successfully");
         return res.status(201).send({
-          message: "Successfully Deleted Label..",
+          message: "Delete label successfully",
           success: true,
           data: data
         });
-      });
+      }
+      function reject () {
+        logger.error("Failed to delete Label");
+        return res.status(400).json({
+          message: "failed to delete Label",
+          success: false
+        });
+      }
     } catch {
       logger.error("internal server error");
       return res.status(500).json({
