@@ -45,7 +45,7 @@ class AddLabelController {
     }
   }
 
-  getLabel = (req, res) => {
+  getLabel = async (req, res) => {
     try {
       const id = { id: req.user.tokenData.id };
       const getLabelValidation = validation.getLabelValidation.validate(id);
@@ -58,22 +58,21 @@ class AddLabelController {
           data: getLabelValidation
         });
       }
-      labelService.getLabel(id, (error, data) => {
-        if (error) {
-          logger.error(error);
-          return res.status(400).json({
-            message: "failed to get all notes",
-            success: false
-          });
-        } else {
-          logger.info("get all labels");
-          return res.status(201).json({
-            message: "Get All label successfully",
-            success: true,
-            data: data
-          });
-        }
-      });
+      const serviceLabel = await labelService.getLabel(id);
+      if (!serviceLabel) {
+        logger.error("error in getting all Labels");
+        return res.status(400).send({
+          success: false,
+          message: "error in getting all Labels"
+        });
+      } else {
+        logger.info("successfully getting all Labels");
+        return res.status(201).send({
+          success: true,
+          message: "Successfully....  getting all Labels",
+          data: serviceLabel
+        });
+      }
     } catch (error) {
       logger.error("internal server error");
       return res.status(500).json({

@@ -12,16 +12,12 @@ class LabelService {
       });
     };
 
-  getLabel = (id, callback) => {
-    labelModel.getLabel(id, (error, data) => {
-      if (data) {
-        logger.info(data);
-        callback(null, data);
-      } else {
-        logger.error(error);
-        callback(error, null);
-      }
-    });
+  getLabel = async (id) => {
+    const get = await labelModel.getLabel(id);
+    if (!get) {
+      return false;
+    }
+    return get;
   };
 
   getLabelById = (id, callback) => {

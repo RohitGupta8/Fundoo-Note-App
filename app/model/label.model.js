@@ -60,16 +60,12 @@ class LabelModel {
     });
   }
 
-  getLabel = (labelID, callback) => {
-    LabelRegister.find({ userId: labelID.id }, (error, data) => {
-      if (data) {
-        logger.info(data);
-        callback(null, data);
-      } else {
-        logger.error(error);
-        callback(error, null);
-      }
-    })
+  getLabel = async (labelID) => {
+    const getAll = await LabelRegister.find({ userId: labelID.id });
+    if (!getAll) {
+      return false;
+    }
+    return getAll;
   };
 
   getLabelById = (id, callback) => {
