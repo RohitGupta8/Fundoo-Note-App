@@ -11,8 +11,7 @@ const labelSchema = mongoose.Schema({
 
   labelName: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   }
 
 }, {
