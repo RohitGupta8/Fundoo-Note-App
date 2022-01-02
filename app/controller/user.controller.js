@@ -134,7 +134,7 @@ class Controller {
     };
   }
 
-  resetPassword = (req, res) => {
+  resetPassword = async (req, res) => {
     try {
       const userResetPasswordInfo = {
         email: req.body.email,
@@ -150,20 +150,17 @@ class Controller {
         });
       }
 
-      userService.resetPassword(userResetPasswordInfo, (err, data) => {
-        if (err) {
-          logger.error(err);
-          return res.status(400).send({
-            success: false,
-            message: "Something went wrong"
-          });
-        } else {
-          logger.info("Successfully updated.....");
-          return res.status(200).send({
-            success: true,
-            message: "Successfully updated......"
-          });
-        }
+      const isReset = await userService.resetpassword(userResetPasswordInfo);
+      if (!isReset) {
+        return res.status(401).json({
+          success: false,
+          message: "Unable to reset password. Please enter correct info"
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: "password reset successfull",
+        data: isReset
       });
     } catch (error) {
       logger.error("Internal server error");
