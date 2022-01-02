@@ -2,7 +2,7 @@
 const validation = require("../utilities/validation");
 const noteService = require("../service/note.service");
 const { logger } = require("../../logger/logger");
-// const redis = require("../middleware/redis");
+const redis = require("../middleware/redis");
 
 class NoteController {
   createNote = async (req, res) => {
@@ -103,7 +103,7 @@ class NoteController {
           message: "error in getting  note"
         });
       } else {
-        // redis.setData("getNoteById", 70, JSON.stringify(data));
+        redis.setData("getNoteById", 60, JSON.stringify(data));
         logger.info("successfully getting all notes");
         return res.status(201).send({
           success: true,
@@ -145,7 +145,7 @@ class NoteController {
             success: false
           });
         } else {
-          // redis.clearCache("getNoteById");
+          redis.clearCache("getNoteById");
           logger.info("Succefully updated..");
           return res.status(201).send({
             message: "Successfully updated....",

@@ -27,8 +27,8 @@ describe("registration", () => {
 
   it("Should return status code - 200,When given registration details is proper.", (done) => {
     const registerfaker = {
-      firstName: faker.name.findName(),
-      lastName: faker.name.lastName(),
+      firstName: faker.name.findName(8),
+      lastName: faker.name.lastName(8),
       email: faker.internet.email(),
       password: faker.internet.password()
     };
