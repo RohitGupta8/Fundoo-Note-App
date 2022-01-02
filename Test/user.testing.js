@@ -324,7 +324,7 @@ describe("Reset Password API", () => {
           console.log("plz check your credential");
           return done();
         }
-        res.should.have.status(400);
+        res.should.have.status(401);
         return done();
       });
   });
