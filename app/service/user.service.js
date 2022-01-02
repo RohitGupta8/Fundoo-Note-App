@@ -49,19 +49,12 @@ class UserService {
     });
   };
 
-  resetPassword = (resetInfo, callback) => {
-    userModel.resetPassword(resetInfo, (err, data) => {
-      if (err) {
-        logger.error(err);
-        callback(err, null);
-      } else if (!data) {
-        logger.error("Code not found");
-        callback("Code not found", null);
-      } else {
-        logger.info(data);
-        callback(null, data);
-      }
-    });
-  };
+  resetpassword = async (user) => {
+    const success = await userModel.resetpassword(user);
+    if (!success) {
+      return false;
+    }
+    return success;
+  }
 }
 module.exports = new UserService();

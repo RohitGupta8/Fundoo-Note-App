@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
 const validation = require("../utilities/validation");
 const noteService = require("../service/note.service");
 const { logger } = require("../../logger/logger");
+// const redis = require("../middleware/redis");
 
 class NoteController {
   createNote = async (req, res) => {
@@ -80,9 +82,9 @@ class NoteController {
     }
   }
 
-  getNoteById = (req, res) => {
+  getNoteById = async (req, res) => {
     try {
-      const id = { userId: req.user.tokenData.id, noteId: req.params.id };
+      const id = { userId: req.user.tokenData.id, id: req.params.id };
       const getNoteValidation = validation.getNoteByIDValidation.validate(id);
       if (getNoteValidation.error) {
         console.log(getNoteValidation.error);
@@ -93,22 +95,22 @@ class NoteController {
           data: getNoteValidation
         });
       }
-      noteService.getNoteById(id, (error, data) => {
-        if (error) {
-          logger.error(error);
-          return res.status(400).json({
-            message: "failed to get given notes",
-            success: false
-          });
-        } else {
-          logger.info(data);
-          return res.status(201).json({
-            message: " Successfully !! retreive given note",
-            success: true,
-            data: data
-          });
-        }
-      });
+      const getNote = await noteService.getNoteById(id);
+      if (!getNote) {
+        logger.error("error in getting a note");
+        return res.status(400).send({
+          success: false,
+          message: "error in getting  note"
+        });
+      } else {
+        // redis.setData("getNoteById", 70, JSON.stringify(data));
+        logger.info("successfully getting all notes");
+        return res.status(201).send({
+          success: true,
+          message: "Successfully....  getting a note",
+          data: getNote
+        });
+      }
     } catch (error) {
       logger.error(error);
       return res.status(500).json({
@@ -143,6 +145,7 @@ class NoteController {
             success: false
           });
         } else {
+          // redis.clearCache("getNoteById");
           logger.info("Succefully updated..");
           return res.status(201).send({
             message: "Successfully updated....",

@@ -40,17 +40,12 @@ class NoteModel {
     return getAll;
   }
 
-  getNoteById = (id, callback) => {
-    NoteRegister.find({ userId: id.UserId, _id: id.noteId }, (error, data) => {
-      if (data) {
-        console.log(data);
-        logger.info(data);
-        callback(null, data);
-      } else {
-        logger.error(error);
-        callback(error, null);
-      }
-    });
+  getNoteById = async (id) => {
+    const getId = await NoteRegister.find({ userId: id.userId, _id: id.id });
+    if (!getId) {
+      return false;
+    }
+    return getId;
   }
 
   updateNoteById = (updatedNote, callback) => {
