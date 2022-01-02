@@ -11,7 +11,7 @@ describe("Add Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61cc4dffb33009b46075b861")
+      .post("/addLabel/61cecf7eea3e31a5d1e23134")
       .set({ authorization: token })
       .send({ labelName: "fakeNamefff" })
       .end((err, res) => {
@@ -45,7 +45,7 @@ describe("Add Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61cc4dffb33009b46075b861")
+      .post("/addLabel/61cecf7eea3e31a5d1e23134")
       .set({ authorization: token })
       .send({ labelName: "fakeNamgge" })
       .end((err, res) => {
@@ -96,7 +96,7 @@ describe("Add Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61cc4dffb33009b46075b861")
+      .post("/addLabel/61cecf7eea3e31a5d1e23134")
       .set({ authorization: token })
       .send({ labelName: "fakkkeName" })
       .end((err, res) => {
@@ -113,7 +113,7 @@ describe("Add Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61cc4dffb33009b46075b861")
+      .post("/addLabel/61cecf7eea3e31a5d1e23134")
       .set({ authorization: token })
       .send({ labelName: "fakeNammme" })
       .end((err, res) => {
@@ -130,7 +130,7 @@ describe("Add Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61cc4dffb33009b46075b861")
+      .post("/addLabel/61cecf7eea3e31a5d1e23134")
       .set({ authorization: token })
       .send({ labelName: "fakeNallme" })
       .end((err, res) => {
@@ -147,7 +147,7 @@ describe("Add Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/62cc4dffb33009b46075b861")
+      .post("/addLabel/61cecf7eea3e31a5d1e23134")
       .set({ authorization: token })
       .send({ labelName: "fakeNallme" })
       .end((err, res) => {

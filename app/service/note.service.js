@@ -18,16 +18,12 @@ class NoteService {
     return get;
   };
 
-  getNoteById = (id, callback) => {
-    noteModel.getNoteById(id, (err, data) => {
-      if (data) {
-        logger.info(data);
-        return callback(null, data);
-      } else {
-        logger.error(err);
-        return callback(err, null);
-      }
-    });
+  getNoteById = async (id) => {
+    const getId = await noteModel.getNoteById(id);
+    if (!getId) {
+      return false;
+    }
+    return getId;
   };
 
   updateNoteById = (updateNote, callback) => {

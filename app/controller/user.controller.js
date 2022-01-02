@@ -142,7 +142,6 @@ class Controller {
         code: req.body.code
       };
       const resetValidation = validation.validResetPassword.validate(userResetPasswordInfo);
-      console.log(resetValidation.error);
       if (resetValidation.error) {
         logger.error(resetValidation.error);
         res.status(400).send({
