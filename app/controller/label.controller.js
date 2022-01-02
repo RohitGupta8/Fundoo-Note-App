@@ -4,7 +4,7 @@ const { logger } = require("../../logger/logger");
 const redis = require("../middleware/redis");
 
 class AddLabelController {
-  addLabel = (req, res) => {
+  addLabel = async (req, res) => {
     try {
       const label = {
         labelName: req.body.labelName,
@@ -21,24 +21,23 @@ class AddLabelController {
           data: labelValidation
         });
       }
-      labelService.addLabel(label, (error, data) => {
-        if (error) {
-          logger.error(error);
-          return res.status(400).json({
-            message: "Oops ...label already exist...plz try with new name..",
-            success: false
-          });
-        } else {
-          logger.info("successfully Add Label..");
-          return res.status(201).send({
-            message: "Successfully Add label..",
-            success: true,
-            data: data
-          });
-        }
-      });
+      const add = await labelService.addLabel(label);
+      if (!add) {
+        logger.error("error in add Labels");
+        return res.status(400).send({
+          success: false,
+          message: "Oops Error in Add Label....."
+        });
+      } else {
+        logger.info("successfully add a Label");
+        return res.status(201).send({
+          success: true,
+          message: "Congratulation !!!! Successfully Add Label...........",
+          data: add
+        });
+      }
     } catch (error) {
-      logger.error(error);
+      console.log(error);
       return res.status(500).send({
         success: false,
         message: "Internal server error"
