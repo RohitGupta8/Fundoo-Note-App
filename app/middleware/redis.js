@@ -1,61 +1,55 @@
 const redis = require("redis");
-const client = redis.createClient("redis://127.0.0.1:6379");
-const { logger } = require("../../logger/logger");
+const logger = require("../../logger/logger");
+const client = redis.createClient();
 
-class Redis {
-    redisGetNoteById = (req, res, next) => {
-      client.get("getNoteById", (error, redisdata) => {
-        if (error) {
-          logger.error(error);
-          throw error;
-        } else if (redisdata) {
-          logger.info("Successfully retrieved all notes.......");
-          res.status(200).send({
-            redisNoteById: JSON.parse(redisdata),
-            message: "Successfully retrieved all notes.......",
-            success: true
-          });
-        } else {
-          next();
-        }
-      });
-    };
+class RedisClass {
+  redisGetNoteById = (req, res, next) => {
+    client.get(req.params.id, (error, data) => {
+      if (error) {
+        throw error;
+      } else if (data) {
+        logger.info("GetNoteById RedisNotes successfully !");
+        res.status(201).send({
+          message: "GetNoteById RedisNotes successfully !",
+          success: true,
+          data: JSON.parse(data)
+        });
+      } else {
+        next();
+      }
+    });
+  }
 
-    redisGetLabelById = (req, res, next) => {
-      client.get("getLabelById", (error, redisdata) => {
-        if (error) {
-          logger.error(error);
-          throw error;
-        } else if (redisdata) {
-          logger.info("Successfully retrieved ALL Labels.....");
-          res.status(200).send({
-            redis_LabelById: JSON.parse(redisdata),
-            message: " Successfully retrieved ALL Labels......",
-            success: true
-          });
-        } else {
-          next();
-        }
-      });
-    }
+  redisGetLabelById = (req, res, next) => {
+    client.get(req.params.id, (error, data) => {
+      if (error) {
+        throw error;
+      } else if (data) {
+        logger.info("GetLabelById RedisGet successfully !");
+        res.status(201).send({
+          message: "GetLabelById RedisGet successfully !",
+          success: true,
+          data: JSON.parse(data)
+        });
+      } else {
+        next();
+      }
+    });
+  }
 
-    setData = (key, time, redisdata) => {
-      client.setEx(key, time, redisdata);
-    };
+  setData (key, time, data) {
+    client.setEx(key, time, data);
+  }
 
-    /**
-     * @description clearing cache
-     */
-
-    clearCache = (key) => {
-      client.del(key, (err, res) => {
-        if (err) {
-          logger.error("cache not cleared");
-        } else {
-          console.log("Cache cleared");
-          logger.info("Cache cleared");
-        }
-      });
-    }
+  clearCache = (key) => {
+    client.del(key, (err, res) => {
+      if (err) {
+        logger.error("cache not cleared");
+      } else {
+        console.log("Cache cleared");
+        logger.info("Cache cleared");
+      }
+    });
+  };
 }
-module.exports = new Redis();
+module.exports = new RedisClass();
