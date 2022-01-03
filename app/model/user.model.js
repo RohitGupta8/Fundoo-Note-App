@@ -89,7 +89,7 @@ class UserModel {
   resetpassword = async (Data) => {
     const codepresent = await Otp.findOne({ email: Data.email, code: Data.code });
     if (codepresent) {
-      const hash = await encryption.hashedPassword(Data.password);
+      const hash = encryption.hashedPassword(Data.password);
       const success = await User.findOneAndUpdate({ email: Data.email }, { $set: { password: hash } });
       if (success) {
         return success;

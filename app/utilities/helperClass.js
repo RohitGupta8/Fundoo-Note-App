@@ -8,16 +8,6 @@ class HelperClass {
     return bcrypt.hashSync(password, salt);
   }
 
-  hashing = (password, callback) => {
-    bcrypt.hash(password, 10, function (err, hash) {
-      if (err) {
-        return callback(err, null);
-      } else {
-        return callback(null, hash);
-      }
-    });
-  }
-
   token = (data) => {
     const tokenData = {
       id: data.id,

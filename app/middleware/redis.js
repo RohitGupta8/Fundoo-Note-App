@@ -1,18 +1,37 @@
 const redis = require("redis");
-const logger = require("../../logger/logger");
-const client = redis.createClient();
+const client = redis.createClient(process.env.REDIS_PORT);
+const { logger } = require("../../logger/logger");
 
-class RedisClass {
-  redisGetNoteById = (req, res, next) => {
-    client.get(req.params.id, (error, data) => {
+class Redis {
+  redisNOteById = (req, res, next) => {
+    client.get("getNoteById", (error, redisdata) => {
       if (error) {
+        logger.error(error);
         throw error;
-      } else if (data) {
-        logger.info("GetNoteById RedisNotes successfully !");
+      } else if (redisdata) {
+        logger.info("getLabels successfully retrieved");
         res.status(201).send({
-          message: "GetNoteById RedisNotes successfully !",
-          success: true,
-          data: JSON.parse(data)
+          redis_NoteById: JSON.parse(redisdata),
+          message: "getlabels successfully retrieved",
+          success: true
+        });
+      } else {
+        next();
+      }
+    });
+  };
+
+  redisLabelById = (req, res, next) => {
+    client.get("getLabelById", (error, redisdata) => {
+      if (error) {
+        logger.error(error);
+        throw error;
+      } else if (redisdata) {
+        logger.info("getLabels successfully retrieved");
+        res.status(201).send({
+          redis_LabelById: JSON.parse(redisdata),
+          message: "getLabels successfully retrieved",
+          success: true
         });
       } else {
         next();
@@ -20,26 +39,9 @@ class RedisClass {
     });
   }
 
-  redisGetLabelById = (req, res, next) => {
-    client.get(req.params.id, (error, data) => {
-      if (error) {
-        throw error;
-      } else if (data) {
-        logger.info("GetLabelById RedisGet successfully !");
-        res.status(201).send({
-          message: "GetLabelById RedisGet successfully !",
-          success: true,
-          data: JSON.parse(data)
-        });
-      } else {
-        next();
-      }
-    });
-  }
-
-  setData (key, time, data) {
-    client.setEx(key, time, data);
-  }
+  setData = (key, time, redisdata) => {
+    client.setex(key, time, redisdata);
+  };
 
   clearCache = (key) => {
     client.del(key, (err, res) => {
@@ -50,6 +52,7 @@ class RedisClass {
         logger.info("Cache cleared");
       }
     });
-  };
+  }
 }
-module.exports = new RedisClass();
+
+module.exports = new Redis();

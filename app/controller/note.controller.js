@@ -103,7 +103,7 @@ class NoteController {
           message: "error in getting  note"
         });
       } else {
-        redis.setData("getNoteById", 60, JSON.stringify(data));
+        redis.setData("getNoteById", 60, JSON.stringify(getNote));
         logger.info("successfully getting all notes");
         return res.status(201).send({
           success: true,
@@ -112,7 +112,8 @@ class NoteController {
         });
       }
     } catch (error) {
-      logger.error(error);
+      // logger.error(error);
+      console.log("controller = ", error);
       return res.status(500).json({
         message: "Internal server error",
         success: false
