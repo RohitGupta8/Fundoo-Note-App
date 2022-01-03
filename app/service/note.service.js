@@ -1,5 +1,6 @@
 const noteModel = require("../model/note.model").UserModel;
 const { logger } = require("../../logger/logger");
+const redis = require("../middleware/redis");
 
 class NoteService {
     createNote = async (note) => {
@@ -23,6 +24,7 @@ class NoteService {
     if (!getId) {
       return false;
     }
+    redis.setData("getNoteById", 60, JSON.stringify(getId));
     return getId;
   };
 
@@ -33,6 +35,7 @@ class NoteService {
         return callback(error, null);
       } else {
         logger.info("successfully updated....");
+        redis.clearCache("getNoteById");
         return callback(null, data);
       }
     });

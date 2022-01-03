@@ -9,10 +9,10 @@ class Redis {
         logger.error(error);
         throw error;
       } else if (redisdata) {
-        logger.info("getLabels successfully retrieved");
+        logger.info("getNote successfully retrieved");
         res.status(201).send({
           redis_NoteById: JSON.parse(redisdata),
-          message: "getlabels successfully retrieved",
+          message: "getNote successfully retrieved",
           success: true
         });
       } else {
@@ -27,10 +27,10 @@ class Redis {
         logger.error(error);
         throw error;
       } else if (redisdata) {
-        logger.info("getLabels successfully retrieved");
+        logger.info("getLabel successfully retrieved");
         res.status(201).send({
           redis_LabelById: JSON.parse(redisdata),
-          message: "getLabels successfully retrieved",
+          message: "getLabel successfully retrieved",
           success: true
         });
       } else {
