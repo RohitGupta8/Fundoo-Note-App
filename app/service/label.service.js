@@ -1,5 +1,7 @@
 const labelModel = require("../model/label.model");
 const { logger } = require("../../logger/logger");
+const redis = require("../middleware/redis");
+
 class LabelService {
     addLabel = async (label) => {
       const add = await labelModel.addlabelById(label);
@@ -21,6 +23,7 @@ class LabelService {
     labelModel.getLabelById(id, (error, data) => {
       if (data) {
         logger.info(data);
+        redis.setData("getLabelById", 60, JSON.stringify(data));
         callback(null, data);
       } else {
         logger.error(error);
@@ -36,6 +39,7 @@ class LabelService {
         return callback(error, null);
       } else {
         logger.info(data);
+        redis.clearCache("getLabelById");
         return callback(null, data);
       }
     }

@@ -1,7 +1,6 @@
 const validation = require("../utilities/validation");
 const labelService = require("../service/label.service");
 const { logger } = require("../../logger/logger");
-const redis = require("../middleware/redis");
 
 class AddLabelController {
   addLabel = async (req, res) => {
@@ -102,7 +101,6 @@ class AddLabelController {
             success: false
           });
         } else {
-          redis.setData("getLabelById", 60, JSON.stringify(data));
           logger.info("success get label");
           return res.status(201).json({
             message: "Hurray....!!!.Get  label successfully.....",
@@ -144,7 +142,6 @@ class AddLabelController {
             success: false
           });
         } else {
-          redis.clearCache("getLabelById");
           logger.info("successfully updated...");
           return res.status(201).send({
             message: "Successfully updated....",
@@ -176,7 +173,6 @@ class AddLabelController {
       }
       labelService.deleteLabelById(id, resolve, reject);
       function resolve (data) {
-        redis.clearCache("getLabelById");
         logger.info("Delete Label successfully");
         return res.status(201).send({
           message: "Delete label successfully",

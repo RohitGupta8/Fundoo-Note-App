@@ -2,7 +2,6 @@
 const validation = require("../utilities/validation");
 const noteService = require("../service/note.service");
 const { logger } = require("../../logger/logger");
-const redis = require("../middleware/redis");
 
 class NoteController {
   createNote = async (req, res) => {
@@ -103,7 +102,6 @@ class NoteController {
           message: "error in getting  note"
         });
       } else {
-        redis.setData("getNoteById", 60, JSON.stringify(getNote));
         logger.info("successfully getting all notes");
         return res.status(201).send({
           success: true,
@@ -112,8 +110,7 @@ class NoteController {
         });
       }
     } catch (error) {
-      // logger.error(error);
-      console.log("controller = ", error);
+      logger.error(error);
       return res.status(500).json({
         message: "Internal server error",
         success: false
@@ -146,7 +143,6 @@ class NoteController {
             success: false
           });
         } else {
-          redis.clearCache("getNoteById");
           logger.info("Succefully updated..");
           return res.status(201).send({
             message: "Successfully updated....",
