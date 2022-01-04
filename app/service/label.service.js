@@ -1,6 +1,6 @@
 const labelModel = require("../model/label.model");
 const { logger } = require("../../logger/logger");
-const redis = require("../middleware/redis");
+const redis = require("../middleware/nodeRedis.middleware");
 
 class LabelService {
     addLabel = async (label) => {

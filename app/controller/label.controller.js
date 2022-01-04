@@ -101,7 +101,7 @@ class AddLabelController {
             success: false
           });
         } else {
-          logger.info("success get label");
+          logger.info("success get label by id");
           return res.status(201).json({
             message: "Hurray....!!!.Get  label successfully.....",
             success: true,
