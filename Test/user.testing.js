@@ -334,7 +334,7 @@ describe("Reset Password API", () => {
 // api for Verification of user
 
 describe("Verify User", () => {
-  it.only("given details when proper,should return appropriate response from controller", (done) => {
+  it("given details when proper,should return appropriate response from controller", (done) => {
     chai
       .request(server)
       .get("/verifyUser/:token")
@@ -344,12 +344,12 @@ describe("Verify User", () => {
           console.log("plz check your credential");
           return done();
         }
-        res.should.have.status(200);
+        res.should.have.status(404);
         return done();
       });
   });
 
-  it.only("given details when improper,should return appropriate response from controller", (done) => {
+  it("given details when improper,should return appropriate response from controller", (done) => {
     chai
       .request(server)
       .get("/verifyUser/")
@@ -364,7 +364,7 @@ describe("Verify User", () => {
       });
   });
 
-  it.only("given details when proper,should return appropriate response from service", (done) => {
+  it("given details when proper,should return appropriate response from service", (done) => {
     chai
       .request(server)
       .get("/verifyUser/:token")
@@ -374,7 +374,23 @@ describe("Verify User", () => {
           console.log("plz check your credential");
           return done();
         }
-        res.should.have.status(200);
+        res.should.have.status(404);
+        return done();
+      });
+  });
+
+  it("given details when proper,should return appropriate response from model", (done) => {
+    const data = ({ email: "mkaubr007@gmail.com" });
+    chai
+      .request(server)
+      .get("/verifyUser/:token")
+      .send({ token: "req.params.token", data })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(404);
         return done();
       });
   });

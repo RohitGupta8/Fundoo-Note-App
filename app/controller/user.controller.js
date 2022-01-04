@@ -172,31 +172,26 @@ class Controller {
     };
   }
 
-  verifyUser = async (req, res) => {
+  confirmRegister = (req, res) => {
     try {
       const data = {
         token: req.params.token
       };
-      const isTrue = await userService.verifyUser(data);
-      if (!isTrue) {
-        return res.status(404).json({
-          success: false,
-          message: "error in verification / email not found in db.."
-        });
-      } else {
-        return res.status(200).json({
-          success: true,
-          message: "Email Successfully Verified.....",
-          data: isTrue
-        });
-      }
-    } catch (error) {
-      return res.status(500).send({
-        success: false,
-        message: "Internal server error",
-        result: null
+      userService.confirmRegister(data, (error, data) => {
+        if (error) {
+          return res.status(404).json({
+            success: false,
+            message: "error"
+          });
+        } else {
+          return res.status(200).json({
+            success: true,
+            message: "Email Successfully Verified",
+            data: data
+          });
+        }
       });
-    }
+    } catch { }
   };
 }
 module.exports = new Controller();

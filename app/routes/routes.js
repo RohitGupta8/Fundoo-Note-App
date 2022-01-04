@@ -47,5 +47,5 @@ module.exports = (app) => {
   app.delete("/deleteLabel/:id", helperClass.validateToken, labelController.deleteLabelById);
 
   // Verify User
-  app.get("/verifyUser/:token", userController.verifyUser);
+  app.get("/confirmregister/:token", userController.confirmRegister);
 };

@@ -1,21 +1,34 @@
 /* eslint-disable node/no-callback-literal */
-const userModel = require("../model/user.model.js").UserModel;
+const userModel = require("../model/user.model.js");
 const utilities = require("../utilities/helperClass");
 const nodemailer = require("../utilities/nodeMailer");
 const { logger } = require("../../logger/logger");
+const rabbitMQ = require("../utilities/rabbitmqServer");
+const jsonWebToken = require("jsonwebtoken");
+require("dotenv").config();
 
 class UserService {
   registerUser = (user, callback) => {
     userModel.registerUser(user, (err, data) => {
       if (err) {
-        logger.error(err);
         callback(err, null);
       } else {
-        logger.info(data);
-        callback(null, data);
+        // Send Welcome Mail to User on his Mail
+        utilities.sendWelcomeMail(user);
+        const secretkey = process.env.SECRET_KEY_FOR_CONFIRM;
+        utilities.jwtTokenVerifyMail(data, secretkey, (err, token) => {
+          if (token) {
+            rabbitMQ.sender(data, data.email);
+            nodemailer.verifyMail(token, data);
+            return callback(null, token);
+          } else {
+            return callback(err, null);
+          }
+        });
+        return callback(null, data);
       }
     });
-  }
+  };
 
   userLogin = (InfoLogin, callback) => {
     userModel.loginModel(InfoLogin, (error, data) => {
@@ -57,8 +70,25 @@ class UserService {
     return success;
   }
 
-  verifyUser = (data) => {
-    return data;
+  confirmRegister = (data, callback) => {
+    console.log("con 44: ", data.token);
+    const decode = jsonWebToken.verify(data.token, process.env.SECRET_KEY_FOR_CONFIRM);
+    if (decode) {
+      rabbitMQ
+        .receiver(decode.email)
+        .then((val) => {
+          userModel.confirmRegister(JSON.parse(val), (error, data) => {
+            if (data) {
+              return callback(null, data);
+            } else {
+              return callback(error, null);
+            }
+          });
+        })
+        .catch((error) => {
+          logger.error(error);
+        });
+    }
   };
 }
 module.exports = new UserService();
