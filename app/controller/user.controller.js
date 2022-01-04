@@ -171,5 +171,19 @@ class Controller {
       });
     };
   }
+
+  verifyUser = (req, res) => {
+    try {
+      return res.status(200).json({
+        success: true
+      });
+    } catch (error) {
+      return res.status(500).send({
+        success: false,
+        message: "Internal server error",
+        result: null
+      });
+    }
+  };
 }
 module.exports = new Controller();

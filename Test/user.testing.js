@@ -1,3 +1,4 @@
+/* eslint-disable node/handle-callback-err */
 /* eslint-disable no-undef */
 /* eslint-disable no-trailing-spaces */
 const chai = require("chai");
@@ -325,6 +326,25 @@ describe("Reset Password API", () => {
           return done();
         }
         res.should.have.status(401);
+        return done();
+      });
+  });
+});
+
+// api for Verification of user
+
+describe("Verify User", () => {
+  it.only("given details when proper,should return appropriate response from controller", (done) => {
+    chai
+      .request(server)
+      .get("/verifyUser/:token")
+      .send({ token: "req.params.token" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(200);
         return done();
       });
   });
