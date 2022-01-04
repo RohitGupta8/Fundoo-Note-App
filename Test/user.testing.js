@@ -363,4 +363,19 @@ describe("Verify User", () => {
         return done();
       });
   });
+
+  it.only("given details when proper,should return appropriate response from service", (done) => {
+    chai
+      .request(server)
+      .get("/verifyUser/:token")
+      .send({ token: "req.params.token" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(200);
+        return done();
+      });
+  });
 });

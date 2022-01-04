@@ -172,11 +172,24 @@ class Controller {
     };
   }
 
-  verifyUser = (req, res) => {
+  verifyUser = async (req, res) => {
     try {
-      return res.status(200).json({
-        success: true
-      });
+      const data = {
+        token: req.params.token
+      };
+      const isTrue = await userService.verifyUser(data);
+      if (!isTrue) {
+        return res.status(404).json({
+          success: false,
+          message: "error in verification / email not found in db.."
+        });
+      } else {
+        return res.status(200).json({
+          success: true,
+          message: "Email Successfully Verified.....",
+          data: isTrue
+        });
+      }
     } catch (error) {
       return res.status(500).send({
         success: false,

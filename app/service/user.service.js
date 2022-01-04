@@ -56,5 +56,9 @@ class UserService {
     }
     return success;
   }
+
+  verifyUser = (data) => {
+    return data;
+  };
 }
 module.exports = new UserService();
