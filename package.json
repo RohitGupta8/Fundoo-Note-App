@@ -18,6 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/eslint-parser": "^7.16.5",
+    "amqplib": "^0.8.0",
     "babel-eslint": "^10.1.0",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
@@ -34,7 +35,7 @@
     "nodemailer": "^6.7.2",
     "prompt": "^1.2.0",
     "prompt-sync": "^4.2.0",
-    "redis": "^3.1.2",
+    "redis": "^4.0.1",
     "redis-server": "^1.2.2",
     "save": "^2.4.0",
     "swagger-jsdoc": "^6.1.0",

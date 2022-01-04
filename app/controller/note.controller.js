@@ -102,7 +102,7 @@ class NoteController {
           message: "error in getting  note"
         });
       } else {
-        logger.info("successfully getting all notes");
+        logger.info("successfully get note by id");
         return res.status(201).send({
           success: true,
           message: "Successfully....  getting a note",

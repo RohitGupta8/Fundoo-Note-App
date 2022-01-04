@@ -171,5 +171,27 @@ class Controller {
       });
     };
   }
+
+  confirmRegister = (req, res) => {
+    try {
+      const data = {
+        token: req.params.token
+      };
+      userService.confirmRegister(data, (error, data) => {
+        if (error) {
+          return res.status(404).json({
+            success: false,
+            message: "error"
+          });
+        } else {
+          return res.status(200).json({
+            success: true,
+            message: "Email Successfully Verified",
+            data: data
+          });
+        }
+      });
+    } catch { }
+  };
 }
 module.exports = new Controller();

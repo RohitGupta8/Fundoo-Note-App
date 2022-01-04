@@ -1,3 +1,4 @@
+/* eslint-disable node/handle-callback-err */
 /* eslint-disable no-undef */
 /* eslint-disable no-trailing-spaces */
 const chai = require("chai");
@@ -325,6 +326,71 @@ describe("Reset Password API", () => {
           return done();
         }
         res.should.have.status(401);
+        return done();
+      });
+  });
+});
+
+// api for Verification of user
+
+describe("Verify User", () => {
+  it("given details when proper,should return appropriate response from controller", (done) => {
+    chai
+      .request(server)
+      .get("/verifyUser/:token")
+      .send({ token: "req.params.token" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(404);
+        return done();
+      });
+  });
+
+  it("given details when improper,should return appropriate response from controller", (done) => {
+    chai
+      .request(server)
+      .get("/verifyUser/")
+      .send({ token: "req.params.token" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(404);
+        return done();
+      });
+  });
+
+  it("given details when proper,should return appropriate response from service", (done) => {
+    chai
+      .request(server)
+      .get("/verifyUser/:token")
+      .send({ token: "req.params.token" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(404);
+        return done();
+      });
+  });
+
+  it("given details when proper,should return appropriate response from model", (done) => {
+    const data = ({ email: "mkaubr007@gmail.com" });
+    chai
+      .request(server)
+      .get("/verifyUser/:token")
+      .send({ token: "req.params.token", data })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(404);
         return done();
       });
   });

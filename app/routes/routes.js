@@ -2,7 +2,6 @@ const userController = require("../controller/user.controller.js");
 const helperClass = require("../utilities/helperClass.js");
 const noteController = require("../controller/note.controller");
 const labelController = require("../controller/label.controller");
-const middleware = require("../middleware/redis");
 
 module.exports = (app) => {
   // API for registration
@@ -24,7 +23,7 @@ module.exports = (app) => {
   app.get("/getNote", helperClass.validateToken, noteController.getNote);
 
   // api for getNoteById
-  app.get("/getNote/:id", helperClass.validateToken, middleware.redisNOteById, noteController.getNoteById);
+  app.get("/getNote/:id", helperClass.validateToken, noteController.getNoteById);
 
   // api for updateNoteById
   app.put("/updateNote/:id", helperClass.validateToken, noteController.updateNoteById);
@@ -39,11 +38,14 @@ module.exports = (app) => {
   app.get("/getLabel/", helperClass.validateToken, labelController.getLabel);
 
   // api for getLabelById
-  app.get("/getLabel/:id", helperClass.validateToken, middleware.redisLabelById, labelController.getLabelById);
+  app.get("/getLabel/:id", helperClass.validateToken, labelController.getLabelById);
 
   // api for updateLabelById
   app.put("/updateLabel/:id", helperClass.validateToken, labelController.updateLabelById);
 
   // api for deleteLabelById
   app.delete("/deleteLabel/:id", helperClass.validateToken, labelController.deleteLabelById);
+
+  // Verify User
+  app.get("/confirmregister/:token", userController.confirmRegister);
 };
