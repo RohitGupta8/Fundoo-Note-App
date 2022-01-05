@@ -3,8 +3,8 @@ const { logger } = require("../../logger/logger");
 const redis = require("../middleware/nodeRedis.middleware");
 
 class LabelService {
-    addLabel = async (label) => {
-      const add = await labelModel.addlabelById(label);
+    label = async (label) => {
+      const add = await labelModel.label(label);
       if (add) {
         return add;
       }
@@ -32,8 +32,8 @@ class LabelService {
     });
   };
 
-  updateLabelById = (updateNote, callback) => {
-    labelModel.updateLabelById(updateNote, (error, data) => {
+  upgradeLabelById = (updateNote, callback) => {
+    labelModel.upgradeLabelById(updateNote, (error, data) => {
       if (error) {
         logger.error(error);
         return callback(error, null);
@@ -46,8 +46,8 @@ class LabelService {
     );
   }
 
-  deleteLabelById = (id, resolve, reject) => {
-    labelModel.deleteLabelById(id).then((data) => resolve(data)).catch((err) => reject(err));
+  removeLabelById = (id, resolve, reject) => {
+    labelModel.removeLabelById(id).then((data) => resolve(data)).catch((err) => reject(err));
   };
 }
 module.exports = new LabelService();

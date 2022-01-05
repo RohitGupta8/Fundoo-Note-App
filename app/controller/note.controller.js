@@ -4,7 +4,7 @@ const noteService = require("../service/note.service");
 const { logger } = require("../../logger/logger");
 
 class NoteController {
-  createNote = async (req, res) => {
+  note = async (req, res) => {
     try {
       const note = {
         userId: req.user.tokenData.id,
@@ -21,7 +21,7 @@ class NoteController {
           data: createNoteValidation
         });
       }
-      const notes = await noteService.createNote(note);
+      const notes = await noteService.note(note);
       if (!notes) {
         return res.status(400).send({
           success: false,
@@ -160,7 +160,7 @@ class NoteController {
     }
   }
 
-  deleteNoteById = (req, res) => {
+  removeNote = (req, res) => {
     try {
       const id = { userId: req.user.tokenData.id, noteId: req.params.id };
       const deleteNoteValidation = validation.validateDeleteNote.validate(id);
@@ -173,7 +173,7 @@ class NoteController {
           data: deleteNoteValidation
         });
       }
-      noteService.deleteNoteById(id, resolve, reject);
+      noteService.removeNote(id, resolve, reject);
       function resolve (data) {
         logger.info("Delete Note successfully");
         return res.status(201).send({

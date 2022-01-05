@@ -7,11 +7,11 @@ chai.should();
 const labelData = require("./label.token.json");
 
 describe("Add Label", () => {
-  it("when call AddLabel api, should return appropriate response from controller", (done) => {
+  it("when call label api, should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61d17629a931b457095eb7c4")
+      .post("/label/61d17629a931b457095eb7c4")
       .set({ authorization: token })
       .send({ labelName: "fakeNamefff" })
       .end((err, res) => {
@@ -24,11 +24,11 @@ describe("Add Label", () => {
       });
   });
 
-  it("when call AddLabel api, should return appropriate response from controller", (done) => {
+  it("when call label api, should return appropriate response from controller", (done) => {
     const token = labelData.notes.inValidToken;
     chai
       .request(server)
-      .post("/addLabel/61cc4dffb33009b46075b861")
+      .post("/label/61cc4dffb33009b46075b861")
       .set({ authorization: token })
       .send({})
       .end((err, res) => {
@@ -41,11 +41,11 @@ describe("Add Label", () => {
       });
   });
 
-  it("when call AddLabel api with valid input, should return appropriate response from controller", (done) => {
+  it("when call label api with valid input, should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61d17629a931b457095eb7c4")
+      .post("/label/61d17629a931b457095eb7c4")
       .set({ authorization: token })
       .send({ labelName: "fakeNamgge" })
       .end((err, res) => {
@@ -58,11 +58,11 @@ describe("Add Label", () => {
       });
   });
 
-  it("when call AddLabel api with false params, should return appropriate response from controller", (done) => {
+  it("when call label api with false params, should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61ca792c3e0c670ef4")
+      .post("/label/61ca792c3e0c670ef4")
       .set({ authorization: token })
       .send({ labelName: "fakfeName" })
       .end((err, res) => {
@@ -75,11 +75,11 @@ describe("Add Label", () => {
       });
   });
 
-  it("when call AddLabel api with false label, should return appropriate response from controller", (done) => {
+  it("when call label api with false label, should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61d17629a931b457095eb7c4")
+      .post("/label/61d17629a931b457095eb7c4")
       .set({ authorization: token })
       .send({ labelName: "fake" })
       .end((err, res) => {
@@ -92,11 +92,11 @@ describe("Add Label", () => {
       });
   });
 
-  it("when call AddLabel api, should return appropriate response from Service", (done) => {
+  it("when call label api, should return appropriate response from Service", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61d17629a931b457095eb7c4")
+      .post("/label/61d17629a931b457095eb7c4")
       .set({ authorization: token })
       .send({ labelName: "fakkkeName" })
       .end((err, res) => {
@@ -109,11 +109,11 @@ describe("Add Label", () => {
       });
   });
 
-  it("when call AddLabel api, should return appropriate response from Model", (done) => {
+  it("when call label api, should return appropriate response from Model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61d17629a931b457095eb7c4")
+      .post("/label/61d17629a931b457095eb7c4")
       .set({ authorization: token })
       .send({ labelName: "fakeNammme" })
       .end((err, res) => {
@@ -130,7 +130,7 @@ describe("Add Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/61d17629a931b457095eb7c4")
+      .post("/label/61d17629a931b457095eb7c4")
       .set({ authorization: token })
       .send({ labelName: "fakeNallme" })
       .end((err, res) => {
@@ -147,7 +147,7 @@ describe("Add Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .post("/addLabel/62cecf7eea3e31a5d1e23134")
+      .post("/label/62cecf7eea3e31a5d1e23134")
       .set({ authorization: token })
       .send({ labelName: "fakeNallme" })
       .end((err, res) => {
@@ -161,14 +161,14 @@ describe("Add Label", () => {
   });
 });
 
-// api for getLabel
+// api for findLabels
 
-describe("GetLabel", () => {
-  it("when call getLabel with inValid token , should return appropriate response from controller", (done) => {
+describe("findLabels", () => {
+  it("when call findLabels with inValid token , should return appropriate response from controller", (done) => {
     const token = labelData.notes.inValidToken;
     chai
       .request(server)
-      .get("/getLabel")
+      .get("/findLabels")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -180,11 +180,11 @@ describe("GetLabel", () => {
       });
   });
 
-  it("when call getLabel with valid token , should return appropriate response from controller", (done) => {
+  it("when call findLabels with valid token , should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .get("/getLabel")
+      .get("/findLabels")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -200,7 +200,7 @@ describe("GetLabel", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .get("/getLabel")
+      .get("/findLabels")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -212,11 +212,11 @@ describe("GetLabel", () => {
       });
   });
 
-  it("when call getLabel with valid token , should return appropriate response from service", (done) => {
+  it("when call findLabels with valid token , should return appropriate response from service", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .get("/getLabel")
+      .get("/findLabels")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -228,11 +228,11 @@ describe("GetLabel", () => {
       });
   });
 
-  it("when call getLabel with valid token , should return appropriate response from model", (done) => {
+  it("when call findLabels with valid token , should return appropriate response from model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .get("/getLabel")
+      .get("/findLabels")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -248,7 +248,7 @@ describe("GetLabel", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .get("/getLabel")
+      .get("/findLabels")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -264,7 +264,7 @@ describe("GetLabel", () => {
     const token = labelData.notes.inValidToken;
     chai
       .request(server)
-      .get("/getLabel")
+      .get("/findLabels")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -279,7 +279,7 @@ describe("GetLabel", () => {
   it("check without token , should return appropriate response from model", (done) => {
     chai
       .request(server)
-      .get("/getLabel")
+      .get("/findLabels")
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -291,14 +291,14 @@ describe("GetLabel", () => {
   });
 });
 
-// api for getLabel by Id
+// api for findLabels by Id
 
 describe("Get Label By ID", () => {
   it("when call getLabelById with valid token , should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .get("/getLabel/61cc4aec22dd21239e23cdf0")
+      .get("/findLabels/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -314,7 +314,7 @@ describe("Get Label By ID", () => {
     const token = labelData.notes.inValidToken;
     chai
       .request(server)
-      .get("/getLabel/61cc4aec22dd21239e23cdf0")
+      .get("/findLabels/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -330,7 +330,7 @@ describe("Get Label By ID", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .get("/getLabel/61cc4aec22dd21239e23cdf0")
+      .get("/findLabels/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -346,7 +346,7 @@ describe("Get Label By ID", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .get("/getLabel/61cc4e23cdf0")
+      .get("/findLabels/61cc4e23cdf0")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -362,7 +362,7 @@ describe("Get Label By ID", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .get("/getLabel/61cc4aec22dd21239e23cdf0")
+      .get("/findLabels/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -378,7 +378,7 @@ describe("Get Label By ID", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .get("/getLabel/61cc4aec22dd21239e23cdf0")
+      .get("/findLabels/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -394,7 +394,7 @@ describe("Get Label By ID", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .get("/getLabel/61cc4aec22dd21239e23cdf0")
+      .get("/findLabels/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -410,7 +410,7 @@ describe("Get Label By ID", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .get("/getLabel/61cc4ae7c22dd21239e23cdf0")
+      .get("/findLabels/61cc4ae7c22dd21239e23cdf0")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -430,7 +430,7 @@ describe("Update Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .put("/updateLabel/61cc4aec22dd21239e23cdf0")
+      .put("/upgradeLabel/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
       .send({ labelName: "Rohit" })
       .end((err, res) => {
@@ -447,7 +447,7 @@ describe("Update Label", () => {
     const token = labelData.notes.inValidToken;
     chai
       .request(server)
-      .put("/updateLabel/61cc4aec22dd21239e23cdf0")
+      .put("/upgradeLabel/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
       .send({ labelName: "Rohit" })
       .end((err, res) => {
@@ -464,7 +464,7 @@ describe("Update Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .put("/updateLabel/61cc4aec22dd21239e23cdf0")
+      .put("/upgradeLabel/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
       .send({ labelName: "Rohit rupali" })
       .end((err, res) => {
@@ -481,7 +481,7 @@ describe("Update Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .put("/updateLabel/61cc4aec22dd21239e23cdf0")
+      .put("/upgradeLabel/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
       .send({ labelName: "Ro" })
       .end((err, res) => {
@@ -498,7 +498,7 @@ describe("Update Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .put("/updateLabel/61cc239e23cdf0")
+      .put("/upgradeLabel/61cc239e23cdf0")
       .set({ authorization: token })
       .send({ labelName: "Rohithdffd" })
       .end((err, res) => {
@@ -511,11 +511,11 @@ describe("Update Label", () => {
       });
   });
 
-  it("when call updateLabel api, should return appropriate response from service", (done) => {
+  it("when call upgradeLabel api, should return appropriate response from service", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .put("/updateLabel/61cc4aec22dd21239e23cdf0")
+      .put("/upgradeLabel/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
       .send({ labelName: "RohitGujpta" })
       .end((err, res) => {
@@ -528,11 +528,11 @@ describe("Update Label", () => {
       });
   });
 
-  it("when call updateLabel api, should return appropriate response from model", (done) => {
+  it("when call upgradeLabel api, should return appropriate response from model", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .put("/updateLabel/61cc4aec22dd21239e23cdf0")
+      .put("/upgradeLabel/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
       .send({ labelName: "RohitGuphhta" })
       .end((err, res) => {
@@ -549,7 +549,7 @@ describe("Update Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .put("/updateLabel/61cc4aec22dd21239e23cdf0")
+      .put("/upgradeLabel/61cc4aec22dd21239e23cdf0")
       .set({ authorization: token })
       .send({ labelName: "RohitGupta" })
       .end((err, res) => {
@@ -566,7 +566,7 @@ describe("Update Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .put("/updateLabel/61cc4aec224dd21239e23cdf0")
+      .put("/upgradeLabel/61cc4aec224dd21239e23cdf0")
       .set({ authorization: token })
       .send({ labelName: "RohitGupta" })
       .end((err, res) => {
@@ -580,14 +580,14 @@ describe("Update Label", () => {
   });
 });
 
-// api for deleteLabel
+// api for removeLabel
 
 describe("Delete Label", () => {
   it("when call delete label api, should return appropriate response from controller", (done) => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .delete("/deleteLabel/61cc504673bf80c104067db6")
+      .delete("/removeLabel/61cc504673bf80c104067db6")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -603,7 +603,7 @@ describe("Delete Label", () => {
     const token = labelData.notes.inValidToken;
     chai
       .request(server)
-      .delete("/deleteLabel/61cc4aec224dd21239e23cdf0")
+      .delete("/removeLabel/61cc4aec224dd21239e23cdf0")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -619,7 +619,7 @@ describe("Delete Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .delete("/deleteLabel/61cc504673bf80c104067db2")
+      .delete("/removeLabel/61cc504673bf80c104067db2")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -635,7 +635,7 @@ describe("Delete Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .delete("/deleteLabel/61c239e23cdf0")
+      .delete("/removeLabel/61c239e23cdf0")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -651,7 +651,7 @@ describe("Delete Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .delete("/deleteLabel/61cc504673bf80c104067dae")
+      .delete("/removeLabel/61cc504673bf80c104067dae")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -667,7 +667,7 @@ describe("Delete Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .delete("/deleteLabel/61cc504673bf80c104067daa")
+      .delete("/removeLabel/61cc504673bf80c104067daa")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -683,7 +683,7 @@ describe("Delete Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .delete("/deleteLabel/61cc4fd07cdcfbcbdc48890a")
+      .delete("/removeLabel/61cc4fd07cdcfbcbdc48890a")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -699,7 +699,7 @@ describe("Delete Label", () => {
     const token = labelData.notes.validToken;
     chai
       .request(server)
-      .delete("/deleteLabel/61cc4eec4ld403e9aba0882")
+      .delete("/removeLabel/61cc4eec4ld403e9aba0882")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {

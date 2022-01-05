@@ -3,8 +3,8 @@ const { logger } = require("../../logger/logger");
 const redis = require("../middleware/nodeRedis.middleware");
 
 class NoteService {
-    createNote = async (note) => {
-      const success = noteModel.createNote(note);
+    note = async (note) => {
+      const success = noteModel.note(note);
       if (!success) {
         return false;
       }
@@ -41,8 +41,8 @@ class NoteService {
     });
   };
 
-  deleteNoteById = (id, resolve, reject) => {
-    noteModel.deleteNoteById(id).then((data) => resolve(data)).catch((err) => reject(err));
+  removeNote = (id, resolve, reject) => {
+    noteModel.removeNote(id).then((data) => resolve(data)).catch((err) => reject(err));
   };
 }
 module.exports = new NoteService();

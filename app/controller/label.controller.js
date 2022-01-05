@@ -3,7 +3,7 @@ const labelService = require("../service/label.service");
 const { logger } = require("../../logger/logger");
 
 class AddLabelController {
-  addLabel = async (req, res) => {
+  label = async (req, res) => {
     try {
       const label = {
         labelName: req.body.labelName,
@@ -20,7 +20,7 @@ class AddLabelController {
           data: labelValidation
         });
       }
-      const add = await labelService.addLabel(label);
+      const add = await labelService.label(label);
       if (!add) {
         logger.error("error in add Labels");
         return res.status(400).send({
@@ -118,7 +118,7 @@ class AddLabelController {
     }
   }
 
-  updateLabelById = (req, res) => {
+  upgradeLabelById = (req, res) => {
     try {
       const updateLabel = {
         id: req.params.id,
@@ -134,7 +134,7 @@ class AddLabelController {
           data: updateLabelValidation
         });
       }
-      labelService.updateLabelById(updateLabel, (error, data) => {
+      labelService.upgradeLabelById(updateLabel, (error, data) => {
         if (error) {
           logger.error(error);
           return res.status(400).json({
@@ -159,7 +159,7 @@ class AddLabelController {
     }
   }
 
-  deleteLabelById = (req, res) => {
+  removeLabelById = (req, res) => {
     try {
       const id = { userId: req.user.tokenData.id, id: req.params.id };
       const deleteLabelValidation = validation.validateDeleteLabel.validate(id);
@@ -171,7 +171,7 @@ class AddLabelController {
           data: deleteLabelValidation
         });
       }
-      labelService.deleteLabelById(id, resolve, reject);
+      labelService.removeLabelById(id, resolve, reject);
       function resolve (data) {
         logger.info("Delete Label successfully");
         return res.status(201).send({

@@ -144,7 +144,7 @@
                 }
             }
         },
-        "/createNote": {
+        "/note": {
             "post": {
                 "tags": [
                     "Create Notes"
@@ -188,7 +188,7 @@
                 }
             }
         },
-        "/getNote": {
+        "/findNotes": {
             "get": {
                 "tags": [
                     "Get All Notes"
@@ -224,7 +224,7 @@
                 }
             }
         },
-        "/getNote/{id}": {
+        "/findNotes/{id}": {
             "get": {
                 "tags": [
                     "Get Notes By Id"
@@ -268,7 +268,7 @@
                 }
             }
         },
-        "/updateNote/{id}": {
+        "/upgradeNote/{id}": {
             "put": {
                 "tags": [
                     "Update Notes By Id"
@@ -317,7 +317,7 @@
                 }
             }
         },
-        "/deleteNote/{id}": {
+        "/removeNote/{id}": {
             "delete": {
                 "tags": [
                     "Delete Notes By Id"
@@ -358,7 +358,7 @@
                 }
             }
         },
-        "/addLabel/{id}": {
+        "/label/{id}": {
             "post": {
                 "tags": [
                     "Add Label by NoteID"
@@ -407,7 +407,7 @@
                     }
                 }
             }
-        },"/getLabel": {
+        },"/findLabels": {
             "get": {
                 "tags": [
                     "Get All Labels"
@@ -437,7 +437,7 @@
                 }
             }
         },
-        "/getLabel/{id}": {
+        "/findLabels/{id}": {
             "get": {
                 "tags": [
                     "Get Label By Id"
@@ -479,7 +479,7 @@
                 }
             }
         },
-        "/updateLabel/{id}": {
+        "/upgradeLabel/{id}": {
             "put": {
                 "tags": [
                     "Update Label"
@@ -528,7 +528,7 @@
                     }
                 }
             }
-        },"/deleteLabel/{id}": {
+        },"/removeLabel/{id}": {
             "delete": {
                 "tags": [
                     "Delete Label"

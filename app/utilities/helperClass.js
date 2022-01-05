@@ -33,14 +33,20 @@ class HelperClass {
       if (tokenInfo) {
         jwt.verify(tokenInfo, process.env.JWT_SECRET, (error, decoded) => {
           if (error) {
-            return res.status(400).send({ success: false, message: "Oops.....Invalid Token" });
+            return res.status(400).send({
+              success: false,
+              message: "Oops.....Invalid Token"
+            });
           } else {
             req.user = decoded;
             next();
           }
         });
       } else {
-        return res.status(401).send({ success: false, message: "Oops....Authorisation failed! Invalid user" });
+        return res.status(401).send({
+          success: false,
+          message: "Oops....Authorisation failed! Invalid user"
+        });
       }
     } catch (error) {
       return res.status(500).send({ success: false, message: "Something went wrong!" });
@@ -48,10 +54,7 @@ class HelperClass {
   }
 
   jwtTokenVerifyMail = (payload, secretkey, callback) => {
-    jwt.sign(
-      { email: payload.email },
-      secretkey,
-      { expiresIn: "500h" },
+    jwt.sign({ email: payload.email }, secretkey, { expiresIn: "500h" },
       (err, token) => {
         if (err) {
           return callback("token not generated", null);
