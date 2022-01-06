@@ -321,7 +321,7 @@ describe("GetNoteById", () => {
   it("when call getNoteById with InvalidToken , should return appropriate response", (done) => {
     chai
       .request(server)
-      .get("/findNotes/61ca792c3e0c670ef5737934")
+      .get("/findNotes/61d696606632cae8f42d9b49")
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -336,7 +336,7 @@ describe("GetNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes/61ca792c3e0c670ef5737934")
+      .get("/findNotes/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -352,7 +352,7 @@ describe("GetNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes/61ca792c3e0c670ef5737934")
+      .get("/findNotes/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -368,7 +368,7 @@ describe("GetNoteById", () => {
     const token = noteData.notes.inValidToken;
     chai
       .request(server)
-      .get("/findNotes/61c8407f4e180a62acac73b3")
+      .get("/findNotes/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -384,7 +384,7 @@ describe("GetNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes/61ca792c3e0c670ef5737934")
+      .get("/findNotes/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -400,7 +400,7 @@ describe("GetNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes/61ca792c3e0c670ef5737934")
+      .get("/findNotes/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -416,7 +416,7 @@ describe("GetNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes/61ca792c3e0c670ef5737934")
+      .get("/findNotes/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -440,7 +440,7 @@ describe("Update Note By Id", () => {
     };
     chai
       .request(server)
-      .put("/upgradeNote/61ca792c3e0c670ef5737934")
+      .put("/upgradeNote/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .send(createNotes)
       .end((err, res) => {
@@ -461,7 +461,7 @@ describe("Update Note By Id", () => {
     };
     chai
       .request(server)
-      .put("/upgradeNote/61ca792c3e0c670ef5737934")
+      .put("/upgradeNote/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .send(createNotes)
       .end((err, res) => {
@@ -478,7 +478,7 @@ describe("Update Note By Id", () => {
     const token = noteData.notes.inValidToken;
     chai
       .request(server)
-      .put("/upgradeNote/61ca792c3e0c670ef5737934")
+      .put("/upgradeNote/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -498,7 +498,7 @@ describe("Update Note By Id", () => {
     };
     chai
       .request(server)
-      .put("/upgradeNote/61cadb787fd12340e21b0e5e")
+      .put("/upgradeNote/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .send(createNotes)
       .end((err, res) => {
@@ -515,7 +515,7 @@ describe("Update Note By Id", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .put("/upgradeNote/61cbe18720f85e5ea0e771b6")
+      .put("/upgradeNote/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .send({ title: "S", description: "golden period of life" })
       .end((err, res) => {
@@ -532,7 +532,7 @@ describe("Update Note By Id", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .put("/upgradeNote/61cbe18720f85e5ea0e771b8")
+      .put("/upgradeNote/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .send({ title: "School", description: "g" })
       .end((err, res) => {
@@ -553,7 +553,7 @@ describe("Update Note By Id", () => {
     };
     chai
       .request(server)
-      .put("/upgradeNote/61cbe18720f85e5ea0e771b8")
+      .put("/upgradeNote/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .send(createNotes)
       .end((err, res) => {
@@ -574,7 +574,7 @@ describe("Update Note By Id", () => {
     };
     chai
       .request(server)
-      .put("/upgradeNote/61cbe18720f85e5ea0e771ba")
+      .put("/upgradeNote/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .send(createNotes)
       .end((err, res) => {
@@ -595,7 +595,7 @@ describe("Update Note By Id", () => {
     };
     chai
       .request(server)
-      .put("/upgradeNote/61cbe18720f85e5ea0e771ba")
+      .put("/upgradeNote/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .send(createNotes)
       .end((err, res) => {

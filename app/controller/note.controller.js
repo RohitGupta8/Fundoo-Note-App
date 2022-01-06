@@ -14,7 +14,6 @@ class NoteController {
       const createNoteValidation = validation.createNoteValidation.validate(note);
       if (createNoteValidation.error) {
         logger.error(createNoteValidation.error);
-        console.log(createNoteValidation.error);
         return res.status(400).send({
           success: false,
           message: "Wrong Input Validations",
@@ -48,7 +47,6 @@ class NoteController {
       const id = { id: req.user.tokenData.id };
       const getNoteValidation = validation.noteIDValidation.validate(id);
       if (getNoteValidation.error) {
-        console.log(getNoteValidation.error);
         logger.error(getNoteValidation.error);
         return res.status(400).send({
           success: false,
@@ -72,7 +70,6 @@ class NoteController {
         });
       }
     } catch (error) {
-      console.log(error);
       logger.error(error);
       return res.status(500).json({
         message: "Internal Server Error",
@@ -86,12 +83,10 @@ class NoteController {
       const id = { userId: req.user.tokenData.id, id: req.params.id };
       const getNoteValidation = validation.getNoteByIDValidation.validate(id);
       if (getNoteValidation.error) {
-        console.log(getNoteValidation.error);
         logger.error(getNoteValidation.error);
         return res.status(400).send({
           success: false,
-          message: "Wrong Input Validations",
-          data: getNoteValidation
+          message: "Wrong Input Validations"
         });
       }
       const getNote = await noteService.getNoteById(id);
@@ -166,7 +161,6 @@ class NoteController {
       const deleteNoteValidation = validation.validateDeleteNote.validate(id);
       if (deleteNoteValidation.error) {
         logger.error(deleteNoteValidation.error);
-        console.log(deleteNoteValidation.error);
         return res.status(400).send({
           success: false,
           message: "Wrong Input Validations",

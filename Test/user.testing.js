@@ -214,7 +214,7 @@ describe("Reset Password API", () => {
     chai
       .request(server)
       .patch("/resetPassword")
-      .send({ email: "rohitg213@gmail.com", password: "clickN70+5", code: "5il2wlecgn" })
+      .send({ email: "rohitg213@gmail.com", password: "clickN70+5", code: "8mi58tkpmi" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -229,7 +229,7 @@ describe("Reset Password API", () => {
     chai
       .request(server)
       .patch("/resetPassword")
-      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "5il2wlecgn" })
+      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "8mi58tkpmi" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -244,7 +244,7 @@ describe("Reset Password API", () => {
     chai
       .request(server)
       .patch("/resetPassword")
-      .send({ email: "rohitg213@gmail.com", password: "Jh", code: "5il2wlecgn" })
+      .send({ email: "rohitg213@gmail.com", password: "Jh", code: "5illecgn" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -259,7 +259,7 @@ describe("Reset Password API", () => {
     chai
       .request(server)
       .patch("/resetPassword")
-      .send({ email: "rohitg213gmail.com", password: "clickN70@hj", code: "5il2wlecgn" })
+      .send({ email: "rohitg213gmail.com", password: "clickN70@hj", code: "8mi58tkpmi" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -274,7 +274,7 @@ describe("Reset Password API", () => {
     chai
       .request(server)
       .patch("/resetPassword")
-      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "5il2wlecgn" })
+      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "8mi58tkpmi" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -289,7 +289,7 @@ describe("Reset Password API", () => {
     chai
       .request(server)
       .patch("/resetPassword")
-      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "5il2wlecgn" })
+      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "8mi58tkpmi" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -304,7 +304,7 @@ describe("Reset Password API", () => {
     chai
       .request(server)
       .patch("/resetPassword")
-      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "5il2wlecgn" })
+      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "8mi58tkpmi" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");

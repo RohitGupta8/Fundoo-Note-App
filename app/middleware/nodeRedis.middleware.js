@@ -7,7 +7,7 @@ class RedisServer {
   }
 
   connect = () => {
-    client = redis.createClient(6379, "127.0.0.1");
+    client = redis.createClient();
     client.connect();
     client.on("connect", function () {
       console.log("successFully .....Redis server Connected!");
@@ -19,6 +19,7 @@ class RedisServer {
       if (error) {
         throw error;
       } else if (data) {
+        console.log(data);
         return JSON.parse(data);
       } else {
         return null;

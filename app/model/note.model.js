@@ -55,7 +55,6 @@ class NoteModel {
         return callback(err, null);
       } else {
         logger.info("updated successfully");
-        console.log(data);
         return callback(null, data);
       }
     });

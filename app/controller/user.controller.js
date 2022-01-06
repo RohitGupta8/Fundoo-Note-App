@@ -28,7 +28,6 @@ class Controller {
           });
         } else {
           logger.info("User registered");
-          console.log("Data:", data);
           return res.status(200).json({
             success: true,
             message: "SuccessFully !!!  registered......",
@@ -116,7 +115,6 @@ class Controller {
           });
         } else {
           logger.info("Email sent successfully");
-          console.log("Result", result);
           return res.status(200).send({
             success: true,
             message: "Email sent successfully"
@@ -172,12 +170,12 @@ class Controller {
     };
   }
 
-  confirmRegister = (req, res) => {
+  verifyUser = (req, res) => {
     try {
       const data = {
         token: req.params.token
       };
-      userService.confirmRegister(data, (error, data) => {
+      userService.verifyUser(data, (error, data) => {
         if (error) {
           return res.status(404).json({
             success: false,

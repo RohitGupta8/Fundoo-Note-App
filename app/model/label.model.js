@@ -57,16 +57,12 @@ class LabelModel {
     return getAll;
   };
 
-  getLabelById = (id, callback) => {
-    LabelRegister.find({ userId: id.userId, _id: id.id }, (error, data) => {
-      if (data) {
-        logger.info(data);
-        callback(null, data);
-      } else {
-        logger.error(error);
-        callback(error, null);
-      }
-    })
+  getLabelById = async (id) => {
+    const getAll = await LabelRegister.find({ userId: id.userId, _id: id.id });
+    if (!getAll) {
+      return false;
+    }
+    return getAll;
   };
 
   upgradeLabelById = (id, callback) => {

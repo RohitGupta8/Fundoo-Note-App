@@ -19,17 +19,14 @@ class LabelService {
     return get;
   };
 
-  getLabelById = (id, callback) => {
-    labelModel.getLabelById(id, (error, data) => {
-      if (data) {
-        logger.info(data);
-        redis.setData("getLabelById", 60, JSON.stringify(data));
-        callback(null, data);
-      } else {
-        logger.error(error);
-        callback(error, null);
-      }
-    });
+  getLabelById = async (id) => {
+    let getId = await redis.getData(id);
+    if (!getId) {
+      getId = await labelModel.getLabelById(id);
+    }
+    redis.setData("getRedisById", 60, JSON.stringify(getId));
+    logger.info("get data by id");
+    return getId;
   };
 
   upgradeLabelById = (updateNote, callback) => {
