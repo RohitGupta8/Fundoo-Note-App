@@ -687,6 +687,27 @@ describe("Update Note By Id", () => {
         return done();
       });
   });
+
+  it("check delete cache after update, should return proper response", (done) => {
+    const token = noteData.notes.validToken;
+    const createNotes = {
+      title: "noteData.notes.title,",
+      description: "faker.lorem.word()"
+    };
+    chai
+      .request(server)
+      .put("/note/61d17503de0a748e8ba98b09")
+      .set({ authorization: token })
+      .send(createNotes)
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
+        return done();
+      });
+  });
 });
 
 // api of Delete Note by Id
