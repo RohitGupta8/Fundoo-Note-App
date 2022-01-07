@@ -395,7 +395,7 @@ describe("Verify User", () => {
       });
   });
 
-  it.only("given proper details in signUp then send verify mail ,should return proper response ", (done) => {
+  it("given proper details in signUp then send verify mail ,should return proper response ", (done) => {
     const registerfaker = {
       firstName: faker.name.findName(8),
       lastName: faker.name.lastName(8),
@@ -412,6 +412,21 @@ describe("Verify User", () => {
           return done();
         }
         res.should.have.status(200);
+        done();
+      });
+  });
+
+  it("check Login after signup without verify mail,should return proper response", (done) => {
+    const userDetails = registrationData.userInformation.wrongLogin;
+
+    chai.request(server)
+      .post("/login")
+      .send(userDetails)
+      .end((err, res) => {
+        if (err) {
+          return done();
+        }
+        res.should.have.status(400);
         done();
       });
   });
