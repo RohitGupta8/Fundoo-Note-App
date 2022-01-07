@@ -475,7 +475,7 @@ describe("GetNoteById", () => {
         return done();
       });
   });
-  it("check data from Redis with invalid token, should return code = 201", (done) => {
+  it("check data from Redis with invalid token, should return code = 400", (done) => {
     const token = noteData.notes.inValidToken;
     chai
       .request(server)
