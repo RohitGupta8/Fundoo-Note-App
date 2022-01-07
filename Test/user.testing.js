@@ -394,4 +394,25 @@ describe("Verify User", () => {
         return done();
       });
   });
+
+  it.only("given proper details in signUp then send verify mail ,should return proper response ", (done) => {
+    const registerfaker = {
+      firstName: faker.name.findName(8),
+      lastName: faker.name.lastName(8),
+      email: faker.internet.email(),
+      password: faker.internet.password()
+    };
+    chai
+      .request(server)
+      .post("/register")
+      .send(registerfaker)
+      .end((err, res) => {
+        if (err) {
+          console.log("Plz check again & enter with proper format");
+          return done();
+        }
+        res.should.have.status(200);
+        done();
+      });
+  });
 });
