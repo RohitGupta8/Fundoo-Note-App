@@ -444,7 +444,7 @@ describe("GetNoteById", () => {
       });
   });
 
-  it("check data from DB not from Redis, should return code = 500", (done) => {
+  it("check data from DB not from Redis, should return code = 201", (done) => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
@@ -453,6 +453,22 @@ describe("GetNoteById", () => {
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(201);
+        return done();
+      });
+  });
+
+  it.only("check data from Redis, should return code = 201", (done) => {
+    const token = noteData.notes.validToken;
+    chai
+      .request(server)
+      .get("/note/61d696606632cae8f42d9b49")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz chec your credential");
           return done();
         }
         res.should.have.status(201);
