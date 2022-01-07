@@ -430,4 +430,17 @@ describe("Verify User", () => {
         done();
       });
   });
+
+  it("check login after verify mail, should return 200 ", (done) => {
+    const userDetails = registrationData.userInformation.correctLogin;
+
+    chai.request(server).post("/login").send(userDetails).end((err, res) => {
+      if (err) {
+        console.log("Plz check again & enter with proper format");
+        return done();
+      }
+      res.should.have.status(200);
+      done();
+    });
+  });
 });
