@@ -20,31 +20,31 @@ module.exports = (app) => {
   app.post("/note", helperClass.validateToken, noteController.note);
 
   // api for getnote
-  app.get("/findNotes", helperClass.validateToken, noteController.getNote);
+  app.get("/note", helperClass.validateToken, noteController.getNote);
 
   // api for getNoteById
-  app.get("/findNotes/:id", helperClass.validateToken, noteController.getNoteById);
+  app.get("/note/:id", helperClass.validateToken, noteController.getNoteById);
 
   // api for updateNoteById
-  app.put("/upgradeNote/:id", helperClass.validateToken, noteController.updateNoteById);
+  app.put("/note/:id", helperClass.validateToken, noteController.updateNoteById);
 
   // api for DeleteNoteById
-  app.delete("/removeNote/:id", helperClass.validateToken, noteController.removeNote);
+  app.delete("/note/:id", helperClass.validateToken, noteController.removeNote);
 
   // api for AddLabel
   app.post("/label/:id", helperClass.validateToken, labelController.label);
 
-  // api for getLabel
-  app.get("/findLabels/", helperClass.validateToken, labelController.getLabel);
+  // api for get all Labels
+  app.get("/label/", helperClass.validateToken, labelController.getLabel);
 
   // api for getLabelById
-  app.get("/findLabels/:id", helperClass.validateToken, labelController.getLabelById);
+  app.get("/label/:id", helperClass.validateToken, labelController.getLabelById);
 
   // api for updateLabelById
-  app.put("/upgradeLabel/:id", helperClass.validateToken, labelController.upgradeLabelById);
+  app.put("/label/:id", helperClass.validateToken, labelController.upgradeLabelById);
 
   // api for deleteLabelById
-  app.delete("/removeLabel/:id", helperClass.validateToken, labelController.removeLabelById);
+  app.delete("/label/:id", helperClass.validateToken, labelController.removeLabelById);
 
   // Verify User
   app.get("/verify/:token", userController.verifyUser);

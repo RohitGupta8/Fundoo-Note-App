@@ -172,8 +172,7 @@ class NoteController {
         logger.info("Delete Note successfully");
         return res.status(201).send({
           message: "Delete note successfully",
-          success: true,
-          data: data
+          success: true
         });
       }
       function reject () {

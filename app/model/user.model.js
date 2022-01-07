@@ -33,7 +33,7 @@ const userSchema = mongoose.Schema({
   }
 },
 {
-  timestamps: true
+  timestamps: false
 });
 
 const User = mongoose.model("UserInformation", userSchema);
@@ -66,16 +66,16 @@ class UserModel {
       if (error) {
         logger.error("Find error while loggin user");
         return callBack(error, null);
-      } else if (!data) {
+      } else if (data.verified == false) {
         logger.error("Invalid User");
         console.log(data);
-        return callBack("Invalid Credential", null);
+        return callBack("Invalid Credential / invalid user", null);
       } else {
         if (data.verified == true) {
           logger.info("data found in database");
           return callBack(null, data);
         } else {
-          return error;
+          return callBack(error, null);
         }
       }
     });

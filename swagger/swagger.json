@@ -186,9 +186,7 @@
                         "description": "Internal server error"
                     }
                 }
-            }
-        },
-        "/findNotes": {
+            },
             "get": {
                 "tags": [
                     "Get All Notes"
@@ -224,7 +222,7 @@
                 }
             }
         },
-        "/findNotes/{id}": {
+        "/note/{id}": {
             "get": {
                 "tags": [
                     "Get Notes By Id"
@@ -266,9 +264,7 @@
                         "description": "Internal server error"
                     }
                 }
-            }
-        },
-        "/upgradeNote/{id}": {
+            },
             "put": {
                 "tags": [
                     "Update Notes By Id"
@@ -315,9 +311,7 @@
                         "description": "Internal server error"
                     }
                 }
-            }
-        },
-        "/removeNote/{id}": {
+            },
             "delete": {
                 "tags": [
                     "Delete Notes By Id"
@@ -354,6 +348,36 @@
                     },
                     "500": {
                         "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/label/": {
+            "get": {
+                "tags": [
+                    "Get All Labels"
+                ],
+                "description": "Gets All Labels",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token for validation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "labels retrieved"
+                    },
+                    "500": {
+                        "description": "Couldnt retrieve labels"
                     }
                 }
             }
@@ -406,38 +430,7 @@
                         "description": "Invalid Token"
                     }
                 }
-            }
-        },"/findLabels": {
-            "get": {
-                "tags": [
-                    "Get All Labels"
-                ],
-                "description": "Gets All Labels",
-                "parameters": [
-                    {
-                        "in": "header",
-                        "name": "authorization",
-                        "description": "Token for validation",
-                        "schema": {
-                            "type": "string",
-                            "required": true
-                        }
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "labels retrieved"
-                    },
-                    "500": {
-                        "description": "Couldnt retrieve labels"
-                    }
-                }
-            }
-        },
-        "/findLabels/{id}": {
+            },
             "get": {
                 "tags": [
                     "Get Label By Id"
@@ -477,9 +470,7 @@
                         "description": "Invalid Token"
                     }
                 }
-            }
-        },
-        "/upgradeLabel/{id}": {
+            },
             "put": {
                 "tags": [
                     "Update Label"
@@ -527,8 +518,7 @@
                         "description": "Invalid Token"
                     }
                 }
-            }
-        },"/removeLabel/{id}": {
+            },
             "delete": {
                 "tags": [
                     "Delete Label"
@@ -569,7 +559,6 @@
                 }
             }
         }
-        
     },
     "definitions": {
         "Register": {
@@ -685,7 +674,8 @@
                     "type": "string"
                 }
             }
-        },"UpdateLabel": {
+        },
+        "UpdateLabel": {
             "type": "object",
             "properties": {
                 "labelName": {
@@ -694,5 +684,4 @@
             }
         }
     }
-    
 }

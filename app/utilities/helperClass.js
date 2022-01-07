@@ -15,7 +15,6 @@ class HelperClass {
       id: data.id,
       firstName: data.firstName,
       lastName: data.lastName,
-      password: data.password,
       email: data.email
     };
     return jwt.sign({ tokenData }, process.env.JWT_SECRET, { expiresIn: "20000H" });

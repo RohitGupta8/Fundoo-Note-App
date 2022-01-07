@@ -184,8 +184,7 @@ class Controller {
         } else {
           return res.status(200).json({
             success: true,
-            message: "Email Successfully Verified",
-            data: data
+            message: "Email Successfully Verified"
           });
         }
       });

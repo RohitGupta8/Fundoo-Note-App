@@ -191,7 +191,7 @@ describe("Get all Notes", () => {
   it("when call findNotes api without token, should return appropriate response from controller", (done) => {
     chai
       .request(server)
-      .get("/findNotes")
+      .get("/note")
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -206,7 +206,7 @@ describe("Get all Notes", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes")
+      .get("/note")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -222,7 +222,7 @@ describe("Get all Notes", () => {
     const token = noteData.notes.inValidToken;
     chai
       .request(server)
-      .get("/findNotes")
+      .get("/note")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -238,7 +238,7 @@ describe("Get all Notes", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes")
+      .get("/note")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -254,7 +254,7 @@ describe("Get all Notes", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes")
+      .get("/note")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -270,7 +270,7 @@ describe("Get all Notes", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes")
+      .get("/note")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -286,7 +286,7 @@ describe("Get all Notes", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes")
+      .get("/note")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -302,7 +302,7 @@ describe("Get all Notes", () => {
     const token = noteData.notes.inValidToken;
     chai
       .request(server)
-      .get("/findNotes")
+      .get("/note")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -321,7 +321,7 @@ describe("GetNoteById", () => {
   it("when call getNoteById with InvalidToken , should return appropriate response", (done) => {
     chai
       .request(server)
-      .get("/findNotes/61d696606632cae8f42d9b49")
+      .get("/note/61d696606632cae8f42d9b49")
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -336,7 +336,7 @@ describe("GetNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes/61d696606632cae8f42d9b49")
+      .get("/note/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -352,7 +352,7 @@ describe("GetNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes/61d696606632cae8f42d9b49")
+      .get("/note/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -368,7 +368,7 @@ describe("GetNoteById", () => {
     const token = noteData.notes.inValidToken;
     chai
       .request(server)
-      .get("/findNotes/61d696606632cae8f42d9b49")
+      .get("/note/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -384,7 +384,7 @@ describe("GetNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes/61d696606632cae8f42d9b49")
+      .get("/note/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -400,7 +400,7 @@ describe("GetNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes/61d696606632cae8f42d9b49")
+      .get("/note/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -416,7 +416,7 @@ describe("GetNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .get("/findNotes/61d696606632cae8f42d9b49")
+      .get("/note/61d696606632cae8f42d9b49")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -440,7 +440,7 @@ describe("Update Note By Id", () => {
     };
     chai
       .request(server)
-      .put("/upgradeNote/61d696606632cae8f42d9b49")
+      .put("/note/61d17503de0a748e8ba98b09")
       .set({ authorization: token })
       .send(createNotes)
       .end((err, res) => {
@@ -461,7 +461,7 @@ describe("Update Note By Id", () => {
     };
     chai
       .request(server)
-      .put("/upgradeNote/61d696606632cae8f42d9b49")
+      .put("/note/61d17503de0a748e8ba98b09")
       .set({ authorization: token })
       .send(createNotes)
       .end((err, res) => {
@@ -478,7 +478,7 @@ describe("Update Note By Id", () => {
     const token = noteData.notes.inValidToken;
     chai
       .request(server)
-      .put("/upgradeNote/61d696606632cae8f42d9b49")
+      .put("/note/61d17503de0a748e8ba98b09")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -498,7 +498,7 @@ describe("Update Note By Id", () => {
     };
     chai
       .request(server)
-      .put("/upgradeNote/61d696606632cae8f42d9b49")
+      .put("/note/61d17503de0a748e8ba98b09")
       .set({ authorization: token })
       .send(createNotes)
       .end((err, res) => {
@@ -515,7 +515,7 @@ describe("Update Note By Id", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .put("/upgradeNote/61d696606632cae8f42d9b49")
+      .put("/note/61d17503de0a748e8ba98b09")
       .set({ authorization: token })
       .send({ title: "S", description: "golden period of life" })
       .end((err, res) => {
@@ -532,7 +532,7 @@ describe("Update Note By Id", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .put("/upgradeNote/61d696606632cae8f42d9b49")
+      .put("/note/61d17503de0a748e8ba98b09")
       .set({ authorization: token })
       .send({ title: "School", description: "g" })
       .end((err, res) => {
@@ -553,7 +553,7 @@ describe("Update Note By Id", () => {
     };
     chai
       .request(server)
-      .put("/upgradeNote/61d696606632cae8f42d9b49")
+      .put("/note/61d17503de0a748e8ba98b09")
       .set({ authorization: token })
       .send(createNotes)
       .end((err, res) => {
@@ -574,7 +574,7 @@ describe("Update Note By Id", () => {
     };
     chai
       .request(server)
-      .put("/upgradeNote/61d696606632cae8f42d9b49")
+      .put("/note/61d17503de0a748e8ba98b09")
       .set({ authorization: token })
       .send(createNotes)
       .end((err, res) => {
@@ -595,7 +595,7 @@ describe("Update Note By Id", () => {
     };
     chai
       .request(server)
-      .put("/upgradeNote/61d696606632cae8f42d9b49")
+      .put("/note/61d17503de0a748e8ba98b09")
       .set({ authorization: token })
       .send(createNotes)
       .end((err, res) => {
@@ -612,7 +612,7 @@ describe("Update Note By Id", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .put("/upgradeNote/61cbe18720f85e5ea0e771bchjg")
+      .put("/note/61cbe18720f85e5ea0e771bchjg")
       .set({ authorization: token })
       .send({ title: "School", description: "golden period of life" })
       .end((err, res) => {
@@ -633,7 +633,7 @@ describe("removeNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .delete("/removeNote/61cbe18720f85e5ea0e771bc")
+      .delete("/note/61cbe18720f85e5ea0e771bc")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -649,7 +649,7 @@ describe("removeNoteById", () => {
     const token = noteData.notes.inValidToken;
     chai
       .request(server)
-      .delete("/removeNote/61cbe18720f85e5ea0e771bc")
+      .delete("/note/61cbe18720f85e5ea0e771bc")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -665,7 +665,7 @@ describe("removeNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .delete("/removeNote/61cbe18720f85e5ea0e771ba")
+      .delete("/note/61cbe18720f85e5ea0e771ba")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -681,7 +681,7 @@ describe("removeNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .delete("/removeNote/61c8913bdcf696aca")
+      .delete("/note/61c8913bdcf696aca")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -697,7 +697,7 @@ describe("removeNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .delete("/removeNote/61c8913bdcf696ac219ce3ea")
+      .delete("/note/61c8913bdcf696ac219ce3ea")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -713,7 +713,7 @@ describe("removeNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .delete("/removeNote/61cbe18720f85e5ea0e771b6")
+      .delete("/note/61cbe18720f85e5ea0e771b6")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -729,7 +729,7 @@ describe("removeNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .delete("/removeNote/61c8913bdcf696ac219ce3ea")
+      .delete("/note/61c8913bdcf696ac219ce3ea")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {
@@ -745,7 +745,7 @@ describe("removeNoteById", () => {
     const token = noteData.notes.validToken;
     chai
       .request(server)
-      .delete("/removeNote/61c8913bdcf696ac219c")
+      .delete("/note/61c8913bdcf696ac219c")
       .set({ authorization: token })
       .end((err, res) => {
         if (err) {

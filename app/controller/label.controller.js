@@ -73,6 +73,7 @@ class AddLabelController {
         });
       }
     } catch (error) {
+      console.log("internal =  ", error);
       logger.error("internal server error");
       return res.status(500).json({
         message: "Internal Server Error",
