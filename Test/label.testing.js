@@ -636,10 +636,25 @@ describe("Update Label", () => {
       .send({ labelName: "RohitGuphhta" })
       .end((err, res) => {
         if (err) {
-          console.log("plz check your credential");
           return done();
         }
         res.should.have.status(400);
+        return done();
+      });
+  });
+
+  it("check given details Clear old Cache after update ,Should return 201", (done) => {
+    const token = labelData.notes.validToken;
+    chai
+      .request(server)
+      .put("/label/61d179c1d67af48269572ada")
+      .set({ authorization: token })
+      .send({ labelName: "RohitGuphhta" })
+      .end((err, res) => {
+        if (err) {
+          return done();
+        }
+        res.should.have.status(201);
         return done();
       });
   });
