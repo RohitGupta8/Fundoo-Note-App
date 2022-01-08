@@ -31,7 +31,12 @@ class Controller {
           return res.status(200).json({
             success: true,
             message: "SuccessFully !!!  registered......",
-            data: data
+            data: {
+              firstName: data.firstName,
+              lastName: data.lastName,
+              email: data.email,
+              verified: data.verified
+            }
           });
         }
       });
