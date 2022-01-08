@@ -437,6 +437,22 @@ describe("Get Label By ID", () => {
         return done();
       });
   });
+
+  it("check Data from DB not from Redis with false input,Should response 400", (done) => {
+    const token = labelData.notes.inValidToken;
+    chai
+      .request(server)
+      .get("/label/61d179c1d67af48269572ada")
+      .set({ authorization: token })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
+        return done();
+      });
+  });
 });
 
 // api for updateLabelById
