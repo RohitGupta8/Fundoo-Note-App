@@ -3,13 +3,13 @@ const { logger } = require("../../logger/logger");
 const redis = require("../middleware/nodeRedis.middleware");
 
 class NoteService {
-    createNote = async (note) => {
-      const success = noteModel.createNote(note);
-      if (!success) {
-        return false;
-      }
-      return success;
+  note = async (note) => {
+    const success = noteModel.note(note);
+    if (!success) {
+      return false;
     }
+    return success;
+  }
 
   getNote = async (id) => {
     const get = await noteModel.getNote(id);
@@ -20,11 +20,12 @@ class NoteService {
   };
 
   getNoteById = async (id) => {
-    const getId = await noteModel.getNoteById(id);
+    let getId = await redis.getData(id);
     if (!getId) {
-      return false;
+      getId = await noteModel.getNoteById(id);
     }
     redis.setData("getRedisById", 60, JSON.stringify(getId));
+    logger.info("get data by id");
     return getId;
   };
 
@@ -41,8 +42,8 @@ class NoteService {
     });
   };
 
-  deleteNoteById = (id, resolve, reject) => {
-    noteModel.deleteNoteById(id).then((data) => resolve(data)).catch((err) => reject(err));
+  removeNote = (id, resolve, reject) => {
+    noteModel.removeNote(id).then((data) => resolve(data)).catch((err) => reject(err));
   };
 }
 module.exports = new NoteService();

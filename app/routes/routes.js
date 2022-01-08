@@ -16,36 +16,36 @@ module.exports = (app) => {
   // api for Reset Password
   app.patch("/resetPassword", userController.resetPassword);
 
-  // api for createNote
-  app.post("/createNote", helperClass.validateToken, noteController.createNote);
+  // api for creating a Note
+  app.post("/note", helperClass.validateToken, noteController.note);
 
   // api for getnote
-  app.get("/getNote", helperClass.validateToken, noteController.getNote);
+  app.get("/note", helperClass.validateToken, noteController.getNote);
 
   // api for getNoteById
-  app.get("/getNote/:id", helperClass.validateToken, noteController.getNoteById);
+  app.get("/note/:id", helperClass.validateToken, noteController.getNoteById);
 
   // api for updateNoteById
-  app.put("/updateNote/:id", helperClass.validateToken, noteController.updateNoteById);
+  app.put("/note/:id", helperClass.validateToken, noteController.updateNoteById);
 
   // api for DeleteNoteById
-  app.delete("/deleteNote/:id", helperClass.validateToken, noteController.deleteNoteById);
+  app.delete("/note/:id", helperClass.validateToken, noteController.removeNote);
 
   // api for AddLabel
-  app.post("/addLabel/:id", helperClass.validateToken, labelController.addLabel);
+  app.post("/label/:id", helperClass.validateToken, labelController.label);
 
-  // api for getLabel
-  app.get("/getLabel/", helperClass.validateToken, labelController.getLabel);
+  // api for get all Labels
+  app.get("/label/", helperClass.validateToken, labelController.getLabel);
 
   // api for getLabelById
-  app.get("/getLabel/:id", helperClass.validateToken, labelController.getLabelById);
+  app.get("/label/:id", helperClass.validateToken, labelController.getLabelById);
 
   // api for updateLabelById
-  app.put("/updateLabel/:id", helperClass.validateToken, labelController.updateLabelById);
+  app.put("/label/:id", helperClass.validateToken, labelController.upgradeLabelById);
 
   // api for deleteLabelById
-  app.delete("/deleteLabel/:id", helperClass.validateToken, labelController.deleteLabelById);
+  app.delete("/label/:id", helperClass.validateToken, labelController.removeLabelById);
 
   // Verify User
-  app.get("/confirmregister/:token", userController.confirmRegister);
+  app.get("/verify/:token", userController.verifyUser);
 };

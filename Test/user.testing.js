@@ -214,7 +214,7 @@ describe("Reset Password API", () => {
     chai
       .request(server)
       .patch("/resetPassword")
-      .send({ email: "rohitg213@gmail.com", password: "clickN70+5", code: "5il2wlecgn" })
+      .send({ email: "rohitg213@gmail.com", password: "clickN70+5", code: "8mi58tkpmi" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -229,7 +229,7 @@ describe("Reset Password API", () => {
     chai
       .request(server)
       .patch("/resetPassword")
-      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "5il2wlecgn" })
+      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "8mi58tkpmi" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -244,7 +244,7 @@ describe("Reset Password API", () => {
     chai
       .request(server)
       .patch("/resetPassword")
-      .send({ email: "rohitg213@gmail.com", password: "Jh", code: "5il2wlecgn" })
+      .send({ email: "rohitg213@gmail.com", password: "Jh", code: "5illecgn" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -259,7 +259,7 @@ describe("Reset Password API", () => {
     chai
       .request(server)
       .patch("/resetPassword")
-      .send({ email: "rohitg213gmail.com", password: "clickN70@hj", code: "5il2wlecgn" })
+      .send({ email: "rohitg213gmail.com", password: "clickN70@hj", code: "8mi58tkpmi" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -274,7 +274,7 @@ describe("Reset Password API", () => {
     chai
       .request(server)
       .patch("/resetPassword")
-      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "5il2wlecgn" })
+      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "8mi58tkpmi" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -289,7 +289,7 @@ describe("Reset Password API", () => {
     chai
       .request(server)
       .patch("/resetPassword")
-      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "5il2wlecgn" })
+      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "8mi58tkpmi" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -304,7 +304,7 @@ describe("Reset Password API", () => {
     chai
       .request(server)
       .patch("/resetPassword")
-      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "5il2wlecgn" })
+      .send({ email: "rohitg213@gmail.com", password: "clickN70+7", code: "8mi58tkpmi" })
       .end((err, res) => {
         if (err) {
           console.log("plz check your credential");
@@ -393,5 +393,54 @@ describe("Verify User", () => {
         res.should.have.status(404);
         return done();
       });
+  });
+
+  it("given proper details in signUp then send verify mail ,should return proper response ", (done) => {
+    const registerfaker = {
+      firstName: faker.name.findName(8),
+      lastName: faker.name.lastName(8),
+      email: faker.internet.email(),
+      password: faker.internet.password()
+    };
+    chai
+      .request(server)
+      .post("/register")
+      .send(registerfaker)
+      .end((err, res) => {
+        if (err) {
+          console.log("Plz check again & enter with proper format");
+          return done();
+        }
+        res.should.have.status(200);
+        done();
+      });
+  });
+
+  it("check Login after signup without verify mail,should return proper response", (done) => {
+    const userDetails = registrationData.userInformation.wrongLogin;
+
+    chai.request(server)
+      .post("/login")
+      .send(userDetails)
+      .end((err, res) => {
+        if (err) {
+          return done();
+        }
+        res.should.have.status(400);
+        done();
+      });
+  });
+
+  it("check login after verify mail, should return 200 ", (done) => {
+    const userDetails = registrationData.userInformation.correctLogin;
+
+    chai.request(server).post("/login").send(userDetails).end((err, res) => {
+      if (err) {
+        console.log("Plz check again & enter with proper format");
+        return done();
+      }
+      res.should.have.status(200);
+      done();
+    });
   });
 });

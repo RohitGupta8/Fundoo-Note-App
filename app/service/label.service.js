@@ -3,8 +3,8 @@ const { logger } = require("../../logger/logger");
 const redis = require("../middleware/nodeRedis.middleware");
 
 class LabelService {
-    addLabel = async (label) => {
-      const add = await labelModel.addlabelById(label);
+    label = async (label) => {
+      const add = await labelModel.label(label);
       if (add) {
         return add;
       }
@@ -19,21 +19,18 @@ class LabelService {
     return get;
   };
 
-  getLabelById = (id, callback) => {
-    labelModel.getLabelById(id, (error, data) => {
-      if (data) {
-        logger.info(data);
-        redis.setData("getLabelById", 60, JSON.stringify(data));
-        callback(null, data);
-      } else {
-        logger.error(error);
-        callback(error, null);
-      }
-    });
+  getLabelById = async (id) => {
+    let getId = await redis.getData(id);
+    if (!getId) {
+      getId = await labelModel.getLabelById(id);
+    }
+    redis.setData("getRedisById", 60, JSON.stringify(getId));
+    logger.info("get data by id");
+    return getId;
   };
 
-  updateLabelById = (updateNote, callback) => {
-    labelModel.updateLabelById(updateNote, (error, data) => {
+  upgradeLabelById = (updateNote, callback) => {
+    labelModel.upgradeLabelById(updateNote, (error, data) => {
       if (error) {
         logger.error(error);
         return callback(error, null);
@@ -46,8 +43,8 @@ class LabelService {
     );
   }
 
-  deleteLabelById = (id, resolve, reject) => {
-    labelModel.deleteLabelById(id).then((data) => resolve(data)).catch((err) => reject(err));
+  removeLabelById = (id, resolve, reject) => {
+    labelModel.removeLabelById(id).then((data) => resolve(data)).catch((err) => reject(err));
   };
 }
 module.exports = new LabelService();

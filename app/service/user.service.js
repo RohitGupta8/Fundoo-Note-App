@@ -70,21 +70,18 @@ class UserService {
     return success;
   }
 
-  confirmRegister = (data, callback) => {
-    console.log("con 44: ", data.token);
+  verifyUser = (data, callback) => {
     const decode = jsonWebToken.verify(data.token, process.env.SECRET_KEY_FOR_CONFIRM);
     if (decode) {
-      rabbitMQ
-        .receiver(decode.email)
-        .then((val) => {
-          userModel.confirmRegister(JSON.parse(val), (error, data) => {
-            if (data) {
-              return callback(null, data);
-            } else {
-              return callback(error, null);
-            }
-          });
-        })
+      rabbitMQ.receiver(decode.email).then((val) => {
+        userModel.verifyUser(JSON.parse(val), (error, data) => {
+          if (data) {
+            return callback(null, data);
+          } else {
+            return callback(error, null);
+          }
+        });
+      })
         .catch((error) => {
           logger.error(error);
         });

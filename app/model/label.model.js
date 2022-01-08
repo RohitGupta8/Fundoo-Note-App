@@ -22,7 +22,7 @@ const labelSchema = mongoose.Schema({
 const LabelRegister = mongoose.model("LabelBook", labelSchema);
 
 class LabelModel {
-  addlabelById = async (id) => {
+  label = async (id) => {
     const isAddLabel = await noteModel.findById({ _id: id.noteId });
     if (!isAddLabel) {
       logger.error("noteId note found in DataBase");
@@ -57,19 +57,15 @@ class LabelModel {
     return getAll;
   };
 
-  getLabelById = (id, callback) => {
-    LabelRegister.find({ userId: id.userId, _id: id.id }, (error, data) => {
-      if (data) {
-        logger.info(data);
-        callback(null, data);
-      } else {
-        logger.error(error);
-        callback(error, null);
-      }
-    })
+  getLabelById = async (id) => {
+    const getAll = await LabelRegister.find({ userId: id.userId, _id: id.id });
+    if (!getAll) {
+      return false;
+    }
+    return getAll;
   };
 
-  updateLabelById = (id, callback) => {
+  upgradeLabelById = (id, callback) => {
     LabelRegister.findByIdAndUpdate(id.id, { labelName: id.labelName }, { new: true }, (err, data) => {
       if (err) {
         logger.error(err);
@@ -81,7 +77,7 @@ class LabelModel {
     });
   }
 
-  deleteLabelById = (id) => {
+  removeLabelById = (id) => {
     return new Promise((resolve, reject) => {
       LabelRegister.findOneAndDelete({ $and: [{ _id: id.id }, { userId: id.userId }] }).then(data => resolve(data)).catch((err) => reject(err));
     })

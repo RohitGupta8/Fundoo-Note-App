@@ -3,7 +3,7 @@ const labelService = require("../service/label.service");
 const { logger } = require("../../logger/logger");
 
 class AddLabelController {
-  addLabel = async (req, res) => {
+  label = async (req, res) => {
     try {
       const label = {
         labelName: req.body.labelName,
@@ -20,7 +20,7 @@ class AddLabelController {
           data: labelValidation
         });
       }
-      const add = await labelService.addLabel(label);
+      const add = await labelService.label(label);
       if (!add) {
         logger.error("error in add Labels");
         return res.status(400).send({
@@ -73,6 +73,7 @@ class AddLabelController {
         });
       }
     } catch (error) {
+      console.log("internal =  ", error);
       logger.error("internal server error");
       return res.status(500).json({
         message: "Internal Server Error",
@@ -81,7 +82,7 @@ class AddLabelController {
     }
   }
 
-  getLabelById = (req, res) => {
+  getLabelById = async (req, res) => {
     try {
       const id = { userId: req.user.tokenData.id, id: req.params.id };
       const getLabelValidation = validation.getLabelByIdValidation.validate(id);
@@ -93,24 +94,23 @@ class AddLabelController {
           data: getLabelValidation
         });
       }
-      labelService.getLabelById(id, (error, data) => {
-        if (error) {
-          logger.error(error);
-          return res.status(400).json({
-            message: "Oops....failed to get a notes",
-            success: false
-          });
-        } else {
-          logger.info("success get label by id");
-          return res.status(201).json({
-            message: "Hurray....!!!.Get  label successfully.....",
-            success: true,
-            data: data
-          });
-        }
-      });
+      const serviceLabe = await labelService.getLabelById(id);
+      if (!serviceLabe) {
+        logger.error("error in getting a Label");
+        return res.status(400).send({
+          success: false,
+          message: "error in getting a Label"
+        });
+      } else {
+        logger.info("successfully getting a Label");
+        return res.status(201).send({
+          success: true,
+          message: "Successfully....  getting a Label",
+          data: serviceLabe
+        });
+      }
     } catch (error) {
-      logger.error(error);
+      logger.error("internal server error");
       return res.status(500).json({
         message: "Internal Server Error",
         success: false
@@ -118,7 +118,7 @@ class AddLabelController {
     }
   }
 
-  updateLabelById = (req, res) => {
+  upgradeLabelById = (req, res) => {
     try {
       const updateLabel = {
         id: req.params.id,
@@ -134,7 +134,7 @@ class AddLabelController {
           data: updateLabelValidation
         });
       }
-      labelService.updateLabelById(updateLabel, (error, data) => {
+      labelService.upgradeLabelById(updateLabel, (error, data) => {
         if (error) {
           logger.error(error);
           return res.status(400).json({
@@ -159,7 +159,7 @@ class AddLabelController {
     }
   }
 
-  deleteLabelById = (req, res) => {
+  removeLabelById = (req, res) => {
     try {
       const id = { userId: req.user.tokenData.id, id: req.params.id };
       const deleteLabelValidation = validation.validateDeleteLabel.validate(id);
@@ -171,7 +171,7 @@ class AddLabelController {
           data: deleteLabelValidation
         });
       }
-      labelService.deleteLabelById(id, resolve, reject);
+      labelService.removeLabelById(id, resolve, reject);
       function resolve (data) {
         logger.info("Delete Label successfully");
         return res.status(201).send({

@@ -4,7 +4,7 @@ const noteService = require("../service/note.service");
 const { logger } = require("../../logger/logger");
 
 class NoteController {
-  createNote = async (req, res) => {
+  note = async (req, res) => {
     try {
       const note = {
         userId: req.user.tokenData.id,
@@ -14,14 +14,13 @@ class NoteController {
       const createNoteValidation = validation.createNoteValidation.validate(note);
       if (createNoteValidation.error) {
         logger.error(createNoteValidation.error);
-        console.log(createNoteValidation.error);
         return res.status(400).send({
           success: false,
           message: "Wrong Input Validations",
           data: createNoteValidation
         });
       }
-      const notes = await noteService.createNote(note);
+      const notes = await noteService.note(note);
       if (!notes) {
         return res.status(400).send({
           success: false,
@@ -48,7 +47,6 @@ class NoteController {
       const id = { id: req.user.tokenData.id };
       const getNoteValidation = validation.noteIDValidation.validate(id);
       if (getNoteValidation.error) {
-        console.log(getNoteValidation.error);
         logger.error(getNoteValidation.error);
         return res.status(400).send({
           success: false,
@@ -72,7 +70,6 @@ class NoteController {
         });
       }
     } catch (error) {
-      console.log(error);
       logger.error(error);
       return res.status(500).json({
         message: "Internal Server Error",
@@ -86,12 +83,10 @@ class NoteController {
       const id = { userId: req.user.tokenData.id, id: req.params.id };
       const getNoteValidation = validation.getNoteByIDValidation.validate(id);
       if (getNoteValidation.error) {
-        console.log(getNoteValidation.error);
         logger.error(getNoteValidation.error);
         return res.status(400).send({
           success: false,
-          message: "Wrong Input Validations",
-          data: getNoteValidation
+          message: "Wrong Input Validations"
         });
       }
       const getNote = await noteService.getNoteById(id);
@@ -160,26 +155,24 @@ class NoteController {
     }
   }
 
-  deleteNoteById = (req, res) => {
+  removeNote = (req, res) => {
     try {
       const id = { userId: req.user.tokenData.id, noteId: req.params.id };
       const deleteNoteValidation = validation.validateDeleteNote.validate(id);
       if (deleteNoteValidation.error) {
         logger.error(deleteNoteValidation.error);
-        console.log(deleteNoteValidation.error);
         return res.status(400).send({
           success: false,
           message: "Wrong Input Validations",
           data: deleteNoteValidation
         });
       }
-      noteService.deleteNoteById(id, resolve, reject);
+      noteService.removeNote(id, resolve, reject);
       function resolve (data) {
         logger.info("Delete Note successfully");
         return res.status(201).send({
           message: "Delete note successfully",
-          success: true,
-          data: data
+          success: true
         });
       }
       function reject () {

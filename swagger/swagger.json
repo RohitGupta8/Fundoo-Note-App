@@ -144,7 +144,7 @@
                 }
             }
         },
-        "/createNote": {
+        "/note": {
             "post": {
                 "tags": [
                     "Create Notes"
@@ -186,9 +186,7 @@
                         "description": "Internal server error"
                     }
                 }
-            }
-        },
-        "/getNote": {
+            },
             "get": {
                 "tags": [
                     "Get All Notes"
@@ -224,7 +222,7 @@
                 }
             }
         },
-        "/getNote/{id}": {
+        "/note/{id}": {
             "get": {
                 "tags": [
                     "Get Notes By Id"
@@ -266,9 +264,7 @@
                         "description": "Internal server error"
                     }
                 }
-            }
-        },
-        "/updateNote/{id}": {
+            },
             "put": {
                 "tags": [
                     "Update Notes By Id"
@@ -315,9 +311,7 @@
                         "description": "Internal server error"
                     }
                 }
-            }
-        },
-        "/deleteNote/{id}": {
+            },
             "delete": {
                 "tags": [
                     "Delete Notes By Id"
@@ -358,7 +352,37 @@
                 }
             }
         },
-        "/addLabel/{id}": {
+        "/label/": {
+            "get": {
+                "tags": [
+                    "Get All Labels"
+                ],
+                "description": "Gets All Labels",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token for validation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "labels retrieved"
+                    },
+                    "500": {
+                        "description": "Couldnt retrieve labels"
+                    }
+                }
+            }
+        },
+        "/label/{id}": {
             "post": {
                 "tags": [
                     "Add Label by NoteID"
@@ -406,38 +430,7 @@
                         "description": "Invalid Token"
                     }
                 }
-            }
-        },"/getLabel": {
-            "get": {
-                "tags": [
-                    "Get All Labels"
-                ],
-                "description": "Gets All Labels",
-                "parameters": [
-                    {
-                        "in": "header",
-                        "name": "authorization",
-                        "description": "Token for validation",
-                        "schema": {
-                            "type": "string",
-                            "required": true
-                        }
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "labels retrieved"
-                    },
-                    "500": {
-                        "description": "Couldnt retrieve labels"
-                    }
-                }
-            }
-        },
-        "/getLabel/{id}": {
+            },
             "get": {
                 "tags": [
                     "Get Label By Id"
@@ -477,9 +470,7 @@
                         "description": "Invalid Token"
                     }
                 }
-            }
-        },
-        "/updateLabel/{id}": {
+            },
             "put": {
                 "tags": [
                     "Update Label"
@@ -527,8 +518,7 @@
                         "description": "Invalid Token"
                     }
                 }
-            }
-        },"/deleteLabel/{id}": {
+            },
             "delete": {
                 "tags": [
                     "Delete Label"
@@ -569,7 +559,6 @@
                 }
             }
         }
-        
     },
     "definitions": {
         "Register": {
@@ -685,7 +674,8 @@
                     "type": "string"
                 }
             }
-        },"UpdateLabel": {
+        },
+        "UpdateLabel": {
             "type": "object",
             "properties": {
                 "labelName": {
@@ -694,5 +684,4 @@
             }
         }
     }
-    
 }
