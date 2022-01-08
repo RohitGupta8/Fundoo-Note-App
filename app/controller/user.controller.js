@@ -183,8 +183,7 @@ class Controller {
           });
         } else {
           return res.status(200).json({
-            success: true,
-            message: "Email Successfully Verified"
+            message: ` Congratulation !!! ${data.firstName} , Your Email ${data.email} Is Successfully Verified..... :) :)`
           });
         }
       });
