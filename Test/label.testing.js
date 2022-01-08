@@ -626,6 +626,23 @@ describe("Update Label", () => {
         return done();
       });
   });
+
+  it("check given details Clear old Cache after update with false input,Should return 400", (done) => {
+    const token = labelData.notes.inValidToken;
+    chai
+      .request(server)
+      .put("/label/61d179c1d67af48269572ada")
+      .set({ authorization: token })
+      .send({ labelName: "RohitGuphhta" })
+      .end((err, res) => {
+        if (err) {
+          console.log("plz check your credential");
+          return done();
+        }
+        res.should.have.status(400);
+        return done();
+      });
+  });
 });
 
 // api for removeLabel
